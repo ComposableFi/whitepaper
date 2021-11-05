@@ -10,7 +10,7 @@ if [ ! -e $lockfile ]; then
    
    mkdir -p dist
 
-   pandoc main.tex -f latex -t html -s -o dist/index.html -H styles/whitepaper.css
+   pandoc main.tex -f latex --mathjax https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js -t html5 -s -o dist/index.html -H styles/whitepaper.css
 
    rm $lockfile
    trap - INT TERM EXIT
