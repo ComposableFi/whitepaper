@@ -1,0 +1,34 @@
+name: Build and Deploy to EKS
+
+on: 
+  push: 
+    branches: 
+      - main
+
+env:
+
+jobs: 
+  build: 
+    name: Build and Dedploy
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: eu-central-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Generate HTML
+      run: |
+        ./script/build.sh
+    
+    - name: Deploy to S3
+      run: |
+        aws s3 sync dist/ s3://paper.composable.finance
