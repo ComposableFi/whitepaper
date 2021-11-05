@@ -9,7 +9,7 @@ on:
 
 jobs: 
   build: 
-    name: Build and Dedploy
+    name: Build and Deploy
     runs-on: self-hosted
 
     steps:
@@ -27,7 +27,7 @@ jobs:
 
     - name: Generate HTML
       run: |
-        ./script/build.sh
+        ./scripts/build.sh
     
     - name: Deploy to S3
       run: |
