@@ -1,11 +1,12 @@
-\section{Communication Layer}
-TODO
+\section{Finality and Application Layer}
+Composable’s vision is to create a protocol that allows for communication across ecosystems. The result is a Port Control Protocol like system for blockchains. The end result is multifaceted; users can perform cross-chain actions, and the overarching blockchain ecosystem is re-positioned as a network of agnostic liquidity and available yield. Throughout these interaction, Composable allows users to tailor their experience to maximize for a desired scalar, such as security or speed, while minimizing ecosystem-specific decision making.
+
+Instead of combining bridging infrastructure to our parachain's consensus, we consistently choose to keep these entities separate, ensuring that we are capable of upgrading and deprecating protocols with minimal impact on other infrastructure through the IAL. 
 
 \subsection{Parachain}
-TODO
-
-\subsection{Off-Chain Architecture}
-TODO
+At the core of our communication stack lies the parachain, functioning as a finality layer for IBC compatible chains, as well as a gateway into XCM compatible chains. It functions as the incentivization layer for light client data storage and proving. Polkadot and Kusama also allow for native cross-chain communication with all other parachains connected to the relay chain, as well as all external networks.
 
 \subsection{Pallets}
-TODO
+Given that our parachains are the foundational layer that powers our ecosystem, we have adopted a pallet-centric approach to adding products on our parachains. Meaning, we will offer projects the ability to deploy as pallets on our chain, with governance having the ability to upgrade these pallets into the runtime of our chains. We are excited to be able to offer this to the Kusama ecosystem, and have a grants programs for others to develop pallet projects using our technology, to be implemented into our parachain. Projects that do well on the Kusama chain, can then upgrade to our Polkadot parachain.
+
+Although we intent for untrusted sources to perform protocol-to-protocol interactions on our parachains through the WASM based XCVM, we initially focus on projects deploying as pallets, which allows for more granular, lower level access to our cross-chain APIs, as well as more advanced logic related to the block life-cycle, storage and cryptographic primitives.
