@@ -9,12 +9,17 @@
 % Replace `letterpaper' with`a4paper' for UK/EU standard size
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 
-% Useful packages
+% Useful packages.
 \usepackage{amsmath}
 \usepackage{amsfonts} 
 \usepackage{graphicx}
 \usepackage{movie15}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+% Algorithmic packages
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
 
 \title{Composable Finance}
 \author{Construction Paper}
@@ -23,13 +28,15 @@
 
 \maketitle
 \tableofcontents
-
+\pagebreak
 \input{vision}
+\pagebreak
 \input{xcvm}
 \input{routing}
+\pagebreak
 \input{communication}
-\input{composable_stack}
-\input{parachain_mission}
+% \input{composable_stack}
+% \input{parachain_mission}
 \input{mosaic}
 % \input{polkadot_v_kusama_design}
 \input{conclusion}
@@ -37,7 +44,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% BIBLIOGRAPHY %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{plain}
-\bibliography{sample}
+\bibliographystyle{alphadin}
+\bibliography{references}
 
 \end{document}
