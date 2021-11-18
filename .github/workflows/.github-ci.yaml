@@ -29,9 +29,9 @@ jobs:
     #   run: |
     #     ./scripts/setup.sh
 
-    # - name: Generate HTML
-    #   run: |
-    #     ./scripts/build.sh
+    - name: Generate HTML
+      run: |
+        ./scripts/build.sh
     
     - name: Deploy to S3
       run: |
