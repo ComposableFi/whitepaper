@@ -1,10 +1,11 @@
 \section{Mosaic Design}
+
 Mosaic is an optimistic bridging solution based on advanced liquidity management, singe sided liquidity pools and a relayer network. At its core it consists of a network of bridges, operated by relayers interacting with smart contracts on source and destination chains. Our proof-of-concept relayer solution is based on a trusted setup, that monitors all connected chains for events, and enacts the transfers accordingly. The next release improves on this model by decentralizing the relayer, using different cutting-edge technologies such as Threshold-Secret-Sharing (TSS) and transaction batching using merkle-proofs. 
 
 The liquidity layer serves to ensure liquidity is moving to the locations where it is needed, allowing the propagation of whatever instructions are required to satisfy the user’s desired outcome, as specified above. We are currently testing this capacity within the EVM ecosystem by running our Proof of Concept (PoC) of Mosaic. From there, we can generalize this liquidity problem and solution to other ecosystems. Liquidity concerns are not new in DeFi. However, they have largely been resolved by automated market makers (AMMs) built into the popular DeFi exchanges like UniSwap and Sushiswap. The introduction of cross-layer and cross-chain applications is, however, making liquidity a more pressing issue than ever before; with so many different layer 2 applications and blockchains to balance liquidity across, and so little infrastructure to do so, liquidity is too siloed for interoperable applications to generate meaningful value.
 
-\include{mosaic_v1}
-\include{mosaic_v2}
-\include{mosaic_v3}
-\include{mosaic_lse}
-\include{mosaic_lrs}
+\input{mosaic_v1}
+\input{mosaic_v2}
+\input{mosaic_v3}
+\input{mosaic_lse}
+\input{mosaic_lrs}

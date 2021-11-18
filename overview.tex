@@ -1,0 +1,28 @@
+\section{Overview}
+
+To achieve our vision we broke down the development into three distinct phases.
+%
+Phase I has been successfully completed and we are releasing Phase II shortly. Phase III is also actively being worked on.
+
+In Phase I, Sec.~(\ref{sec:phaseI}) aka the proof-of-concept (PoC), assets can be locked on the source layer, a relayer transmits the transferal information to the destination layer and the same amount in fees is released on the destination layer.
+%
+In Phase II, Sec.~(\ref{sec:phaseII}), we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, Sec.~(\ref{section:lse}), to help us decide on liquidity rebalancing and an optimal fee model to use, Sec.~(\ref{sec:feemodel}).
+%
+In Phase III, Sec.~(\ref{sec:phaseIII}) we seek to increase as much as possible the decentralization of the entire system.
+
+Having covered the breakdown of the road to accomplish our vision and the successful progress we have had to date, let us now take a look at the components, or the layers, in Composable's tech stack.
+
+We start with the Cross-Chain Virtual Machine (XCVM).
+%
+This layer abstracts away the interaction of developers with the underlying system of networks. For example, the developer needs not worry about sending individual requests to the underlying routing layer directly, handle circuit failures etc.
+%
+This ensures that the ecosystem is blockchain-agnostic. We cover this layer in Sec.~(\ref{sec:xcvm}) describing its architecture in Sec.~(\ref{sec:xcvmarch}.
+
+\todo{jesper}
+
+WHY SUBSTRATE CHAIN?
+
+WHY PALLETS?
+Pallets add functionality to our Substrate chain, such as cross-chain message capabilities (XCMP), oracles and decentralized exchanges. They’re written in Rust and form a part of the blockchain’s runtime. Smart contract functionality is also provided through pallets, such as the ink! and EVM pallet. 
+
+What other WHYs?
