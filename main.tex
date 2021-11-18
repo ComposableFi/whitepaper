@@ -4,7 +4,11 @@
 % Language setting
 % Replace `english' with e.g. `spanish' to change the document language
 \usepackage[english]{babel}
+\usepackage{datetime}
 
+\newdateformat{monthyeardate}{%
+  \monthname[\THEMONTH], \THEYEAR}
+  
 % Set page size and margins
 % Replace `letterpaper' with`a4paper' for UK/EU standard size
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
@@ -21,8 +25,10 @@
 \usepackage{algpseudocode}
 \usepackage{algorithmicx}
 
+
 \title{Composable Finance}
 \author{Construction Paper}
+\date{\monthyeardate\today}
 
 \begin{document}
 
@@ -30,6 +36,8 @@
 \tableofcontents
 \pagebreak
 \input{vision}
+\pagebreak
+\input{overview}
 \pagebreak
 \input{xcvm}
 \input{routing}
@@ -39,12 +47,14 @@
 % \input{parachain_mission}
 \input{mosaic}
 % \input{polkadot_v_kusama_design}
+\pagebreak
 \input{conclusion}
+\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% BIBLIOGRAPHY %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{alphadin}
-\bibliography{references}
+\bibliographystyle{unsrt}
+\bibliography{references_2}
 
 \end{document}

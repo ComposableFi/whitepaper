@@ -1,5 +1,6 @@
-\subsection{Phase II}
-Phase II represents the evolution of Mosaic v1, our proof of concept. Phase II introduces two main components: a new active/passive liquidity model and a new and more complete set of features that deeply extend the functionality of Mosaic. Phase 2 allows to use different tokens on the source and destination layers, and also introduces the support for new chains such as Moonriver, Fantom and Avalanche.
+\subsection{Phase II\label{sec:phaseII}}
+
+Phase II represents the evolution of Mosaic v1, our proof of concept. Phase II introduces two main components: a new active/passive liquidity model and a new and more complete set of features that deeply extend the functionality of Mosaic. Phase 2 allows to use different tokens on the source and destination layers, and also introduces the support for new chains such as Moonriver, Fantom, and Avalanche.
 
 \subsubsection*{Active and passive liquidity}
 In Mosaic v2 the user has the ability to provide liquidity on any layer and in exchange, besides the APY, he receives receipt tokens that can be integrated with other protocols (e.g: use them as collateral for loans). The user is also able to withdraw liquidity at any point he desires, our dynamic withdrawal fee will calculate the proportional rewards and the user will be credited with the right amount of tokens. Liquidity ca be also directly provided using ETH, and ETH can be transferred among the different layers. In addition to all these new possibilities, we introduce two types of liquidity for different profiles:
@@ -11,17 +12,24 @@ In Mosaic v2 the user has the ability to provide liquidity on any layer and in e
     \end{itemize}
     
 \subsubsection*{Cross Layer Function Calls}
-Mosaic v2 not only supports value transfers, but also offers cross functions calls. The relayer can transfer the function call and its associated parameters from source to destination in a similar manner as value transfers. To handle calls and returns, it employs a \textit{MsgSender} contract on the source layer, which is in charge of abstracting the user and communicating with the relayer, and a \textit{MsgReceiverFactory} contract on the destination layer. \textit{MsgReceiverFactory} creates \textit{MsgReceiver} instances, which create a virtual identification of the user on the destination network, and interact with the desired protocol. All the interactions on the destination layer are done through the factory contract. This general architecture allows users to call any protocol on any network and from any source. This elevates Mosaic v2 to a new level of unification, not only value is transferred, but also functionality is bridged together. 
+Mosaic v2 not only supports value transfers, but also offers cross functions calls. The relayer can transfer the function call and its associated parameters from source to destination in a similar manner as value transfers. To handle calls and returns, it employs a \textit{MsgSender} contract on the source layer, which is in charge of abstracting the user and communicating with the relayer, and a \textit{MsgReceiverFactory} contract on the destination layer. \textit{MsgReceiverFactory} creates \textit{MsgReceiver} instances, which create a virtual identification of the user on the destination network, and interact with the desired protocol. All the interactions on the destination layer are done through the factory contract.
 
-\todo{ADD IMAGE}
+This general architecture, as shown on Fig.~(\ref{fig:crosscall}), allows users to call any protocol on any network and from any source. This elevates Mosaic v2 to a new level of unification, not only value is transferred, but also functionality is bridged together. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/mosaic/crosscalls.pdf}
+    \caption{Cross layer function call architecture}
+    \label{fig:crosscall}
+\end{figure}
 
 
 \subsubsection*{Other improvements}
 In addition to the improvements already mentioned, phase II of the protocol presents the following and varied advances:
 
 \begin{itemize}
-    \item Transfer NFTs (ERC-721) between networks by using Ethereum research wrapper proposal (quote).
+    \item Transfer NFTs (ERC-721) between networks by using Ethereum research wrapper proposal \cite{WhyPropertiesb}.
     \item More secure and controlled vaults. Instead of a single \textit{MosaicVault}, everything is isolated in different and dedicated \textit{MosaicHoldings} smart contracts.
-    \item Real time liquidity balancing. See Section \ref{section:lrs} for more details.
+    \item Real time liquidity balancing. See Sec.~(\ref{section:lrs}) for more details.
     \item More efficient management of unused funds. Single or combined assets are used to yield farm, resulting in better and more competitive APY for Mosaic's liquidity providers.
 \end{itemize}
