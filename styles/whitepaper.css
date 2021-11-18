@@ -6,6 +6,11 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
+span[id^="sec:"] {
+  display: none;
+}
+
+
 body {
   color: #444;
   font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
