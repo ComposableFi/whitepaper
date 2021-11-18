@@ -10,7 +10,7 @@ if [ ! -e $lockfile ]; then
    
    mkdir -p dist
 
-   pandoc main.tex -f latex --mathjax https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js -t html5 -o dist/index.html -H styles/whitepaper.css --self-contained
+   pandoc -Fpandoc-crossref main.tex -f latex --mathjax https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js --bibliography=references_2.bib  -t html5 -o dist/index.html -H styles/whitepaper.css --self-contained
 
    rm $lockfile
    trap - INT TERM EXIT
