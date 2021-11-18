@@ -6,6 +6,32 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
+.hero {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100vh;
+  height: 100vh;
+  padding-right: 0%;
+  padding-left: 0%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #170010;
+  background-image: url('images/1920x1080-min.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
 span[id^="sec:"] {
   display: none;
 }
@@ -13,6 +39,10 @@ span[id^="sec:"] {
 span[class^="citation"] {
   display: none;
 }
+
+/* a[data-reference-type^="ref"] {
+   display: none;
+} */
 
 body {
   color: #444;
