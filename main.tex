@@ -8,7 +8,7 @@
 
 \newdateformat{monthyeardate}{%
   \monthname[\THEMONTH], \THEYEAR}
-  
+
 % Set page size and margins
 % Replace `letterpaper' with`a4paper' for UK/EU standard size
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
@@ -17,7 +17,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts} 
 \usepackage{graphicx}
-\usepackage{movie15}
+\usepackage[hyphens]{url}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
 % Algorithmic packages
@@ -34,22 +34,17 @@
 
 \maketitle
 \tableofcontents
-\pagebreak
-\input{vision}
-\pagebreak
-\input{overview}
-\pagebreak
-\input{xcvm}
-\input{routing}
-\pagebreak
-\input{communication}
-% \input{composable_stack}
-% \input{parachain_mission}
-\input{mosaic}
-% \input{polkadot_v_kusama_design}
-\pagebreak
-\input{conclusion}
-\pagebreak
+
+\include{vision}
+\include{overview}
+\include{xcvm}
+\include{routing}
+\include{communication}
+% \include{composable_stack}
+% \include{parachain_mission}
+\include{mosaic}
+% \include{polkadot_v_kusama_design}
+\include{conclusion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% BIBLIOGRAPHY %%%%%
