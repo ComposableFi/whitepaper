@@ -25,14 +25,14 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    # - name: Install tools
-    #   run: |
-    #     ./scripts/setup.sh
+    # # - name: Install tools
+    # #   run: |
+    # #     ./scripts/setup.sh
 
-    - name: Generate HTML
-      run: |
-        ./scripts/build.sh
+    # - name: Generate HTML
+    #   run: |
+    #     ./scripts/build.sh
     
     - name: Deploy to S3
       run: |
-        aws s3 sync dist/ s3://paper.composable.finance
+        aws s3 sync site/ s3://paper.composable.finance
