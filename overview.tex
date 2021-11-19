@@ -1,6 +1,30 @@
 \section{Overview}
 
-Having covered the vision in Sec.~(\ref{sec:vision}) we now start by taking a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
+\subsection{Roadmap\label{sec:roadmap}}
+
+Let us start with Composable's roadmap shown in Fig.~(\ref{fig:roadmap}) covering tasks we target to complete through the first half of 2022.
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/roadmap.png}
+    \caption{Composable's roadmap through first half of 2022.\label{fig:roadmap}}
+\end{figure}
+%
+In the closing of this year, we target to enable support for cross-layer NFTs, we deploy Phase II for Mosaic, we have Picasso onboarded to Kusama.
+%
+The Picasso Token Generation Event (TGE) is planned to take place as well and our Oracle pallet Apollo is set to unlock primaries and secondaries.
+%
+We are also set to release cubic - our pallet supporting vaults known from Ethereum but in the substrate-based Polkadot and Kusama ecosystems.
+
+In 2022, we release Centauri, the IBS Substrate testnet, we finish our developments of the BEEFY light client, and develop our Parachain to L2 bridge capability.
+%
+Later in that year, we finalize our routing layer and move Mosaic to Phase III which addresses decentralization. We also release our cross chain virtual machine and the IBC Substrate moves to mainnet.
+%
+Each of these deliverables are covered in more detail throughout this paper.
+
+\subsection{Paper outline}
+
+Having covered the vision in Sec.~(\ref{sec:vision}) and the roadmap in Sec.~(\ref{sec:roadmap}), we now take a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
 
 First, our Application Layer abstracts away high-level actions such as ``take out a loan on chain W layer X, then stake that on chain Y layer Z", in fact, we can get more abstract and say ``take out a loan at the lowest rate and buy NFT X" where ``X" does not include any specification of the chain or layer it lives on.
 %
