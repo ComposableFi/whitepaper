@@ -1,28 +1,49 @@
 \section{Overview}
 
-To achieve our vision we broke down the development into three distinct phases.
+Having covered the vision in Sec.~(\ref{sec:vision}) we now start by taking a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
+
+First, our Application Layer abstracts away high-level actions such as ``take out a loan on chain W layer X, then stake that on chain Y layer Z", in fact, we can get more abstract and say ``take out a loan at the lowest rate and buy NFT X" where ``X" does not include any specification of the chain or layer it lives on.
 %
-Phase I has been successfully completed and we are releasing Phase II shortly. Phase III is also actively being worked on.
-
-In Phase I, Sec.~(\ref{sec:phaseI}) aka the proof-of-concept (PoC), assets can be locked on the source layer, a relayer transmits the transferal information to the destination layer and the same amount in fees is released on the destination layer.
+Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet the user needs not understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
 %
-In Phase II, Sec.~(\ref{sec:phaseII}), we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, Sec.~(\ref{section:lse}), to help us decide on liquidity rebalancing and an optimal fee model to use, Sec.~(\ref{sec:feemodel}).
+An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.
+
+Let us descend one layer. We believe that the application needs to be developed in an easy to use language for developers which is blockchain agnostic. This can help bring to life the full network effect and speed of Web3.
 %
-In Phase III, Sec.~(\ref{sec:phaseIII}) we seek to increase as much as possible the decentralization of the entire system.
-
-Having covered the breakdown of the road to accomplish our vision and the successful progress we have had to date, let us now take a look at the components, or the layers, in Composable's tech stack.
-
-We start with the Cross-Chain Virtual Machine (XCVM).
+This is where the Cross-Chain Virtual Machine (XCVM) comes in, see Sec.~(\ref{sec:xcvm}). In other words, XCVM is a virtual machine (akin to that familiar from Ethereum) capable of running smart contracts without the need to worry about the underlying chain-connection details.
 %
-This layer abstracts away the interaction of developers with the underlying system of networks. For example, the developer needs not worry about sending individual requests to the underlying routing layer directly, handle circuit failures etc.
+XCVM, in turn, needs to send information between various blockchains and layers.
 %
-This ensures that the ecosystem is blockchain-agnostic. We cover this layer in Sec.~(\ref{sec:xcvm}) describing its architecture in Sec.~(\ref{sec:xcvmarch}.
+This is where the next layer down comes into focus: The Routing Layer, see Sec.~(\ref{sec:routing}). This is how the encoded information from developers are turned into information being sent and received to and from the relevant parties.
+%
+In other words, the Routing layer is responsible for routing the information from the XCVM to the correct blockchain and the correct layer, much like Port Control Protocol \cite{PortWikipedia} from Web2.
 
-\todo{jesper}
+To accomplish this, the Routing Layer, in turn, needs broad access to the ecosystem of blockchains. And it needs this access to be fast and secure.
+%
+We have now arrived at our core layer: The Picasso Parachain for Kusama in Sec.~(\ref{sec:parachain}).
+%
+Incidentally, a goal is to also deploy, in a similar way, to a Polkadot parachain.
+%
+The parachain ensures security and speed as the applications transmit information around the entire ecosystem.
 
-WHY SUBSTRATE CHAIN?
+Taking a look now at the various existing ecosystems, for Ethereum we built Mosaic, covered in Sec.~(\ref{sec:mosaic}). Mosaic is a cross-layer bridge and allows for easy cross-layer transfers of tokens.
+%
+Mosaic is actively being built to support cross-chain transfers as well - via Picasso. To achieve our vision for Mosaic we broke down the development into three distinct phases which we will highlight here.
+%
+In Mosaic's Phase I, Sec.~(\ref{sec:phaseI}) aka the proof-of-concept (PoC), assets can be locked on the source layer, a relayer transmits the transferal information to the destination layer and the same amount in fees is released on the destination layer.
+%
+In Mosaic's Phase II, Sec.~(\ref{sec:phaseII}), we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, Sec.~(\ref{section:lse}), to help us decide on liquidity rebalancing and an optimal fee model to use, Sec.~(\ref{sec:feemodel}).
+%
+In Mosaic's Phase III, Sec.~(\ref{sec:phaseIII}) we seek to increase as much as possible the decentralization of the entire system.
 
-WHY PALLETS?
-Pallets add functionality to our Substrate chain, such as cross-chain message capabilities (XCMP), oracles and decentralized exchanges. They’re written in Rust and form a part of the blockchain’s runtime. Smart contract functionality is also provided through pallets, such as the ink! and EVM pallet. 
+Next, besides Ethereum, we are also actively developing in the Polkadot and Cosmos ecosystems \cite{Cosmos:Blockchains}.
+%
+For Polkadot, we are creating a blockchain in Substrate \cite{HomeSubstrate_} and for Cosmos we are contributing to the Cosmos SDK.
+%
+Then, pallets \cite{TheMedium} are used to add additional functionality - one example is our Maximal Extractable Value (MEV) \cite{MinerEthereum.org} resistant data oracle Apollo \cite{Apollo:Finance}.
+%
+Other pallets can be developed including ones to enable Solidity support, cross-chain message capabilities (XCMP), decentralized exchanges, and so on.
+%
+Cosmos supports the Inter-Blockchain Communication Protocol (IBC) \cite{Inter-BlockchainCommunication} standard opening up for a large ecosystem that we can connect to.
 
-What other WHYs?
+In the remaining sections, we cover each of these layers in more detail and we conclude at the end in Sec.~(\ref{sec:conclusion}).

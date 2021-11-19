@@ -78,7 +78,7 @@ The PoC transfer data is visualized in Fig.~(\ref{fig:pocdatavis}).
 %
 \begin{figure}
     \centering
-    \includegraphics[scale=0.28]{images/mosaic/pocdata.png}
+    \includegraphics[width=0.6\textwidth]{images/mosaic/pocdata.png}
     \caption{Visualizing the Mosaic PoC bridge transfer data. Each network supported by Mosaic in the PoC is a node and edges represent transfers between the networks. Note that Arbitrum and Polygon were there from the beginning and other networks were added later. Thus, edges are not normalized by time and surely does not imply "popularity" of a network.}
     \label{fig:pocdatavis}
 \end{figure}
@@ -87,7 +87,7 @@ We next visualize the fees charged for the PoC data in Fig.~(\ref{fig:pocdatafee
 %
 \begin{figure}
     \centering
-    \includegraphics[scale=0.8]{images/mosaic/poc_transfer_on_fee_curve.pdf}
+    \includegraphics[width=0.8\textwidth]{images/mosaic/poc_transfer_on_fee_curve.png}
     \caption{Fee charged vs transfer amounts as percent of available liquidity in the origin vault. For example, if 10 wETH is transferred from a vault on Arbitrum with 1000 wETH it would show up at $x=10$\%. The y-axis shows the fee charged for the transfer. For the PoC vaults were on the order of \$100-200k at the beginning of the PoC. The exact numbers for each token (which in turn was distributed across multiple networks like Arbitrum and Polygon) are available here: \href{https://mosaic.composable.finance/earn}{TVLs for Mosaic} (accessed November 12, 2021).}
     \label{fig:pocdatafees}
 \end{figure}
@@ -110,7 +110,7 @@ This optimized fee curve is shown in Fig.~(\ref{fig:pocdatafeesopt}).
 %
 \begin{figure}
     \centering
-    \includegraphics[scale=0.8]{images/mosaic/poc_optimized.pdf}
+    \includegraphics[width=0.8\textwidth]{images/mosaic/poc_optimized.png}
     \caption{The PoC data transformed to the optimized fee curve with parameters (30, 4, 0.25).}
     \label{fig:pocdatafeesopt}
 \end{figure}

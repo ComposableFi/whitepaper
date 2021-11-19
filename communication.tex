@@ -1,7 +1,31 @@
-\section{Finality and Application Layer}
+\section{Picasso and the Finality Layer\label{sec:parachain}}
+
 Composable’s vision is to create a protocol that allows for communication across ecosystems. The result is a Port Control Protocol like system for blockchains. The end result is multifaceted; users can perform cross-chain actions, and the overarching blockchain ecosystem is re-positioned as a network of agnostic liquidity and available yield. Throughout these interactions, Composable allows users to tailor their experience to maximize for a desired scalar, such as security or speed, while minimizing ecosystem-specific decision making.
 
-Instead of combining bridging infrastructure to our parachain's consensus, we consistently choose to keep these entities separate, ensuring that we are capable of upgrading and deprecating protocols with minimal impact on other infrastructure through our Innovation Availability Layer (IAL). 
+Foundational to our approach of expanding on existing, cutting-edge technology is our effort on stabilizing BEEFY and leading the charge on the Cosmos-Substrate bridging infrastructure. We are developing the reference implementation for BEEFY in Golang, as well as the BEEFY-IBC client libraries needed to support connections to Cosmos chains. Only the security of a parachain allows for bridging to both XCM and IBC compatible chains.
+
+\subsection{Parachain}
+
+At the core of our communication stack lies the parachain, functioning as a finality layer for IBC compatible chains, as well as a gateway into XCM compatible chains. It functions as the incentivization layer for light client data storage and proving.
+
+We will be pursuing the operation of both a Kusama and Polkadot parachain.
+%
+Projects that do well on the Kusama chain, can then upgrade to our Polkadot parachain - still to be named.
+
+Polkadot and Kusama also allow for native cross-chain communication with all other parachains connected to the relay chain, as well as all external networks. An inflationary reward mechanism is used to incentivize collators and oracles. Through a runtime upgrade enacted by decentralized governance, the actual reward rate can be set and reduced as the protocol starts generating significant fees. Users and infrastructure providers are capable of staking PICA and LAYR tokens to grow with the ecosystem, providing critical security and capabilities to our ecosystem. 
+
+\subsection{Picasso}
+
+We consider Kusama and Polkadot interchangeable in what follows and part of the greater substrate ecosystem.
+%
+Polkadot offers plug-and-play security, allowing Composable to focus on building its ecosystem, and leaving the security to Polkadot’s validators.
+%
+By leveraging parachains we do not have to recruit our own validators for security, which gives us greater finality guarantees and lowers the risk of cross-chain transaction failures. We also chose Polkadot for its blockchain development framework, Substrate. Substrate allowed us to custom-build our blockchain, allowing us to continuously upgrade our blockchain with new functionalities without needing to fork the network.
+%
+Polkadot also allows for native cross-chain communication with all other parachains connected to Polkadot, as well as all external networks bridged to Polkadot.
+%
+Last, we believe Polkadot has the top engineering team and leadership in the industry, having been built by Gavin Wood who coded Ethereum, invented the Solidity programming language, and invented the Ethereum Virtual Machine (EVM). We believe Polkadot is building the third phase of crypto after Bitcoin and Ethereum.
+
 
 \subsection{Finality}
 Composable's support of different ecosystems implies that we must be able to control and abstract for the final user, the inclusion of transactions in different chains. Inclusion is tightly related to the concept of finality. Finality guarantees that past events on the blockchain are immutable, therefore when a transaction it is included on a final block we can be sure that it has been included on the chain. Unfortunately, strong finality cannot be provided without some compromises \cite{Brewer2012Cap} and most blockchains only offer some degree of finality. We list the three degrees of finality most likely to be found on different networks, from weaker to stronger finality:
@@ -15,14 +39,6 @@ Composable's support of different ecosystems implies that we must be able to con
 \end{itemize}
 
 We need to handle chains with different finalities and different synchronization times. Therefore, we cannot proceed with a deterministic solution. In order to make Composable decentralized and protocol-agnostic, we need to rely on validators.
-
-\subsection{Innovation Availability Layer}
-Our core design is centered around integration of cutting edge technologies across ecosystems, such as IBC, XCMP and zero-knowledge based bridges. The Innovation Availability Layer offers a protocol to upgrade bridging technologies without downtime, as well as an API stability guarantee for smart-contracts. Users and protocols alike will be able to interact through this singular interface to dispatch complex operations.
-
-Foundational to our approach of expanding on existing, cutting-edge technology is our effort on stabilizing BEEFY and leading the charge on the Cosmos-Substrate bridging infrastructure. We are developing the reference implementation for BEEFY in Golang, as well as the BEEFY-IBC client libraries needed to support connections to Cosmos chains.
- 
-\subsection{Parachain}
-At the core of our communication stack lies the parachain, functioning as a finality layer for IBC compatible chains, as well as a gateway into XCM compatible chains. It functions as the incentivization layer for light client data storage and proving. Polkadot and Kusama also allow for native cross-chain communication with all other parachains connected to the relay chain, as well as all external networks. An inflationary reward mechanism is used to incentivize collators and oracles. Through a runtime upgrade enacted by decentralized governance, the actual reward rate can be set and reduced as the protocol starts generating significant fees. Users and infrastructure providers are capable of staking PICA and LAYR tokens to grow with the ecosystem, providing critical security and capabilities to our ecosystem. 
 
 \subsection{Pallets}
 Given that our parachains are the foundational layer that powers our ecosystem, we have adopted a pallet-centric approach to adding products on our parachains. Meaning, we will offer projects the ability to deploy as pallets on our chain, with decentralized, stake-based governance, having the ability to upgrade these pallets into the runtime of our chains. We are excited to be able to offer this to the Kusama ecosystem, and have a grants programs for others to develop pallet projects using our technology, to be implemented into our parachain. Projects that do well on the Kusama chain, can then upgrade to our Polkadot parachain, which we envision to be the stable, more mature sister of our Kusama chain. 
