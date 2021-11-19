@@ -36,3 +36,4 @@ jobs:
     - name: Deploy to S3
       run: |
         aws s3 sync site/ s3://paper.composable.finance
+        aws cloudfront create-invalidation --distribution-id E23AJ9F0MJOWAM --paths "/*"
