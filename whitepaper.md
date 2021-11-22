@@ -1,22 +1,3 @@
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']],
-      processEscapes: true},
-      jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
-      extensions: ["tex2jax.js","mml2jax.js","asciimath2jax.js","MathMenu.js","MathZoom.js","AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
-      TeX: {
-      extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
-      equationNumbers: {
-      autoNumber: "AMS"
-      }
-    }
-  });
-</script>
-
 # Composable Finance
 
 ## Contents
@@ -76,9 +57,11 @@ We believe that the applications of such a stack are the catalyst for the next D
 ## 2. Overview
 
 ### 2.1 Roadmap 
-Let us start with Composable's roadmap shown in Fig.~(\ref{fig:roadmap}) covering tasks we target to complete through the first half of 2022.
+Let us start with Composable's roadmap shown in Fig.[(1)](#fig_roadmap) covering tasks we target to complete through the first half of 2022.
 
+<a name="fig_roadmap"></a>
 ![Composable Roadmap](./images/roadmap.png)
+
 
 In the closing of this year, we target to enable support for cross-layer NFTs, we deploy Phase II for Mosaic, we have Picasso onboarded to Kusama.
 The Picasso Token Generation Event (TGE) is planned to take place as well and our Oracle pallet Apollo is set to unlock primaries and secondaries.
@@ -89,28 +72,28 @@ Later in that year, we finalize our routing layer and move Mosaic to Phase III w
 Each of these deliverables are covered in more detail throughout this paper.
 
 ## 2.2 Paper Outline
-Having covered the vision in Sec.~(\ref{sec:vision}) and the roadmap in Sec.~(\ref{sec:roadmap}), we now take a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
+Having covered the vision in Sec.[(1)](#1-vision) and the roadmap in Sec.[(2.1)](#21-roadmap), we now take a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
 
 First, our Application Layer abstracts away high-level actions such as ``take out a loan on chain W layer X, then stake that on chain Y layer Z", in fact, we can get more abstract and say ``take out a loan at the lowest rate and buy NFT X" where ``X" does not include any specification of the chain or layer it lives on.
 Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet the user needs not understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
 An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.
 
 Let us descend one layer. We believe that the application needs to be developed in an easy to use language for developers which is blockchain agnostic. This can help bring to life the full network effect and speed of Web3.
-This is where the Cross-Chain Virtual Machine (XCVM) comes in, see Sec.~(\ref{sec:xcvm}). In other words, XCVM is a virtual machine (akin to that familiar from Ethereum) capable of running smart contracts without the need to worry about the underlying chain-connection details.
+This is where the Cross-Chain Virtual Machine (XCVM) comes in, see Sec.([3)](#3-cross-chain-virtual-machine). In other words, XCVM is a virtual machine (akin to that familiar from Ethereum) capable of running smart contracts without the need to worry about the underlying chain-connection details.
 XCVM, in turn, needs to send information between various blockchains and layers.
-This is where the next layer down comes into focus: The Routing Layer, see Sec.~(\ref{sec:routing}). This is how the encoded information from developers are turned into information being sent and received to and from the relevant parties.
+This is where the next layer down comes into focus: The Routing Layer, see Sec.[(4)](#4-routing-layer-design). This is how the encoded information from developers are turned into information being sent and received to and from the relevant parties.
 In other words, the Routing layer is responsible for routing the information from the XCVM to the correct blockchain and the correct layer, much like Port Control Protocol \cite{PortWikipedia} from Web2.
 
 To accomplish this, the Routing Layer, in turn, needs broad access to the ecosystem of blockchains. And it needs this access to be fast and secure.
-We have now arrived at our core layer: The Picasso Parachain for Kusama in Sec.~(\ref{sec:parachain}).
+We have now arrived at our core layer: The Picasso Parachain for Kusama in Sec.[(5)](#5-picasso-and-the-finality-layer).
 Incidentally, a goal is to also deploy, in a similar way, to a Polkadot parachain.
 The parachain ensures security and speed as the applications transmit information around the entire ecosystem.
 
-Taking a look now at the various existing ecosystems, for Ethereum we built Mosaic, covered in Sec.~(\ref{sec:mosaic}). Mosaic is a cross-layer bridge and allows for easy cross-layer transfers of tokens.
+Taking a look now at the various existing ecosystems, for Ethereum we built Mosaic, covered in Sec.[6](#6-mosaic-design). Mosaic is a cross-layer bridge and allows for easy cross-layer transfers of tokens.
 Mosaic is actively being built to support cross-chain transfers as well - via Picasso. To achieve our vision for Mosaic we broke down the development into three distinct phases which we will highlight here.
-In Mosaic's Phase I, Sec.~(\ref{sec:phaseI}) aka the proof-of-concept (PoC), assets can be locked on the source layer, a relayer transmits the transferal information to the destination layer and the same amount in fees is released on the destination layer.
-In Mosaic's Phase II, Sec.~(\ref{sec:phaseII}), we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, Sec.~(\ref{section:lse}), to help us decide on liquidity rebalancing and an optimal fee model to use, Sec.~(\ref{sec:feemodel}).
-In Mosaic's Phase III, Sec.~(\ref{sec:phaseIII}) we seek to increase as much as possible the decentralization of the entire system.
+In Mosaic's Phase I, Sec.[(6.1)](#61-phase-i) aka the proof-of-concept (PoC), assets can be locked on the source layer, a relayer transmits the transferal information to the destination layer and the same amount in fees is released on the destination layer.
+In Mosaic's Phase II, Sec.[(6.2)](#62-phase-ii) , we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, Sec[6.4](#64-liquidity-simulation-environment), to help us decide on liquidity rebalancing and an optimal fee model to use, Sec.[6.4.2](#642-mosaic-fee-model).
+In Mosaic's Phase III, Sec.[(6.3)](#63-phase-iii)  we seek to increase as much as possible the decentralization of the entire system.
 
 Next, besides Ethereum, we are also actively developing in the Polkadot and Cosmos ecosystems \cite{Cosmos:Blockchains}.
 For Polkadot, we are creating a blockchain in Substrate \cite{HomeSubstrate_} and for Cosmos we are contributing to the Cosmos SDK.
@@ -118,7 +101,7 @@ Then, pallets \cite{TheMedium} are used to add additional functionality - one ex
 Other pallets can be developed including ones to enable Solidity support, cross-chain message capabilities (XCMP), decentralized exchanges, and so on.
 Cosmos supports the Inter-Blockchain Communication Protocol (IBC) \cite{Inter-BlockchainCommunication} standard opening up for a large ecosystem that we can connect to.
 
-In the remaining sections, we cover each of these layers in more detail and we conclude at the end in Sec.~(\ref{sec:conclusion}).
+In the remaining sections, we cover each of these layers in more detail and we conclude at the end in Sec.[(7)](#7-conclusion).
 
 ## 3. Cross-Chain Virtual Machine
 The cross-chain virtual machine (XCVM) is a single, developer friendly interface to interact and orchestrate smart contract functions across the multitude of L1 and L2 networks available. In short, the XCVM abstracts complexity from the process of having to send instructions to the routing layer directly, initiates call-backs into smart contracts, and handles circuit failure such as network outages.
@@ -170,14 +153,16 @@ As mentioned beforehand, constructing a dynamic graph and finding the best route
 
 * Solvers will run off-chain custom algorithms to find the best route for a given problem instance. When trying to find a path, solvers will compete to find the best solution. Received solutions will be ranked according to a predefined cost function and top solvers will earn tokens with regard to the efficiency of their solution. By doing this, we leverage the game theory aspect of the competition while achieving a decentralized manner to find the best route.
 
+<a name="fig_routing"></a>
 ![Routing architecture with indexers and solvers. We can appreciate how, by using Picasso as finality layer, routers and indexers can collaborate on the routing algorithm. Please note how routing solver nodes leverage XCVM to propose new routes.}
 \label{fig:routing](./images/routing.png)
 
-These roles will be used, together with a default minimum cost routing algorithm, to address the routing challenges previously introduced. This architecture, as shown in Figure \ref{fig:routing}, enhances for public examination and minimizes the trust users need to put on the protocol. It is also fairly easy to scale since most of the workload is performed off-chain, while only validation is done on-chain.
+These roles will be used, together with a default minimum cost routing algorithm, to address the routing challenges previously introduced. This architecture, as shown in Figure [(2)](#fig_routing), enhances for public examination and minimizes the trust users need to put on the protocol. It is also fairly easy to scale since most of the workload is performed off-chain, while only validation is done on-chain.
 
+<a name="fig_sel_bridges"></a>
 ![Uni-connected directional graph representation of different Blockchains connected via the best bridges based on the specific requirements of a given user at a given time.](./images/Selected_Bridges1.png)
 
-As for the routing algorithms employed by solvers, we do not enforce any kind of restriction. We are interested on the best result the community can provide. As previously mentioned, and shown in Figure \ref{fig:sel_bridges}, we are facing a complex problem with variable parameters, where there is no unique strategy that dominates the others, at least with limited time. We outsource the path finding task to the decentralized community of Composable users. As other projects have explored \cite{GnosisWhitepaper}, having the users to run different algorithms and heuristics in a fair ecnonomic game, produces a better and more complete solution that can adapt to new scenenarios faster. We will also run our own algorithm, so that all problem instances have a fair baseline solution.
+As for the routing algorithms employed by solvers, we do not enforce any kind of restriction. We are interested on the best result the community can provide. As previously mentioned, and shown in Figure [(3)](#fig_sel_bridges), we are facing a complex problem with variable parameters, where there is no unique strategy that dominates the others, at least with limited time. We outsource the path finding task to the decentralized community of Composable users. As other projects have explored \cite{GnosisWhitepaper}, having the users to run different algorithms and heuristics in a fair ecnonomic game, produces a better and more complete solution that can adapt to new scenenarios faster. We will also run our own algorithm, so that all problem instances have a fair baseline solution.
 
 ## 5. Picasso and the Finality Layer
 
@@ -229,11 +214,12 @@ The liquidity layer serves to ensure liquidity is moving to the locations where 
 ### 6.1 Phase I
 Phase I presents a simple and functional cross-layer solution to enable a transfer system between all major DeFi ecosystems. It is a PoC with enforced limited functionality to demonstrate the capability of the system.
 
-The main actors in this phase are: an L1 vault in charge of redistributing liquidity, dedicated vaults on each L2, users engaging and providing the required liquidity and a relayer in charge of communicating the different supported networks. All the actors and their interactions are depicted on Fig.~(\ref{fig:v1_mosaic}).
+The main actors in this phase are: an L1 vault in charge of redistributing liquidity, dedicated vaults on each L2, users engaging and providing the required liquidity and a relayer in charge of communicating the different supported networks. All the actors and their interactions are depicted on Fig.[(4)](#fig_v1_mosaic).
 
+<a name="fig_v1_mosaic"></a>
 ![Polygon-Arbitrum transfer scheme in Mosaic v1](./images/mosaic/v1.png)
 
-As you can see on Fig.~(\ref{fig:v1_mosaic}), a transfer consists of 2 important events: the lock event that happens on the source layer and the release event that is triggered by our relayer system on the destination one. This interaction is done on the L2Vault contract, with the lock happening using the \textit{depositERC20} method, while for the asset release, the \textit{withdrawTo} method is called on the L2Vault contract deployed on the other side.
+As you can see on Fig.[(4)](#fig_v1_mosaic), a transfer consists of 2 important events: the lock event that happens on the source layer and the release event that is triggered by our relayer system on the destination one. This interaction is done on the L2Vault contract, with the lock happening using the \textit{depositERC20} method, while for the asset release, the \textit{withdrawTo} method is called on the L2Vault contract deployed on the other side.
 
 In terms of the necessary liquidity for these actions to happen, users deposit liquidity using the VaultL1 smart contract deployed on L1 mainnet. Users obtain rewards in form of LAYR tokens in exchange for providing liquidity. L1 Vault acts as master with regards the L2 vaults, and redistributes the liquidity on demand.
 
@@ -253,9 +239,9 @@ In Mosaic v2 the user has the ability to provide liquidity on any layer and in e
 #### Cross Layer Function Calls
 Mosaic v2 not only supports value transfers, but also offers cross functions calls. The relayer can transfer the function call and its associated parameters from source to destination in a similar manner as value transfers. To handle calls and returns, it employs a \textit{MsgSender} contract on the source layer, which is in charge of abstracting the user and communicating with the relayer, and a \textit{MsgReceiverFactory} contract on the destination layer. \textit{MsgReceiverFactory} creates \textit{MsgReceiver} instances, which create a virtual identification of the user on the destination network, and interact with the desired protocol. All the interactions on the destination layer are done through the factory contract.
 
-This general architecture, as shown on Fig.~(\ref{fig:crosscall}), allows users to call any protocol on any network and from any source. This elevates Mosaic v2 to a new level of unification, not only value is transferred, but also functionality is bridged together.
+This general architecture, as shown on Fig.[(5)](#fig_crosscall), allows users to call any protocol on any network and from any source. This elevates Mosaic v2 to a new level of unification, not only value is transferred, but also functionality is bridged together.
 
-
+<a name="fig_crosscall"></a>
 ![Cross layer function call architecture](./images/mosaic/crosscalls.png)
 
 #### Other improvements
@@ -263,7 +249,7 @@ In addition to the improvements already mentioned, phase II of the protocol pres
 
 * Transfer NFTs (ERC-721) between networks by using Ethereum research wrapper proposal \cite{WhyPropertiesb}.
 * More secure and controlled vaults. Instead of a single *MosaicVault*, everything is isolated in different and dedicated *MosaicHoldings* smart contracts.
-* Real time liquidity balancing. See Sec.~(\ref{section:lrs}) for more details.
+* Real time liquidity balancing. See Sec.[(6.5)](#65-liquidity-rebalancing-system) for more details.
 * More efficient management of unused funds. Single or combined assets are used to yield farm, resulting in better and more competitive APY for Mosaic's liquidity providers.
 
 ### 6.3 Phase III
@@ -277,8 +263,9 @@ Each one of the bridges that constitutes Mosaic will be maintained by a group of
 ##### RelayerSet Creation
 We’ve chosen to use RelayerSets instead of single relayer nodes to reduce the chance of fraudulent relayers, as well as reducing the stake required to participate as a relayer. In order to increase the security of the RelayerSets, and decrease the risk of a sybil attack, we assign relayers at random to different RelayerSets on-chain.
 
-A user who wants to form part of a relayer group of a given size sends a transaction and initiates the registration. The transaction includes, the identification of the user, the stake he is providing and the size of the TSS he would like to form part of. Algorithm \ref{alg:register_TSS} contains the pseudo-code of the joining process.
+A user who wants to form part of a relayer group of a given size sends a transaction and initiates the registration. The transaction includes, the identification of the user, the stake he is providing and the size of the TSS he would like to form part of. Algorithm [(1)](#alg_tss) contains the pseudo-code of the joining process.
 
+<a name="alg_tss"></a>
     \begin{algorithm}[H]
         \caption{Register TSS group}
         \begin{algorithmic}[1]
@@ -329,26 +316,29 @@ Let Alice be a user who wishes to transfer an asset from chain Source to chain D
 
 Alice initiates the transaction on the source chain, locking the funds in a time locked contract and storing the parameters of the proposed transaction,  then confirms it will relay the transaction by interacting with the contract, which permanently locks the funds. (The confirmation can be negotiated and signed off-chain to reduce gas fees for the relayer).
 
-After XCT-lock has been confirmed, the RelayerSet sends Alice the XCT-unlock transaction, which she commits on the destination chain. Fig.~(\ref{fig:v3_protocol}) illustrates the complete process.
+After XCT-lock has been confirmed, the RelayerSet sends Alice the XCT-unlock transaction, which she commits on the destination chain. Fig.[(6)](#fig_protocol)) illustrates the complete process.
 
+<a name="fig_protocol"></a>
 ![Time interaction scheme of the different actors for a XCT using RelayerSets](./images/mosaic/phase3/protocol.png)
 
 ##### Disputes
 A malicious RelayerSet can commit fraud in a number of ways, which are handled through on-chain dispute and settled by slashing the stake of the relayers.
 
   * **Case 1. RelayerSet and user submit a XCT-unlock with no corresponding XCT-lock on the source chain.**
-  As illustrated in Fig.~(\ref{fig:dispute1}), when a validator observes a fraud on the destination chain, he musts dispute the RelayerSet on the source and destination chain. Disputes on the source chain are more easily settled since the validator only needs to submit the XCT-unlock event to show the intention of the relayer to commit fraud, independently of the inclusion or finality on the destination chain. 
+  As illustrated in Fig.[(7)](#fig_dispute1), when a validator observes a fraud on the destination chain, he musts dispute the RelayerSet on the source and destination chain. Disputes on the source chain are more easily settled since the validator only needs to submit the XCT-unlock event to show the intention of the relayer to commit fraud, independently of the inclusion or finality on the destination chain. 
    
   However, disputes on the destination chain are way more complex since different chains present different finality and consensus models. In order to address this problem, we resort to different proof-of-non-membership that can immediately settle the dispute. If that is not feasible, the dispute may be resolved through decentralized governance.
 
+  <a name="fig_dispute1"></a>
   ![Time interaction scheme of the dispute resolution when no XCT-lock event is triggered on source chain](images/mosaic/phase3/dispute1.png)
    
   * **Case 2. RelayerSet and/or user create a transaction in the destination chain with a different corresponding transaction on source chain.**
   The solution to this dispute is actually identical to the previous one, as there will be no corresponding entry for the transaction on the source chain. Nonetheless, this case will be less common, as the amount of funds lost by the user is greater (the stake + the cost of the XCT-lock transaction), while it does not present additional gains with regards to case 1.
   
   * **Case 3. RelayerSet does not create a corresponding transaction on destination chain.**
-  Since the RelayerSet confirms on the source chain that it will relay by signing the XCT proposal, the fraud proof becomes showing the destination chain that RelayerSet committed to signing an XCT-unlock. The user can then re-obtain their funds on the destination chain. The proof is depicted in Fig.~(\ref{fig:dispute3}).
+  Since the RelayerSet confirms on the source chain that it will relay by signing the XCT proposal, the fraud proof becomes showing the destination chain that RelayerSet committed to signing an XCT-unlock. The user can then re-obtain their funds on the destination chain. The proof is depicted in Fig.[(8)](#fig_dispute3).
 
+  <a name="fig_dispute3"></a>
   ![Time interaction scheme of the dispute resolution when no transaction is created on destination chain](images/mosaic/phase3/dispute3.png)
 
 In the case where an honest RelayerSet provides XCT-unlock, but the user does not submit the transaction, the RelayerSet may still submit the XCT-unlock transaction during the dispute window and slash funds from the XCT.
@@ -372,8 +362,9 @@ For our cross-chain solution, we consider two well-known and established schemes
 
 Both approaches have its benefits and drawbacks. On the one hand, multi-signature is easier to implement since it is based on independent signatures and requires no additional setup. However, it produces multiple signatures, increasing the costs on the blockchain and the verification times, since each individual signature needs to be separately verified.
 
-On the other hand, TSS  require quite a complicated setup, with multiple sub-protocols and the use of homomorphic cryptography \cite{Moore2014PracticalSurvey}. Nonetheless, the verification is simpler and faster than the multi-signature scheme. A simple scheme of both signatures protocols is depicted in Fig.~(\ref{fig:signatures}).
+On the other hand, TSS  require quite a complicated setup, with multiple sub-protocols and the use of homomorphic cryptography \cite{Moore2014PracticalSurvey}. Nonetheless, the verification is simpler and faster than the multi-signature scheme. A simple scheme of both signatures protocols is depicted in Fig.[(9)](#fig_signatures}).
 
+<a name="fig_signatures"></a>
 ![Multi-signature vs. TSS. Here, $$\sigma$$ represents a partial or complete signature, $$R$$ is the randomness used in the process, $$M$$ represents the message to be signed and $sk_i$ illustrates their partial or personal secret key](images/mosaic/phase3/signatures.png)
 
 Since we are focused an interested on keeping the operational costs as lower as possible for the user, we choose the TSS scheme. The setup can be performed off-chain, and then only a single signature and public verification key need to be broadcasted. This keeps the blockchain transaction and storage costs to a minimum while leveraging and state of the art signature scheme with all the desired security properties.
@@ -381,8 +372,9 @@ Since we are focused an interested on keeping the operational costs as lower as 
 #### 6.3.3 Alternative model
 We presented the the protocol, the dispute resolution engine and the cryptographic constructs that enable Mosaic v3. However, there exist an alternative model we have also considered. In function of the data we gather from Phase II, we might consider this secondary approach. For the sake of completeness, we briefly describe the second model we considered.
 
-As other projects have explored \cite{HopRollups, MOVRMOVR}, when a common layer or chain is available (e.g: L1 on Ethereum and RelayChain on Polkadot), cross-chain transfers can be achieved by bundling different transactions. The state (e.g: transactions or messages) from a source chain is transferred to the destination chain in a cryptographic accumulator, usually in the form of a Merkle Root \cite{Becker2008MerkleCryptanalysis}. As depicted in Fig.~( \ref{fig:accumulator}), the state is comprised on source chain and sent to the destination chain through the common layer. Later on, by proving membership  and unpacking the Merkle root, messages can be recovered on the destination layer.  By bundling information, we can reduce transaction costs on the common layer as well as benefiting from its security since the whole process is done on-chain. To ensure the validity of data being transferred, some stake is locked or an optimistic approach is pursued until the source chain settles its sates on the common chain. Then, the data is considered final and can be used as ground truth.
+As other projects have explored \cite{HopRollups, MOVRMOVR}, when a common layer or chain is available (e.g: L1 on Ethereum and RelayChain on Polkadot), cross-chain transfers can be achieved by bundling different transactions. The state (e.g: transactions or messages) from a source chain is transferred to the destination chain in a cryptographic accumulator, usually in the form of a Merkle Root \cite{Becker2008MerkleCryptanalysis}. As depicted in Fig.[(10)](#fig_accumulator), the state is comprised on source chain and sent to the destination chain through the common layer. Later on, by proving membership  and unpacking the Merkle root, messages can be recovered on the destination layer.  By bundling information, we can reduce transaction costs on the common layer as well as benefiting from its security since the whole process is done on-chain. To ensure the validity of data being transferred, some stake is locked or an optimistic approach is pursued until the source chain settles its sates on the common chain. Then, the data is considered final and can be used as ground truth.
 
+<a name="fig_accumulator"></a>
 ![Accumulate and transfer scheme. Only the Merkle root is transferred on-chain to  reduce costs](images/mosaic/phase3/accumulator.png)
 
 We believe Mosaic is more general than this approach, since it does not depend on the existence of a common layer and replaces the finality gadget with a set of decentralized relayers. Nonetheless, we might consider this agglutination scheme for scenarios in which a common layer can be easily found, in an effort to keep as much of the process on-chain. Please note that this approach still requires, to a certain degree, off-chain services in order to operate properly.
@@ -423,18 +415,20 @@ The moves or transactions $N_t$ (amount of \$) from one vault to another, at tim
 
 with $\mu$ being a drift term, $\sigma$ the volatility, both assumed to be constants and $W_t$ is a Brownian motion stochastic process. The analytical solution of the above SDE at time t, given initial condition $N_0$, is known to be
 
+<a name="eq_gbm_solution"></a>
 \begin{equation}
 \label{eq:gbm_solution}
 N_t = N_0 \exp\left[ \left(\mu - \frac{\sigma^2}{2}\right) t + \sigma W_t\right],
 \end{equation}
 
-which by definition is always strictly positive. A key property of the solution, important for our LSE use, is that the solution asymptotically goes to infinity when $\mu > \frac{1}{2}\sigma^2$, it goes to $0$ when $\mu < \frac{1}{2}$ and it fluctuates between zero and arbitrarily large values when $\mu = \frac{1}{2}\sigma^2$, therefore for most of our cases we will be using $\mu = \frac{1}{2}\sigma^2$. Fig. \ref{fig:gbm} shows two random simulation of eq. (\ref{eq:gbm_solution}) for the $N_0 = \$2000$, $\sigma=2$ and $N_0=\$1500$, $\sigma=1$ respectively. Note that the same initial and volatility values have also been used in our simulations below to simulate moves from Polygon to Arbitrum vaults and vice versa.
+which by definition is always strictly positive. A key property of the solution, important for our LSE use, is that the solution asymptotically goes to infinity when $\mu > \frac{1}{2}\sigma^2$, it goes to $0$ when $\mu < \frac{1}{2}$ and it fluctuates between zero and arbitrarily large values when $\mu = \frac{1}{2}\sigma^2$, therefore for most of our cases we will be using $\mu = \frac{1}{2}\sigma^2$. Fig.[(11)](#fig_gbm) shows two random simulation of eq.[(2)](#eq_gbm_solution) for the $N_0 = \$2000$, $\sigma=2$ and $N_0=\$1500$, $\sigma=1$ respectively. Note that the same initial and volatility values have also been used in our simulations below to simulate moves from Polygon to Arbitrum vaults and vice versa.
 
+<a name="fig_gbm"></a>
 ![Simulation of Geometric Brownian motion data in Composable's Liquidity Simulation Environment (LSE)](images/gbms.png)
 
 These results guided us to an answer on two key questions to kick off the Mosaic PoC: First, how much liquidity should be assigned in total and then how much should be assigned to each network? Second, which transfer fee model should we initially use?
 
-These results guided us to decide on a good initial fee model to use for the Mosaic PoC. We then ran the PoC with that model, collected the data, and optimized the model to its final form. More on that in Sec.~(\ref{sec:feemodel}).
+These results guided us to decide on a good initial fee model to use for the Mosaic PoC. We then ran the PoC with that model, collected the data, and optimized the model to its final form. More on that in Sec.[(6.4.2)](#642-mosaic-fee-model).
 
 #### 6.4.2 Mosaic Fee Model
 One of the first use-cases of the LSE was deciding which fee model to use for Mosaic.
@@ -457,12 +451,14 @@ We have three free parameters in our fee model:
 
 In the PoC these parameters were: 40\%, 4\%, and 0.25\%, respectively. For ease, we will denote this parameter set in the format (40, 4, 0.25).
 
-The PoC transfer data is visualized in Fig.~(\ref{fig:pocdatavis}).
+The PoC transfer data is visualized in Fig.[(12)](#fig_pocdatavis).
 
+<a name="fig_pocdatavis"></a>
 ![Visualizing the Mosaic PoC bridge transfer data. Each network supported by Mosaic in the PoC is a node and edges represent transfers between the networks. Note that Arbitrum and Polygon were there from the beginning and other networks were added later. Thus, edges are not normalized by time and surely does not imply "popularity" of a network](images/mosaic/pocdata.png)
 
-We next visualize the fees charged for the PoC data in Fig.~(\ref{fig:pocdatafees}).
+We next visualize the fees charged for the PoC data in Fig.[(13)](#fig_pocdatafees).
 
+<a name="fig_pocdatafees"></a>
 ![Fee charged vs transfer amounts as percent of available liquidity in the origin vault. For example, if 10 wETH is transferred from a vault on Arbitrum with 1000 wETH it would show up at $x=10$\%. The y-axis shows the fee charged for the transfer. For the PoC vaults were on the order of \$100-200k at the beginning of the PoC. The exact numbers for each token (which in turn was distributed across multiple networks like Arbitrum and Polygon) are available here: \href{https://mosaic.composable.finance/earn}{TVLs for Mosaic} (accessed November 12, 2021)](images/mosaic/poc_transfer_on_fee_curve.png)
 
 To decide on a good set of parameters, we next compare this to bridges seen in the general cross-ledger community.
@@ -479,8 +475,9 @@ And so on.
 
 Given this landscape of fees the following parameters were chosen: (30, 4, 0.25) (liquidity-\% at which max fee kicks in, maximum fee \% to charge, minimum fee \% to charge, respectively).
 
-This optimized fee curve is shown in Fig.~(\ref{fig:pocdatafeesopt}).
+This optimized fee curve is shown in Fig.[(14)](#fig_pocdatafeesopt).
 
+<a name="fig_pocdatafeesopt"></a>
 ![The PoC data transformed to the optimized fee curve with parameters (30, 4, 0.25).](images/mosaic/poc_optimized.png)
 
 
@@ -494,7 +491,7 @@ If we stray away from expected values, we modify the parameters if necessary bas
 ### 6.5 Liquidity Rebalancing System
 The best user experience is obtained when the liquidity availability is high thus allowing, in general, any token to be moved from any network to any other network.
 
-To that end, we used the LSE from Sec.~\ref{section:lse} to design a forecasting and rebalancing technology which can predict in advance when a certain liquidity level will be reached for a given vault. This is built into Mosaic.
+To that end, we used the LSE from Sec.[(6.4)](#64-liquidity-simulation-environment) to design a forecasting and rebalancing technology which can predict in advance when a certain liquidity level will be reached for a given vault. This is built into Mosaic.
 
 It is critical for the optimization of the passive liquidity rebalancing that will enable passive liquidity providers to continue to service cross-layer transfers.
 
@@ -502,9 +499,10 @@ Having an optimal allocation of capital across layers is key to offering the bes
 
 More formally, enter the Liquidity Rebalancing System (LRS) developed by Composable Labs.
 
+<a name="fig_lrd"></a>
 ![Sketch of the Liquidity Rebalancing System showing how a forecast model is built on the liquidity in each vault in the Mosaic network. Transfer of funds are moved as needed when a subset of vaults are depleted (to a certain pre-set level, we use 90\% here which is conservative) needing funds from a donor vault](images/lrs.png)
 
-In Fig.~(\ref{fig:lrs}) we show a graph of various networks such as the Ethereum mainnet, a layer 2 solution Arbitrum, Avalanche, and Fantom, but Mosaic supports many more networks and is growing.
+In Fig.[(15)](#fig_lrd) we show a graph of various networks such as the Ethereum mainnet, a layer 2 solution Arbitrum, Avalanche, and Fantom, but Mosaic supports many more networks and is growing.
 
 LRS builds a forecasting model on each network (shown as the insets with black lines being the liquidity data and green lines being the forecast model). At a given frequency, e.g. hourly, it checks the status of all networks, computes where liquidity is needed and performs the transfers.
 
@@ -572,8 +570,9 @@ We generate simulated data with the LSE. Our time series data consists of $1000$
 
 We briefly touched on how these are computed, but let us provide more details here. We select a number of token movements of the vaults. These are drawn from a truncated Gaussian with parameters set to resemble real-world transfers. As an aside, the Mosaic PoC provided even more realistic data and we have developed ways to account for this as well - we are able to confirm that our simulated data resembles the PoC data.
 
-Then, the simulated data is snapped to a global timegrid and a state machine is used to evolve the vault states forward starting at some initial liquidity levels. This give rise to the evolving liquidity levels over time as plotted in Fig.~(\ref{fig:lse_datasets}).
+Then, the simulated data is snapped to a global timegrid and a state machine is used to evolve the vault states forward starting at some initial liquidity levels. This give rise to the evolving liquidity levels over time as plotted in Fig.[(16)](#fig_lse_datasets}).
 
+<a name="fig_lse_datasets"></a>
 ![](images/lse_results_feemodel_3_20_20211015_18_59_40_412997.png)
 ![Dataset 1 (left) and Dataset 2 (right) from the Liquidity Simulation Environment (LSE). Each vault is a row. The liquidity is shown as the moving curves in rows 2 and 3. Row 1 does not have transfers involved with it for this data.](images/lse_results_feemodel_3_20_20211021_18_59_52_314364.png)
 
@@ -583,8 +582,9 @@ Then, we run the model selection algorithm every time we shift the time frame 10
 
 We next show the performance of the ARIMA model as well as of HLT. In the HLT approach, also known as double exponential smoothing, we identify a linear trend in the time series and make a prediction using the smoothed value $s_t$ and the linear trend term $b_t$ at time $t$.
 
-See the forecasting comparison and performance for the Arbitrum vault in Fig.~(\ref{fig:arb_conserv}).
+See the forecasting comparison and performance for the Arbitrum vault in Fig.[(17)](#fig_arb_conserv).
 
+<a name="fig_arb_conserv"></a>
 ![Forecasting comparison between ARIMA and HLT models. The black point shows when the ARIMA model predicts that a 90\% liquidity level is reached in the vault - by conservative estimates (the lower confidence level). The purple point shows when the HLT model predicts the same 90\% liquidity level. While both predictions can be used to trigger, in advance, a replenishment event, the ARIMA predictions appears to be much more conservative](images/arbitrum_instance_t_fin270_90perce_drop.png)
 
 We run a forecasting model on each vault and this, in turn, triggers the rebalancing system to move liquidity accordingly to always keep the vaults ready and liquid thus maximizing the successful transfer rate.
