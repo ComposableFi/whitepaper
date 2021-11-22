@@ -10,6 +10,14 @@
   background-image: linear-gradient(180deg, #fffbf1, #fffbf1);
 }
 
+span[id^="sec:"] {
+  display: none;
+}
+
+span[class^="citation"] {
+  display: none;
+}
+
 .socials {
   display: -webkit-box;
   display: -webkit-flex;
