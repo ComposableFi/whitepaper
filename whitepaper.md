@@ -174,20 +174,15 @@ Foundational to our approach of expanding on existing, cutting-edge technology i
 At the core of our communication stack lies the parachain, functioning as a finality layer for IBC compatible chains, as well as a gateway into XCM compatible chains. It functions as the incentivization layer for light client data storage and proving.
 
 We will be pursuing the operation of both a Kusama and Polkadot parachain.
-
 Projects that do well on the Kusama chain, can then upgrade to our Polkadot parachain - still to be named.
 
 Polkadot and Kusama also allow for native cross-chain communication with all other parachains connected to the relay chain, as well as all external networks. An inflationary reward mechanism is used to incentivize collators and oracles. Through a runtime upgrade enacted by decentralized governance, the actual reward rate can be set and reduced as the protocol starts generating significant fees. Users and infrastructure providers are capable of staking PICA and LAYR tokens to grow with the ecosystem, providing critical security and capabilities to our ecosystem.
 
 ### 5.2 Picasso
 We consider Kusama and Polkadot interchangeable in what follows and part of the greater substrate ecosystem.
-
 Polkadot offers plug-and-play security, allowing Composable to focus on building its ecosystem, and leaving the security to Polkadot’s validators.
-
 By leveraging parachains we do not have to recruit our own validators for security, which gives us greater finality guarantees and lowers the risk of cross-chain transaction failures. We also chose Polkadot for its blockchain development framework, Substrate. Substrate allowed us to custom-build our blockchain, allowing us to continuously upgrade our blockchain with new functionalities without needing to fork the network.
-
 Polkadot also allows for native cross-chain communication with all other parachains connected to Polkadot, as well as all external networks bridged to Polkadot.
-
 Last, we believe Polkadot has the top engineering team and leadership in the industry, having been built by Gavin Wood who coded Ethereum, invented the Solidity programming language, and invented the Ethereum Virtual Machine (EVM). We believe Polkadot is building the third phase of crypto after Bitcoin and Ethereum.
 
 ### 5.3 Finality
@@ -381,23 +376,18 @@ We believe Mosaic is more general than this approach, since it does not depend o
 
 ### 6.4 Liquidity Simulation Environment
 As part of building Mosaic \cite{MosaicFinance} we wanted to understand the nature of liquidity and how its allocation and movement means for the design of the system.
-
 To that end, Composable Labs \cite{IntroducingMedium} built a Liquidity Simulation Environment (LSE) \cite{IntroducingMediumb}.
 
 This software tool can simulate allocations of assets to vaults and assets moving around in the network.
-
 It is modular and you can produce data in any form you want.
-
 Currently, the LSE supports data generated from a truncated Gaussian, Geometric Brownian Motion (GBM), and data sampled from our 2021 September-October PoC run \cite{TestingMedium}.
 
 The strategy layer allows for any liquidity allocation and movement approach to be defined. For example "move liquidity from vault X to vault Y when conditions Z is true".
-
 An objective - which can also be defined in the LSE - useful for searching for the best strategy could be to optimize the liquidity distribution among the vaults so that any transfer can be supported.
 
 Fee models, how much and simply how, to charge moving assets can be defined as well. In fact, we used the PoC in conjuncion with the LSE to decide the best fee model to use in the context of available data up to that point.
 
 The LSE is built as a state-machine iterating through the simulated transfers changing the states of the vaults. Replenishment events can be triggered - for example: the Arbitrum vault needs liquidity from the Mainnet vault.
-
 The LSE is also continuously improving. As more transfer data is received this gives us a unique insight into how Mosaic is used and the LSE can help fine-tune our network to achieve an optimal user experience by having maximum availability.
 
 #### 6.4.1 Simulating Data
@@ -432,17 +422,14 @@ These results guided us to decide on a good initial fee model to use for the Mos
 
 #### 6.4.2 Mosaic Fee Model
 One of the first use-cases of the LSE was deciding which fee model to use for Mosaic.
-
 Fees are charged when funds are moved between networks. The question of which fee model to go with is key to a successful deployment.
 
 First, guided by Occam's razor \cite{WhatRazor} we picked a simple functional form and let the fee model follow a linear form capped by a maximum fee ensuring that nobody, no matter how much they move across Mosaic, is charged more than a certain percent.
 
 For most transfers, and for practically all retail transfers, users move along the linear part close to the origin.
-
 To ensure a safe network, we implemented a minimum fee as well distributing rewards to maintainers. Let $x$ denote the liquidity moved as percent of available liquidity in the origin vault. For example, if I move 10 ETH in a vault with 200 ETH $x=5$\%. Let $y$ be the fee charged in percent. The Mosaic fee model is then determined by the two points $(x,y)=(0,0.25)$ and $(x,y)=(30,5)$.
 
 The Mosaic PoC was run with this model and based on the data the two points were optimized to balance use and network safety (indirectly via rewards collected from fees).
-
 We have three free parameters in our fee model:
 * the liquidity-\% at which the maximum fee kicks in (also called $a$)
 * the maximum fee \% to charge
@@ -462,19 +449,14 @@ We next visualize the fees charged for the PoC data in Fig.[(13)](#fig_pocdatafe
 ![Fee charged vs transfer amounts as percent of available liquidity in the origin vault. For example, if 10 wETH is transferred from a vault on Arbitrum with 1000 wETH it would show up at $x=10$\%. The y-axis shows the fee charged for the transfer. For the PoC vaults were on the order of \$100-200k at the beginning of the PoC. The exact numbers for each token (which in turn was distributed across multiple networks like Arbitrum and Polygon) are available here: \href{https://mosaic.composable.finance/earn}{TVLs for Mosaic} (accessed November 12, 2021)](images/mosaic/poc_transfer_on_fee_curve.png)
 
 To decide on a good set of parameters, we next compare this to bridges seen in the general cross-ledger community.
-
 We find that some operators charge a fixed 0.5\% for all transfers, higher than the average Mosaic PoC case.
-
 Other operators charge different fees depending on whether you are leaving Ethereum or arriving from another chain. Some charge a fixed dollar amount and others a percentage with minimum and maximum dollar amounts.
 
 Some operators do not charge a fee but instead charge a ``hidden fee" by quoting a given ``transfer rate". They also create bi-directional fees (mainnet to polygon is different than polygon to mainnet).
-
 Other operators charge a fee that is a multiple of the destination network fee.
-
 And so on.
 
 Given this landscape of fees the following parameters were chosen: (30, 4, 0.25) (liquidity-\% at which max fee kicks in, maximum fee \% to charge, minimum fee \% to charge, respectively).
-
 This optimized fee curve is shown in Fig.[(14)](#fig_pocdatafeesopt).
 
 <a name="fig_pocdatafeesopt"></a>
@@ -483,29 +465,24 @@ This optimized fee curve is shown in Fig.[(14)](#fig_pocdatafeesopt).
 
 #### 6.4.3 Continuous Improvement
 With the LSE we can continuously collect data from the operation of Mosaic and periodically revisit the fee model parameter settings.
-
 This introduces us, as shown, to a purely data driven approach to determine this. We would use Graph QL \cite{GraphQLAPI} to collect data from the Mosaic network, compute the fees/revenues collected and ensure that we stay within a certain band of expected and allowable values. We make this check once a week.
-
 If we stray away from expected values, we modify the parameters if necessary based on a data review.
 
 ### 6.5 Liquidity Rebalancing System
 The best user experience is obtained when the liquidity availability is high thus allowing, in general, any token to be moved from any network to any other network.
 
 To that end, we used the LSE from Sec.[(6.4)](#64-liquidity-simulation-environment) to design a forecasting and rebalancing technology which can predict in advance when a certain liquidity level will be reached for a given vault. This is built into Mosaic.
-
 It is critical for the optimization of the passive liquidity rebalancing that will enable passive liquidity providers to continue to service cross-layer transfers.
-
 Having an optimal allocation of capital across layers is key to offering the best performance for users seeking to move cross-layer. Therefore, understanding when said capital reaches certain key levels where action will need to be taken is important.
 
 More formally, enter the Liquidity Rebalancing System (LRS) developed by Composable Labs.
+In Fig.[(15)](#fig_lrd) we show a graph of various networks such as the Ethereum mainnet, a layer 2 solution Arbitrum, Avalanche, and Fantom, but Mosaic supports many more networks and is growing.
 
 <a name="fig_lrd"></a>
 ![Sketch of the Liquidity Rebalancing System showing how a forecast model is built on the liquidity in each vault in the Mosaic network. Transfer of funds are moved as needed when a subset of vaults are depleted (to a certain pre-set level, we use 90\% here which is conservative) needing funds from a donor vault](images/lrs.png)
 
-In Fig.[(15)](#fig_lrd) we show a graph of various networks such as the Ethereum mainnet, a layer 2 solution Arbitrum, Avalanche, and Fantom, but Mosaic supports many more networks and is growing.
 
 LRS builds a forecasting model on each network (shown as the insets with black lines being the liquidity data and green lines being the forecast model). At a given frequency, e.g. hourly, it checks the status of all networks, computes where liquidity is needed and performs the transfers.
-
 The transfers take place as follows: if a vault is predicted to be depleted to 80\% of its seed amount then funds are moved from a so-called ``donation" vault. If a vault has too much liquidity, or satisfy a broader set of metrics to be defined later, it becomes a donation vault (this status is temporary).
 
 The system overall consists of two key pieces: First, we have a forecasting model predicting the evolution of liquidity in a single vault on a single network and second, we have a broader logic deciding how to distribute available liquidity across the entire connection of networks (a connected graph).
@@ -515,13 +492,11 @@ The system overall consists of two key pieces: First, we have a forecasting mode
 To forecast a single network we developed multiple models starting with a set of baseline models including an autoregressive integrated moving average (ARIMA) model \cite{AnScience}, Holt's linear trend model (HLT) \cite{7.2Ed}, and a Holt-Winters seasonal method \cite{7.3Ed}. We will show the ARIMA and HLT performance in what follows.
 
 Also, the eventual goal is to build Artificial Intelligence (AI) \cite{ArtificialBritannica} based models such as long short-term memory (LSTM) \cite{UnderstandingBlog}.
-
 This work is in the pipeline and the non-AI baseline models will help us compare and also develop a two-tiered system where non-AI and AI work to forecast together.
 
 ##### Forecasting with ARIMA
 
 To simplify the discussion and without loss of generality we assume a graph of three networks: L1, Arbitrum (ARB), and Polygon (POL).
-
 We first develop an ARIMA model to fit and forecast liquidity data on the POL vault, that can be mathematically described as
 
 \begin{equation}
@@ -529,7 +504,6 @@ Y_t - \alpha_1Y_{t-1} - \dots - \alpha_{p'}Y_{t-p'} = \epsilon_t + \theta_1\epsi
 \end{equation}
 
 where $Y_t$ is our time series data at discrete time $t$. Although the above expression applies to the more widely known \emph{autoregressive moving average} (ARMA) \cite{TimeScience} models with $p'$ and $q$ being the orders of the autoregressive (AR) and moving average (MA) terms, here we also account for the fact that non-stationary effects are present in our data and, therefore, a differencing step needs to be applied to the data prior to fitting the model.
-
 The order of the differencing step depends on the multiplicity of the unit root. Using the lag operator notation, $L^i[Y_t] := Y_{t-i}$, the times series model can be written as
 
 \begin{equation}
@@ -543,9 +517,7 @@ and in the presence of a unit root with multiplicity $d$ we have
 \end{equation}
 
 representing the ARIMA(p, d, q) process.
-
 Next, we developed an automated model selection of the ARIMA order parameters such that the rebalancing system does not require manual input to determine its parameters when a dataset is provided.
-
 Below we are presenting a list of criteria that we have used in order to identify the optimal order of differencing $d$ in the data and the orders of autoregressive and moving average terms, $p$ and $q$, in the ARIMA(p, d, q) model.
 
 ##### Identifying the order of differencing in the data
@@ -559,7 +531,6 @@ A sign that can often indicate that the time series might be overdifferenced is 
 
 Next, in order to identify the number of autoregressive and moving average terms, we proceed as follows:
 For the number $p$ of AR terms we set it equal to the number of lag terms that it takes for the partial autocorrelation function (PACF) to cross the significance limit.
-%
 Similarly, the number $q$ of MA terms, we use the autocorrelation function (ACF) instead and it is set again equal to the number of lag terms that it takes to cross the significance limit.
 
 ##### Optimizing the ARIMA model for our LSE data
@@ -567,7 +538,6 @@ Similarly, the number $q$ of MA terms, we use the autocorrelation function (ACF)
 In what follows we employ our model selection capability explained above to optimize our ARIMA model parameters and use them for forecasting.
 
 We generate simulated data with the LSE. Our time series data consists of $1000$ liquidity transfer observations obtained on a hourly basis ($\Delta t = 1$ hour).
-
 We briefly touched on how these are computed, but let us provide more details here. We select a number of token movements of the vaults. These are drawn from a truncated Gaussian with parameters set to resemble real-world transfers. As an aside, the Mosaic PoC provided even more realistic data and we have developed ways to account for this as well - we are able to confirm that our simulated data resembles the PoC data.
 
 Then, the simulated data is snapped to a global timegrid and a state machine is used to evolve the vault states forward starting at some initial liquidity levels. This give rise to the evolving liquidity levels over time as plotted in Fig.[(16)](#fig_lse_datasets}).
@@ -594,7 +564,6 @@ We note that, as we run the forecasting model across the data in a rolling windo
 #### 6.5.2 Rebalancing Logic
 
 With a forecasting model built on each network, the next step is designing the rebalancing logic of the overall system.
-
 Here is our approach. At a given cadence which can depend on transfer activity in the general network, we check the following: First, what is the set of current liquidity donation vault. We assign a score to each vault and sort them. For each donor, we also log how much liquidity can be donated.
 
 This implies that we have a list of candidate liquidity donors.
@@ -605,9 +574,7 @@ The score assigned to a vault in the ``donor detection phase" is determined base
 
 ## 7. Conclusion
 Composable is on a mission to unlock the interconnected ecosystem of blockchains via a cross-chain, cross-layer networking fabric.
-
 Moving assets intra-ecosystem is becoming more intuitive. However more and more applications have begun to shard operations across one or several blockchain L1 and L2 networks to minimize costs and maximise performance the implications being asset transfers and smart contract executions that are increasingly more complex and ambiguous. We are approaching a world in which the future of DeFi will be fully blockchain-agnostic.
-
 Like Port Control Protocol of the Internet, Composable's mission is to service all these interactions, transfers, and communications cross-ecosystem.
 
 Both developers and users will seek ways to interface with multiple ecosystems in a user-friendly, scalable, provable, and decentralized manner. In this construction paper, we discussed our thoughts and designs to provide this future in the form of Virtual Machines, Routing Layers, Finality and Application layers, and we introduced Mosaic the cross-ledger highly competitive transferal system backed by advanced engineering. All of our technologies are backed by strong guiding principles in both engineering and programming practices.
