@@ -10,15 +10,17 @@ if [ ! -e $lockfile ]; then
 
    # The option: -H styles/whitepaper.css \ hides the references.
    pandoc -s -f markdown \
+             --toc \
              --filter pandoc-crossref \
              --citeproc \
              --mathjax=https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js \
              --bibliography=references_2.bib \
              --csl=styles/csl/ieee.csl \
+             -H styles/whitepaper.css \
              -t html5 \
              --metadata title="Composable Whitepaper" \
              --metadata link-citations=true \
-             -o dist/whitepaper.html whitepaper.md
+             -o site/index.html whitepaper.md
 
    rm $lockfile
    trap - INT TERM EXIT

@@ -1,37 +1,5 @@
 # Composable Finance
 
-## Contents
-* [1. Vision](#1-vision)
-* [2. Overview](#2-overview)
-  * [2.1 Roadmap](#21-roadmap)
-  * [2.2 Paper outline](#22-paper-outline)
-* [3. Cross-Chain Virtual Machine](#3-cross-chain-virtual-machine)
-  * [3.1 Architecture](#31-architecture)
-  * [3.2 Well-Known Protocol Types](#32-well-known-protocol-types)
-* [4. Routing Layer Design](#4-routing-layer-design)
-  * [4.1 Nameservices](#41-nameservices)
-  * [4.2 Indexers and Solvers](#42-indexers-and-solvers)
-* [5. Picasso and the Finality Layer](#5-picasso-and-the-finality-layer)
-  * [5.1 Parachain](#51-parachain)
-  * [5.2 Picasso](#52-picasso) 
-  * [5.3 Finality](#53-finality) 
-  * [5.4 Pallets](#54-pallets)
-* [6. Mosaic Design](#6-mosaic-design)
-  * [6.1 Phase I](#61-phase-i)
-  * [6.2 Phase II](#62-phase-ii) 
-  * [6.3 Phase III](#63-phase-iii)
-    * [6.3.1 Protocol](#631-protocol)
-    * [6.3.2 TSS vs. Multi-signatures](#632-tss-vs-multi-signatures)
-    * [6.3.3 Alternative Model](#633-alternative-model)
-  * [6.4 Liquidity Simulation Environment](#64-liquidity-simulation-environment)
-      * [6.4.1 Simulating Data](#641-simulating-data)
-      * [6.4.2 Mosaic Fee Model](#642-mosaic-fee-model)
-      * [6.4.3 Continuous Improvement](#643-continuous-improvement)
-  * [6.5 Liquidity Rebalancing System](#65-liquidity-rebalancing-system)
-      * [6.5.1 Forecasting a Single Network](#651-forecasting-a-single-network)
-      * [6.5.2 Rebalancing Logic](#652-rebalancing-logic)
-* [7. Conclusion](#7-conclusion)  
-
 ---
 
 ![Composable Ecossytem](./images/parachain.png)
@@ -239,7 +207,7 @@ In addition to the improvements already mentioned, phase II of the protocol pres
 * Transfer NFTs (ERC-721) between networks by using Ethereum research wrapper proposal [@WhyPropertiesb].
 * More secure and controlled vaults. Instead of a single *MosaicVault*, everything is isolated in different and dedicated *MosaicHoldings* smart contracts.
 * Real time liquidity balancing. See Sec.[(6.5)](#65-liquidity-rebalancing-system) for more details.
-* More efficient management of unused funds. Single or combined assets are used to yield farm, resulting in better and more competitive APY for Mosaic's liquidity providers.
+* More efficient management of unused funds. Single or combined assets are used to yremoveield farm, resulting in better and more competitive APY for Mosaic's liquidity providers.
 
 ### 6.3 Phase III
 Phase I was about proving a concept and demonstrating that a less fragmented DeFi space was possible. Phase II was about enhancing and increasing the features of Mosaic as well as adding new liquidity models. Phase III is focused on increasing the decentralization of our solution.
@@ -531,3 +499,6 @@ Like Port Control Protocol of the Internet, Composable's mission is to service a
 Both developers and users will seek ways to interface with multiple ecosystems in a user-friendly, scalable, provable, and decentralized manner. In this construction paper, we discussed our thoughts and designs to provide this future in the form of Virtual Machines, Routing Layers, Finality and Application layers, and we introduced Mosaic the cross-ledger highly competitive transferal system backed by advanced engineering. All of our technologies are backed by strong guiding principles in both engineering and programming practices.
 
 Composable's full technical stack is driving the evolution of digital assets and DeFi protocols. It enables the unification of functionality, across all blockchain ecosystems. We are engineering the fully interoperable future and we embrace the sharded efficient ecosystem which is rapidly expanding.
+
+\pagebreak
+## 8. Bibliography

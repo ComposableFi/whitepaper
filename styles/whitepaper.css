@@ -31,15 +31,6 @@ html {
   background-attachment: fixed;
 }
 
-
-span[id^="sec:"] {
-  display: none;
-}
-
-span[class^="citation"] {
-  display: none;
-}
-
 /* a[data-reference-type^="ref"] {
    display: none;
 } */
