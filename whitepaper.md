@@ -95,7 +95,7 @@ In Mosaic's Phase I, Sec.[(6.1)](#61-phase-i) aka the proof-of-concept (PoC), as
 In Mosaic's Phase II, Sec.[(6.2)](#62-phase-ii) , we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, Sec[6.4](#64-liquidity-simulation-environment), to help us decide on liquidity rebalancing and an optimal fee model to use, Sec.[6.4.2](#642-mosaic-fee-model).
 In Mosaic's Phase III, Sec.[(6.3)](#63-phase-iii)  we seek to increase as much as possible the decentralization of the entire system.
 
-Next, besides Ethereum, we are also actively developing in the Polkadot and Cosmos ecosystems [Cosmos:Blockchains].
+Next, besides Ethereum, we are also actively developing in the Polkadot and Cosmos ecosystems [@Cosmos:Blockchains].
 For Polkadot, we are creating a blockchain in Substrate [@HomeSubstrate_] and for Cosmos we are contributing to the Cosmos SDK.
 Then, pallets [@TheMedium] are used to add additional functionality - one example is our Maximal Extractable Value (MEV) [@MinerEthereum.org] resistant data oracle Apollo [@Apollo:Finance].
 Other pallets can be developed including ones to enable Solidity support, cross-chain message capabilities (XCMP), decentralized exchanges, and so on.
