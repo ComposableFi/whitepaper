@@ -38,18 +38,18 @@
 
 ## 1. Vision
 
-A natural evolution in a cross-chain world entails developers and users interacting seamlessly with protocols, regardless of where their assets live. That is why our core mission at Composable Finance (Composable) \cite{ComposableFinance}, is to build a fully interoperable future, capable of offering developers and end-users a seamless experience and utility.
-Through simplifying and unifying decentralized finance (DeFi) \cite{DecentralizedEthereum.org} with new interoperability standards we are accelerating DeFi into the mainstream. We are crafting a transparent, interoperable future for DeFi 2.0 and Web3.
+A natural evolution in a cross-chain world entails developers and users interacting seamlessly with protocols, regardless of where their assets live. That is why our core mission at Composable Finance (Composable) [@ComposableFinance], is to build a fully interoperable future, capable of offering developers and end-users a seamless experience and utility.
+Through simplifying and unifying decentralized finance (DeFi) [@DecentralizedEthereum.org] with new interoperability standards we are accelerating DeFi into the mainstream. We are crafting a transparent, interoperable future for DeFi 2.0 and Web3.
 
-Similar to how Port Control Protocol \cite{PortWikipedia} became an essential piece of the networking layer for the Internet, Composable's vision is to become the entryway and networking fabric for blockchain networks. It is Composable's mission to service all interactions, transfers, and communication cross-ecosystem.
+Similar to how Port Control Protocol [@PortWikipedia] became an essential piece of the networking layer for the Internet, Composable's vision is to become the entryway and networking fabric for blockchain networks. It is Composable's mission to service all interactions, transfers, and communication cross-ecosystem.
 Our vision of hyper liquidity and composability abstract the underlying technology into a single interface, unlocking the potential for new primitives to be developed at an unprecedented pace. Protocol-to-protocol interactions will become possible across ecosystems.
 
-The DeFi space has resorted to sharded blockchains for increased scalability \cite{WhyProperties,WhatCoinDesk}. Examples are Ethereum 2.0 \cite{TheEthereum.org}, Polkadot \cite{Polkadot:Platform}, and NEAR \cite{NEARWorld}. The result, however, is that even though the vision of ETH 2.0 is already upon us, instead of just blockchains being sharded, applications are being sharded as well. SushiSwap \cite{IntroductionSushi}, for example, is deployed on multiple Ethereum Virtual Machine (EVM) \cite{EthereumEthereum.org} compatible chains, Layer-2-like (L2) rollups \cite{LayerEthereum.org}, and Parachains \cite{WhatAlexandria}, and the expansion of these applications to other ecosystems is very likely. Thus, while moving assets intra-ecosystem is becoming more intuitive, with several applications segregated within a specific ecosystem, managing assets inter-ecosystem is not \cite{0xbrainjarOurMedium}.
+The DeFi space has resorted to sharded blockchains for increased scalability [@WhyProperties],[@WhatCoinDesk]. Examples are Ethereum 2.0 [@TheEthereum.org], Polkadot [@Polkadot:Platform], and NEAR [@NEARWorld]. The result, however, is that even though the vision of ETH 2.0 is already upon us, instead of just blockchains being sharded, applications are being sharded as well. SushiSwap [@IntroductionSushi], for example, is deployed on multiple Ethereum Virtual Machine (EVM) [@EthereumEthereum.org] compatible chains, Layer-2-like (L2) rollups [@LayerEthereum.org], and Parachains [@WhatAlexandria], and the expansion of these applications to other ecosystems is very likely. Thus, while moving assets intra-ecosystem is becoming more intuitive, with several applications segregated within a specific ecosystem, managing assets inter-ecosystem is not [@0xbrainjarOurMedium].
 
 Therefore, Composable is focused on a cross-chain, cross-layer liquidity layer for sharded applications. Composable takes this notion a step further by also realizing that between each ecosystem, there is a sharding of functionality itself; for instance, most ecosystems have their own lending protocols. Our vision is thus to abstract away inter-ecosystem decision making and maximize users' and developers' outcomes based on their unique goals.
 
-To accomplish this function, we are creating a communication protocol, utilizing our parachain as a finality layer, that will connect L2s to the Polkadot and Kusama ecosystem, and the Cosmos Ecosystem \cite{Cosmos:Blockchains} through the Inter-Blockchain Communication protocol (IBC) \cite{Inter-BlockchainCommunication} to the Polkadot and Kusama ecosystem.
-We will then include other ecosystems, such as Algorand \cite{AlgorandAlgorand}, Solana \cite{ScalableScale}, and more.
+To accomplish this function, we are creating a communication protocol, utilizing our parachain as a finality layer, that will connect L2s to the Polkadot and Kusama ecosystem, and the Cosmos Ecosystem [@Cosmos:Blockchains] through the Inter-Blockchain Communication protocol (IBC) [@Inter-BlockchainCommunication] to the Polkadot and Kusama ecosystem.
+We will then include other ecosystems, such as Algorand [@AlgorandAlgorand], Solana [@ScalableScale], and more.
 
 We are embarking on a vast and growing opportunity in architecting and building infrastructure that allow developers to deploy applications capable of interoperating across layers and chains autonomously.
 We believe that the applications of such a stack are the catalyst for the next DeFi revolution.
@@ -82,7 +82,7 @@ Let us descend one layer. We believe that the application needs to be developed 
 This is where the Cross-Chain Virtual Machine (XCVM) comes in, see Sec.([3)](#3-cross-chain-virtual-machine). In other words, XCVM is a virtual machine (akin to that familiar from Ethereum) capable of running smart contracts without the need to worry about the underlying chain-connection details.
 XCVM, in turn, needs to send information between various blockchains and layers.
 This is where the next layer down comes into focus: The Routing Layer, see Sec.[(4)](#4-routing-layer-design). This is how the encoded information from developers are turned into information being sent and received to and from the relevant parties.
-In other words, the Routing layer is responsible for routing the information from the XCVM to the correct blockchain and the correct layer, much like Port Control Protocol \cite{PortWikipedia} from Web2.
+In other words, the Routing layer is responsible for routing the information from the XCVM to the correct blockchain and the correct layer, much like Port Control Protocol [@PortWikipedia] from Web2.
 
 To accomplish this, the Routing Layer, in turn, needs broad access to the ecosystem of blockchains. And it needs this access to be fast and secure.
 We have now arrived at our core layer: The Picasso Parachain for Kusama in Sec.[(5)](#5-picasso-and-the-finality-layer).
@@ -95,11 +95,11 @@ In Mosaic's Phase I, Sec.[(6.1)](#61-phase-i) aka the proof-of-concept (PoC), as
 In Mosaic's Phase II, Sec.[(6.2)](#62-phase-ii) , we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, Sec[6.4](#64-liquidity-simulation-environment), to help us decide on liquidity rebalancing and an optimal fee model to use, Sec.[6.4.2](#642-mosaic-fee-model).
 In Mosaic's Phase III, Sec.[(6.3)](#63-phase-iii)  we seek to increase as much as possible the decentralization of the entire system.
 
-Next, besides Ethereum, we are also actively developing in the Polkadot and Cosmos ecosystems \cite{Cosmos:Blockchains}.
-For Polkadot, we are creating a blockchain in Substrate \cite{HomeSubstrate_} and for Cosmos we are contributing to the Cosmos SDK.
-Then, pallets \cite{TheMedium} are used to add additional functionality - one example is our Maximal Extractable Value (MEV) \cite{MinerEthereum.org} resistant data oracle Apollo \cite{Apollo:Finance}.
+Next, besides Ethereum, we are also actively developing in the Polkadot and Cosmos ecosystems [Cosmos:Blockchains].
+For Polkadot, we are creating a blockchain in Substrate [@HomeSubstrate_] and for Cosmos we are contributing to the Cosmos SDK.
+Then, pallets [@TheMedium] are used to add additional functionality - one example is our Maximal Extractable Value (MEV) [@MinerEthereum.org] resistant data oracle Apollo [@Apollo:Finance].
 Other pallets can be developed including ones to enable Solidity support, cross-chain message capabilities (XCMP), decentralized exchanges, and so on.
-Cosmos supports the Inter-Blockchain Communication Protocol (IBC) \cite{Inter-BlockchainCommunication} standard opening up for a large ecosystem that we can connect to.
+Cosmos supports the Inter-Blockchain Communication Protocol (IBC) [@Inter-BlockchainCommunication] standard opening up for a large ecosystem that we can connect to.
 
 In the remaining sections, we cover each of these layers in more detail and we conclude at the end in Sec.[(7)](#7-conclusion).
 
@@ -133,7 +133,7 @@ Routing transactions between different blockchains remains a difficult problem. 
 
 Our routing layer solves two problems: constructing and maintaining a graph of the different chains and bridges available, and, finding the best route at a given time. With the increasing number of chains (both on Layer 1 and Layer 2), and the different available bridge solutions between them, maintaining a live graph of all the connections is not a trivial task. In a dense graph, the number of edges connecting the vertices grows quadratically. We also need to consider the mutating and changing nature of blockchain ecosystems: new versions of protocols can be deployed, old bridges might drop support, new tokens can be added etc.
 
-Given the magnitude and dynamic essence of the task, and the volatile prices we face, finding the optimal route for a given trade is not in the reach of most of the users. The problem can be seen as an instance of the Travelling salesman problem \cite{Gavish1978TheProblems} or the Minimum-cost flow problem \cite{Orlin1988AAlgorithm}, with the component of changing networks and the requirement of on-chain validity. The users need to be guaranteed they got the best possible path. In order to accomplish all this, we require complex algorithms (e.g: \cite{Feigenbaum2005ARouting}) and dedicated heuristics.
+Given the magnitude and dynamic essence of the task, and the volatile prices we face, finding the optimal route for a given trade is not in the reach of most of the users. The problem can be seen as an instance of the Travelling salesman problem [@Gavish1978TheProblems] or the Minimum-cost flow problem [@Orlin1988AAlgorithm], with the component of changing networks and the requirement of on-chain validity. The users need to be guaranteed they got the best possible path. In order to accomplish all this, we require complex algorithms (e.g: [@Feigenbaum2005ARouting]) and dedicated heuristics.
 
 One exciting application for this execution layer is in cross-chain fee management. Our infrastructure as a whole intends to support a network of blockchain networks, meaning that there will be multiple potential pathways to the same destination. In this scenario, without a tool to do so for them, users would have to pathfind the most efficient and compliant route for value packets. Users may need to prioritize efficiency if the pathway must be especially liquid or secure, or if a specific regulatory requirement must be enforced (such as know your customer/anti-money laundering requirements, abbreviated KYC/AML). Therefore, the routing process would be both incredibly important and very time intensive. Our pathway execution layer will make this process simple for users and enable them to customize which parameter they want to optimize for when completing a given transaction.
 
@@ -142,7 +142,7 @@ Our routing layer will abstract and simplify the route algorithms through a clea
 ### 4.1 Nameservices
 A nameservice is a simple registry that maps identifications to names (e.g: DNS). This feature can also be used to link blockchain addresses to names (e.g: nicknames). Nameservices improve the semantic meaning of decentralized protocols, help the inexperienced user, bridge different platforms, decrease the possibility of making errors when creating transactions and contribute to promote identity and digital ownership on Web3.
 
-While other projects have already explored the benefits of using nameservices \cite{ProtonchainBlockchain}. To the best of our knowledge, Composable Finance will be the first one to provide cross-chain and cross-layer nameservice support. Providing nameservice support on a single chain is relatively trivial. However, maintaining nameservices across different layers and chains poses new challenges. We will take care of the details such as key management, data synchronization and finality on different chains so that the whole process is translucent to the final user. Therefore, no matter the network or the token, we will be able to support names and addresses indistinctly.
+While other projects have already explored the benefits of using nameservices [@ProtonchainBlockchain]. To the best of our knowledge, Composable Finance will be the first one to provide cross-chain and cross-layer nameservice support. Providing nameservice support on a single chain is relatively trivial. However, maintaining nameservices across different layers and chains poses new challenges. We will take care of the details such as key management, data synchronization and finality on different chains so that the whole process is translucent to the final user. Therefore, no matter the network or the token, we will be able to support names and addresses indistinctly.
 
 Nameservices help to accomplish our vision of a less fragmented and more accessible blockchain space. Where a single interface helps to leverage the composability of the DeFi space, unlocking its full potential and enabling new projects.
 
@@ -154,15 +154,14 @@ As mentioned beforehand, constructing a dynamic graph and finding the best route
 * Solvers will run off-chain custom algorithms to find the best route for a given problem instance. When trying to find a path, solvers will compete to find the best solution. Received solutions will be ranked according to a predefined cost function and top solvers will earn tokens with regard to the efficiency of their solution. By doing this, we leverage the game theory aspect of the competition while achieving a decentralized manner to find the best route.
 
 <a name="fig_routing"></a>
-![Routing architecture with indexers and solvers. We can appreciate how, by using Picasso as finality layer, routers and indexers can collaborate on the routing algorithm. Please note how routing solver nodes leverage XCVM to propose new routes.}
-\label{fig:routing](./images/routing.png)
+![Routing architecture with indexers and solvers. We can appreciate how, by using Picasso as finality layer, routers and indexers can collaborate on the routing algorithm. Please note how routing solver nodes leverage XCVM to propose new routes.](./images/routing.png)
 
 These roles will be used, together with a default minimum cost routing algorithm, to address the routing challenges previously introduced. This architecture, as shown in Figure [(2)](#fig_routing), enhances for public examination and minimizes the trust users need to put on the protocol. It is also fairly easy to scale since most of the workload is performed off-chain, while only validation is done on-chain.
 
 <a name="fig_sel_bridges"></a>
 ![Uni-connected directional graph representation of different Blockchains connected via the best bridges based on the specific requirements of a given user at a given time.](./images/Selected_Bridges1.png)
 
-As for the routing algorithms employed by solvers, we do not enforce any kind of restriction. We are interested on the best result the community can provide. As previously mentioned, and shown in Figure [(3)](#fig_sel_bridges), we are facing a complex problem with variable parameters, where there is no unique strategy that dominates the others, at least with limited time. We outsource the path finding task to the decentralized community of Composable users. As other projects have explored \cite{GnosisWhitepaper}, having the users to run different algorithms and heuristics in a fair ecnonomic game, produces a better and more complete solution that can adapt to new scenenarios faster. We will also run our own algorithm, so that all problem instances have a fair baseline solution.
+As for the routing algorithms employed by solvers, we do not enforce any kind of restriction. We are interested on the best result the community can provide. As previously mentioned, and shown in Figure [(3)](#fig_sel_bridges), we are facing a complex problem with variable parameters, where there is no unique strategy that dominates the others, at least with limited time. We outsource the path finding task to the decentralized community of Composable users. As other projects have explored [@GnosisWhitepaper], having the users to run different algorithms and heuristics in a fair ecnonomic game, produces a better and more complete solution that can adapt to new scenenarios faster. We will also run our own algorithm, so that all problem instances have a fair baseline solution.
 
 ## 5. Picasso and the Finality Layer
 
@@ -186,7 +185,7 @@ Polkadot also allows for native cross-chain communication with all other paracha
 Last, we believe Polkadot has the top engineering team and leadership in the industry, having been built by Gavin Wood who coded Ethereum, invented the Solidity programming language, and invented the Ethereum Virtual Machine (EVM). We believe Polkadot is building the third phase of crypto after Bitcoin and Ethereum.
 
 ### 5.3 Finality
-Composable's support of different ecosystems implies that we must be able to control and abstract for the final user, the inclusion of transactions in different chains. Inclusion is tightly related to the concept of finality. Finality guarantees that past events on the blockchain are immutable, therefore when a transaction it is included on a final block we can be sure that it has been included on the chain. Unfortunately, strong finality cannot be provided without some compromises \cite{Brewer2012Cap} and most blockchains only offer some degree of finality. We list the three degrees of finality most likely to be found on different networks, from weaker to stronger finality:
+Composable's support of different ecosystems implies that we must be able to control and abstract for the final user, the inclusion of transactions in different chains. Inclusion is tightly related to the concept of finality. Finality guarantees that past events on the blockchain are immutable, therefore when a transaction it is included on a final block we can be sure that it has been included on the chain. Unfortunately, strong finality cannot be provided without some compromises [@Brewer2012Cap] and most blockchains only offer some degree of finality. We list the three degrees of finality most likely to be found on different networks, from weaker to stronger finality:
 
 * **Probabilistic finality:** Finality is reached eventually. Under some assumptions, we can estimate the probability that a given block is considered final. With each new block added to the chain, older blocks become more final. E.g: Bitcoin and most PoW chains consider a block final after 6 blocks since the *probability* of a fork decreases exponentially as the chain grows.
 
@@ -242,7 +241,7 @@ This general architecture, as shown on Fig.[(5)](#fig_crosscall), allows users t
 #### Other improvements
 In addition to the improvements already mentioned, phase II of the protocol presents the following and varied advances:
 
-* Transfer NFTs (ERC-721) between networks by using Ethereum research wrapper proposal \cite{WhyPropertiesb}.
+* Transfer NFTs (ERC-721) between networks by using Ethereum research wrapper proposal [@WhyPropertiesb].
 * More secure and controlled vaults. Instead of a single *MosaicVault*, everything is isolated in different and dedicated *MosaicHoldings* smart contracts.
 * Real time liquidity balancing. See Sec.[(6.5)](#65-liquidity-rebalancing-system) for more details.
 * More efficient management of unused funds. Single or combined assets are used to yield farm, resulting in better and more competitive APY for Mosaic's liquidity providers.
@@ -260,41 +259,68 @@ We’ve chosen to use RelayerSets instead of single relayer nodes to reduce the 
 
 A user who wants to form part of a relayer group of a given size sends a transaction and initiates the registration. The transaction includes, the identification of the user, the stake he is providing and the size of the TSS he would like to form part of. Algorithm [(1)](#alg_tss) contains the pseudo-code of the joining process.
 
+---
+header-includes:
+- \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+---
+# Algorithm 1
+Just a sample algorithmn
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{Write here the result}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{Write here the input}
+\Output{Write here the output}
+\BlankLine
+\While{While condition}{
+instructions\;
+\eIf{condition}{
+instructions1\;
+instructions2\;
+}{
+instructions3\;
+}
+}
+\caption{While loop with If/Else condition}
+\end{algorithm}
+
+
 <a name="alg_tss"></a>
-    \begin{algorithm}[H]
-        \caption{Register TSS group}
-        \begin{algorithmic}[1]
-            \Require $t_r \gets \{Stake, msg.sender, size\}$
-            \Require groups.  
-            \Require needs.
-            
-            \If{$t_r.Stake < Required Stake$}
-                \State \Return Err
-            \EndIf
-            
-            \If{needs[$t_r$.size] $<$ groups[$t_r$.size] \& $\forall g \in groups[t_r.size] : msg.sender \not \in g$} 
-                \State g $\gets sample(Hash(msg.sender || prev-block-hash))$ 
-                \If{g.size $+ 1=$ $t_r$.size}
-                    \State PerformTSS();
-                \Else
-                    \If{g.size $<$ $t_r$.size}
-                    \State g.size++
-                    \State g.append(msg.sender)
-                    \State WaitForOthers();
-                    \Else
-                    \State \Return Err
-                    \EndIf
-                \EndIf
-            \Else
+\begin{algorithm}[H]
+    \caption{Register TSS group}
+    \begin{algorithmic}[1]
+        \Require $t_r \gets \{Stake, msg.sender, size\}$
+        \Require groups.  
+        \Require needs.
+        
+        \If{$t_r.Stake < Required Stake$}
             \State \Return Err
+        \EndIf
+        
+        \If{needs[$t_r$.size] $<$ groups[$t_r$.size] \& $\forall g \in groups[t_r.size] : msg.sender \not \in g$} 
+            \State g $\gets sample(Hash(msg.sender || prev-block-hash))$ 
+            \If{g.size $+ 1=$ $t_r$.size}
+                \State PerformTSS();
+            \Else
+                \If{g.size $<$ $t_r$.size}
+                \State g.size++
+                \State g.append(msg.sender)
+                \State WaitForOthers();
+                \Else
+                \State \Return Err
+                \EndIf
             \EndIf
-            \State \Return g
-        \end{algorithmic}
-        \label{alg:register_TSS}
-    \end{algorithm}
+        \Else
+        \State \Return Err
+        \EndIf
+        \State \Return g
+    \end{algorithmic}
+    \label{alg:register_TSS}
+\end{algorithm}
 
 ##### Staking and Slashing
-In any form of distributed system in which free actors can take part, there is an open door to malicious and/or selfish behaviour. Because every randomly-generated imaginary entity likes money \cite{LightningNetwork}, we need to provide our protocol with a mechanism that punishes malicious actors, while at the same time incentives and rewards honest behaviour.
+In any form of distributed system in which free actors can take part, there is an open door to malicious and/or selfish behaviour. Because every randomly-generated imaginary entity likes money [@LightningNetwork], we need to provide our protocol with a mechanism that punishes malicious actors, while at the same time incentives and rewards honest behaviour.
 
 A stake amount is required to form a RelayerSet, and to individual relayers to join an already established set. The total stake by a RelayerSet sets the budget for their disputable transactions. For a RelayerSet to commit fraud, more than threshold relayers need to commit fraud. For security reasons we may require an elevated percentage of the relayers within a set to contribute in creating a transaction.
 
@@ -302,7 +328,7 @@ Both TSS and multi-signatures can be used to construct fraud proofs showing whic
 
 Transactions may be disputed by validators for a certain amount of blocks, we refer to this as the dispute window. As the protocol has Alice submit the transactions for the XCT, both the RelayerSet and Alice need to collude to commit fraud, making the total $slashable_{amount} = funds_{transfered} + relayer_{stake}$. This means that the $funds_{transfered}$ on the destination chain need to remain locked for the duration of the dispute window.
 
-Although $$(slashable_{amount}$$ cannot effectively be reduced; we can unlock the user’s funds earlier, by having liquidity providers stake the $funds_{transferred}$ portion of the slashable amount. An ensurer node operates similarly to a validator (it serve both roles), and observes valid XCTs. The XCT specifies that it wishes a faster unlock on the destination side, and the total fee it is willing to pay for the underlying stake. An ensurer node may then choose to provide the stake for the specified fee. As the insurer node can observe the mempool, source chain, and destination chain state, it is able to determine finality and take the risk that the smart contract cannot. Thus, we provide a faster unlock method to the final user and an opportunity to experienced validators with greater risk appetite to gain additional fees.  An insurer node might be prohibitively expensive for individual users to run. We will provide some way to allow users to provide their assets to a pool, without significant risk.
+Although $(slashable_{amount}$ cannot effectively be reduced; we can unlock the user’s funds earlier, by having liquidity providers stake the $funds_{transferred}$ portion of the slashable amount. An ensurer node operates similarly to a validator (it serve both roles), and observes valid XCTs. The XCT specifies that it wishes a faster unlock on the destination side, and the total fee it is willing to pay for the underlying stake. An ensurer node may then choose to provide the stake for the specified fee. As the insurer node can observe the mempool, source chain, and destination chain state, it is able to determine finality and take the risk that the smart contract cannot. Thus, we provide a faster unlock method to the final user and an opportunity to experienced validators with greater risk appetite to gain additional fees.  An insurer node might be prohibitively expensive for individual users to run. We will provide some way to allow users to provide their assets to a pool, without significant risk.
 
 #### 6.3.1 Protocol
 We devote this section to give a general overview of how the protocol of Mosaic v3 will operate and how the new RelayerSets integrate on the ecosystem. We also introduce the most common procedures to raise and audit a disagreement during the dispute window.
@@ -341,33 +367,33 @@ Not all destination chains may support smarts contracts. In that case; it must b
 
 
 #### 6.3.2 TSS vs. Multi-signatures
-In a decentralized and distributed environment, we need a mechanism that allows for verification, integrity and non-repudiability of messages. The most common tool for this goal is the use of digital signatures. Digital signatures are an instrument of public key cryptography \cite{Diffie1976NewCryptography} that allows for public verification. Multiple signatures schemes exist, most of them are based on the initial standard of DSA \cite{DSSStandard} and can be summarized as the following set of algorithms:
+In a decentralized and distributed environment, we need a mechanism that allows for verification, integrity and non-repudiability of messages. The most common tool for this goal is the use of digital signatures. Digital signatures are an instrument of public key cryptography [@Diffie1976NewCryptography] that allows for public verification. Multiple signatures schemes exist, most of them are based on the initial standard of DSA [@DSSStandard] and can be summarized as the following set of algorithms:
 
-* Key generation$$(1^{\lambda}) \rightarrow (sk,pk)$$. As the algorithm that takes as input a security parameter $\lambda$ and produces the signing key $sk$ and the public verification key $pk$.
+* Key generation$(1^{\lambda}) \rightarrow (sk,pk)$. As the algorithm that takes as input a security parameter $\lambda$ and produces the signing key $sk$ and the public verification key $pk$.
 
-* Signature$$(m, sk) \rightarrow \sigma$$. Which is the algorithm that takes a message $m$ and the signing key $sk$ to produce a signature $\sigma$.
+* Signature$(m, sk) \rightarrow \sigma$. Which is the algorithm that takes a message $m$ and the signing key $sk$ to produce a signature $\sigma$.
     
-* Verification$$(pk,\sigma, m) \rightarrow 1/0$$ As the verification algorithm that takes the message $m$ and the signature $\sigma$ and verifies them using the public key $pk$. It outputs a boolean with the result of the verification.
+* Verification$(pk,\sigma, m) \rightarrow 1/0$. As the verification algorithm that takes the message $m$ and the signature $\sigma$ and verifies them using the public key $pk$. It outputs a boolean with the result of the verification.
 
 For our cross-chain solution, we consider two well-known and established schemes: multi-signatures and TSS. Both schemes serve our purpose of redistributing the responsibility among a set of parties, but there are some key differences we summarize here.
 
 * **Multi-signature:** As the name suggest, it is a scheme that involves multiple signatures. To be considered valid, different parties need to sign the same content. It can be architectured in a threshold manner such that a minimum of signatures is required to be considered valid (e.g: 2-out-of-3). It produces as many signatures as the set of parties involved.
 
-* **TSS:** Threshold Signature Schemes \cite{Gennaro2019FastSetup, Canetti2021UCAbortsb} are a special kind of signatures that allow to redistribute the responsibility between a set of parties. In a TSS, the secret key is not known by any party, each party has a partial secret key, and needs to collaborate with the a minimum subset of the parties (e.g: 3-out-of-5) in order to produce a valid signature. Only one single signature is produced and there is no difference on the signature produced or the verification process, when compared to traditional signatures.
+* **TSS:** Threshold Signature Schemes [@Gennaro2019FastSetup], [@Canetti2021UCAbortsb], are a special kind of signatures that allow to redistribute the responsibility between a set of parties. In a TSS, the secret key is not known by any party, each party has a partial secret key, and needs to collaborate with the a minimum subset of the parties (e.g: 3-out-of-5) in order to produce a valid signature. Only one single signature is produced and there is no difference on the signature produced or the verification process, when compared to traditional signatures.
 
 Both approaches have its benefits and drawbacks. On the one hand, multi-signature is easier to implement since it is based on independent signatures and requires no additional setup. However, it produces multiple signatures, increasing the costs on the blockchain and the verification times, since each individual signature needs to be separately verified.
 
-On the other hand, TSS  require quite a complicated setup, with multiple sub-protocols and the use of homomorphic cryptography \cite{Moore2014PracticalSurvey}. Nonetheless, the verification is simpler and faster than the multi-signature scheme. A simple scheme of both signatures protocols is depicted in Fig.[(9)](#fig_signatures}).
+On the other hand, TSS  require quite a complicated setup, with multiple sub-protocols and the use of homomorphic cryptography [@Moore2014PracticalSurvey]. Nonetheless, the verification is simpler and faster than the multi-signature scheme. A simple scheme of both signatures protocols is depicted in Fig.[(9)](#fig_signatures}).
 
 <a name="fig_signatures"></a>
-![Multi-signature vs. TSS. Here, $$\sigma$$ represents a partial or complete signature, $$R$$ is the randomness used in the process, $$M$$ represents the message to be signed and $sk_i$ illustrates their partial or personal secret key](images/mosaic/phase3/signatures.png)
+![Multi-signature vs. TSS. Here, $\sigma$ represents a partial or complete signature, $R$ is the randomness used in the process, $M$ represents the message to be signed and $sk_i$ illustrates their partial or personal secret key](images/mosaic/phase3/signatures.png)
 
 Since we are focused an interested on keeping the operational costs as lower as possible for the user, we choose the TSS scheme. The setup can be performed off-chain, and then only a single signature and public verification key need to be broadcasted. This keeps the blockchain transaction and storage costs to a minimum while leveraging and state of the art signature scheme with all the desired security properties.
 
 #### 6.3.3 Alternative model
 We presented the the protocol, the dispute resolution engine and the cryptographic constructs that enable Mosaic v3. However, there exist an alternative model we have also considered. In function of the data we gather from Phase II, we might consider this secondary approach. For the sake of completeness, we briefly describe the second model we considered.
 
-As other projects have explored \cite{HopRollups, MOVRMOVR}, when a common layer or chain is available (e.g: L1 on Ethereum and RelayChain on Polkadot), cross-chain transfers can be achieved by bundling different transactions. The state (e.g: transactions or messages) from a source chain is transferred to the destination chain in a cryptographic accumulator, usually in the form of a Merkle Root \cite{Becker2008MerkleCryptanalysis}. As depicted in Fig.[(10)](#fig_accumulator), the state is comprised on source chain and sent to the destination chain through the common layer. Later on, by proving membership  and unpacking the Merkle root, messages can be recovered on the destination layer.  By bundling information, we can reduce transaction costs on the common layer as well as benefiting from its security since the whole process is done on-chain. To ensure the validity of data being transferred, some stake is locked or an optimistic approach is pursued until the source chain settles its sates on the common chain. Then, the data is considered final and can be used as ground truth.
+As other projects have explored [@HopRollups], [@MOVRMOVR], when a common layer or chain is available (e.g: L1 on Ethereum and RelayChain on Polkadot), cross-chain transfers can be achieved by bundling different transactions. The state (e.g: transactions or messages) from a source chain is transferred to the destination chain in a cryptographic accumulator, usually in the form of a Merkle Root [@Becker2008MerkleCryptanalysis]. As depicted in Fig.[(10)](#fig_accumulator), the state is comprised on source chain and sent to the destination chain through the common layer. Later on, by proving membership  and unpacking the Merkle root, messages can be recovered on the destination layer.  By bundling information, we can reduce transaction costs on the common layer as well as benefiting from its security since the whole process is done on-chain. To ensure the validity of data being transferred, some stake is locked or an optimistic approach is pursued until the source chain settles its sates on the common chain. Then, the data is considered final and can be used as ground truth.
 
 <a name="fig_accumulator"></a>
 ![Accumulate and transfer scheme. Only the Merkle root is transferred on-chain to  reduce costs](images/mosaic/phase3/accumulator.png)
@@ -375,12 +401,12 @@ As other projects have explored \cite{HopRollups, MOVRMOVR}, when a common layer
 We believe Mosaic is more general than this approach, since it does not depend on the existence of a common layer and replaces the finality gadget with a set of decentralized relayers. Nonetheless, we might consider this agglutination scheme for scenarios in which a common layer can be easily found, in an effort to keep as much of the process on-chain. Please note that this approach still requires, to a certain degree, off-chain services in order to operate properly.
 
 ### 6.4 Liquidity Simulation Environment
-As part of building Mosaic \cite{MosaicFinance} we wanted to understand the nature of liquidity and how its allocation and movement means for the design of the system.
-To that end, Composable Labs \cite{IntroducingMedium} built a Liquidity Simulation Environment (LSE) \cite{IntroducingMediumb}.
+As part of building Mosaic [@MosaicFinance] we wanted to understand the nature of liquidity and how its allocation and movement means for the design of the system.
+To that end, Composable Labs [@IntroducingMedium] built a Liquidity Simulation Environment (LSE) [@IntroducingMediumb].
 
 This software tool can simulate allocations of assets to vaults and assets moving around in the network.
 It is modular and you can produce data in any form you want.
-Currently, the LSE supports data generated from a truncated Gaussian, Geometric Brownian Motion (GBM), and data sampled from our 2021 September-October PoC run \cite{TestingMedium}.
+Currently, the LSE supports data generated from a truncated Gaussian, Geometric Brownian Motion (GBM), and data sampled from our 2021 September-October PoC run [@TestingMedium].
 
 The strategy layer allows for any liquidity allocation and movement approach to be defined. For example "move liquidity from vault X to vault Y when conditions Z is true".
 An objective - which can also be defined in the LSE - useful for searching for the best strategy could be to optimize the liquidity distribution among the vaults so that any transfer can be supported.
@@ -424,7 +450,7 @@ These results guided us to decide on a good initial fee model to use for the Mos
 One of the first use-cases of the LSE was deciding which fee model to use for Mosaic.
 Fees are charged when funds are moved between networks. The question of which fee model to go with is key to a successful deployment.
 
-First, guided by Occam's razor \cite{WhatRazor} we picked a simple functional form and let the fee model follow a linear form capped by a maximum fee ensuring that nobody, no matter how much they move across Mosaic, is charged more than a certain percent.
+First, guided by Occam's razor [@WhatRazor] we picked a simple functional form and let the fee model follow a linear form capped by a maximum fee ensuring that nobody, no matter how much they move across Mosaic, is charged more than a certain percent.
 
 For most transfers, and for practically all retail transfers, users move along the linear part close to the origin.
 To ensure a safe network, we implemented a minimum fee as well distributing rewards to maintainers. Let $x$ denote the liquidity moved as percent of available liquidity in the origin vault. For example, if I move 10 ETH in a vault with 200 ETH $x=5$\%. Let $y$ be the fee charged in percent. The Mosaic fee model is then determined by the two points $(x,y)=(0,0.25)$ and $(x,y)=(30,5)$.
@@ -465,7 +491,7 @@ This optimized fee curve is shown in Fig.[(14)](#fig_pocdatafeesopt).
 
 #### 6.4.3 Continuous Improvement
 With the LSE we can continuously collect data from the operation of Mosaic and periodically revisit the fee model parameter settings.
-This introduces us, as shown, to a purely data driven approach to determine this. We would use Graph QL \cite{GraphQLAPI} to collect data from the Mosaic network, compute the fees/revenues collected and ensure that we stay within a certain band of expected and allowable values. We make this check once a week.
+This introduces us, as shown, to a purely data driven approach to determine this. We would use Graph QL [@GraphQLAPI] to collect data from the Mosaic network, compute the fees/revenues collected and ensure that we stay within a certain band of expected and allowable values. We make this check once a week.
 If we stray away from expected values, we modify the parameters if necessary based on a data review.
 
 ### 6.5 Liquidity Rebalancing System
@@ -489,9 +515,9 @@ The system overall consists of two key pieces: First, we have a forecasting mode
 
 #### 6.5.1 Forecasting a Single Network
 
-To forecast a single network we developed multiple models starting with a set of baseline models including an autoregressive integrated moving average (ARIMA) model \cite{AnScience}, Holt's linear trend model (HLT) \cite{7.2Ed}, and a Holt-Winters seasonal method \cite{7.3Ed}. We will show the ARIMA and HLT performance in what follows.
+To forecast a single network we developed multiple models starting with a set of baseline models including an autoregressive integrated moving average (ARIMA) model [@AnScience], Holt's linear trend model (HLT) [@7.2Ed], and a Holt-Winters seasonal method [@7.3Ed]. We will show the ARIMA and HLT performance in what follows.
 
-Also, the eventual goal is to build Artificial Intelligence (AI) \cite{ArtificialBritannica} based models such as long short-term memory (LSTM) \cite{UnderstandingBlog}.
+Also, the eventual goal is to build Artificial Intelligence (AI) [@ArtificialBritannica] based models such as long short-term memory (LSTM) [@UnderstandingBlog].
 This work is in the pipeline and the non-AI baseline models will help us compare and also develop a two-tiered system where non-AI and AI work to forecast together.
 
 ##### Forecasting with ARIMA
@@ -503,7 +529,7 @@ We first develop an ARIMA model to fit and forecast liquidity data on the POL va
 Y_t - \alpha_1Y_{t-1} - \dots - \alpha_{p'}Y_{t-p'} = \epsilon_t + \theta_1\epsilon_{t-1} + \dots + \theta_q\epsilon_{t-q},
 \end{equation}
 
-where $Y_t$ is our time series data at discrete time $t$. Although the above expression applies to the more widely known \emph{autoregressive moving average} (ARMA) \cite{TimeScience} models with $p'$ and $q$ being the orders of the autoregressive (AR) and moving average (MA) terms, here we also account for the fact that non-stationary effects are present in our data and, therefore, a differencing step needs to be applied to the data prior to fitting the model.
+where $Y_t$ is our time series data at discrete time $t$. Although the above expression applies to the more widely known \emph{autoregressive moving average} (ARMA) [@TimeScience] models with $p'$ and $q$ being the orders of the autoregressive (AR) and moving average (MA) terms, here we also account for the fact that non-stationary effects are present in our data and, therefore, a differencing step needs to be applied to the data prior to fitting the model.
 The order of the differencing step depends on the multiplicity of the unit root. Using the lag operator notation, $L^i[Y_t] := Y_{t-i}$, the times series model can be written as
 
 \begin{equation}
@@ -543,8 +569,8 @@ We briefly touched on how these are computed, but let us provide more details he
 Then, the simulated data is snapped to a global timegrid and a state machine is used to evolve the vault states forward starting at some initial liquidity levels. This give rise to the evolving liquidity levels over time as plotted in Fig.[(16)](#fig_lse_datasets}).
 
 <a name="fig_lse_datasets"></a>
-![](images/lse_results_feemodel_3_20_20211015_18_59_40_412997.png)
-![Dataset 1 (left) and Dataset 2 (right) from the Liquidity Simulation Environment (LSE). Each vault is a row. The liquidity is shown as the moving curves in rows 2 and 3. Row 1 does not have transfers involved with it for this data.](images/lse_results_feemodel_3_20_20211021_18_59_52_314364.png)
+![](images/lse_results_feemodel_3_20_20211015_18_59_40_412997.png) ![Dataset 1 (left) and Dataset 2 (right) from the Liquidity Simulation Environment (LSE). Each vault is a row. The liquidity is shown as the moving curves in rows 2 and 3. Row 1 does not have transfers involved with it for this data.](images/lse_results_feemodel_3_20_20211021_18_59_52_314364.png)
+
 
 We use $200$ training points (roughly 8 days worth of data) each time we fit an ARIMA model and we use it to forecast on a time horizon of $168$ hours; roughly 1 week ahead which coincides with some layer 2 to layer 1 exit times.
 
