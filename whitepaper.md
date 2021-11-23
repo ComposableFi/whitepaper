@@ -244,7 +244,7 @@ In addition to the improvements already mentioned, phase II of the protocol pres
 * Transfer NFTs (ERC-721) between networks by using Ethereum research wrapper proposal [@WhyPropertiesb].
 * More secure and controlled vaults. Instead of a single *MosaicVault*, everything is isolated in different and dedicated *MosaicHoldings* smart contracts.
 * Real time liquidity balancing. See Sec.[(6.5)](#65-liquidity-rebalancing-system) for more details.
-* More efficient management of unused funds. Single or combined assets are used to yield farm, resulting in better and more competitive APY for Mosaic's liquidity providers.
+* More efficient management of unused funds. Single or combined assets are used to yremoveield farm, resulting in better and more competitive APY for Mosaic's liquidity providers.
 
 ### 6.3 Phase III
 Phase I was about proving a concept and demonstrating that a less fragmented DeFi space was possible. Phase II was about enhancing and increasing the features of Mosaic as well as adding new liquidity models. Phase III is focused on increasing the decentralization of our solution.
@@ -258,32 +258,6 @@ Each one of the bridges that constitutes Mosaic will be maintained by a group of
 We’ve chosen to use RelayerSets instead of single relayer nodes to reduce the chance of fraudulent relayers, as well as reducing the stake required to participate as a relayer. In order to increase the security of the RelayerSets, and decrease the risk of a sybil attack, we assign relayers at random to different RelayerSets on-chain.
 
 A user who wants to form part of a relayer group of a given size sends a transaction and initiates the registration. The transaction includes, the identification of the user, the stake he is providing and the size of the TSS he would like to form part of. Algorithm [(1)](#alg_tss) contains the pseudo-code of the joining process.
-
----
-header-includes:
-- \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
----
-# Algorithm 1
-Just a sample algorithmn
-\begin{algorithm}[H]
-\DontPrintSemicolon
-\SetAlgoLined
-\KwResult{Write here the result}
-\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
-\Input{Write here the input}
-\Output{Write here the output}
-\BlankLine
-\While{While condition}{
-instructions\;
-\eIf{condition}{
-instructions1\;
-instructions2\;
-}{
-instructions3\;
-}
-}
-\caption{While loop with If/Else condition}
-\end{algorithm}
 
 
 <a name="alg_tss"></a>
@@ -606,3 +580,6 @@ Like Port Control Protocol of the Internet, Composable's mission is to service a
 Both developers and users will seek ways to interface with multiple ecosystems in a user-friendly, scalable, provable, and decentralized manner. In this construction paper, we discussed our thoughts and designs to provide this future in the form of Virtual Machines, Routing Layers, Finality and Application layers, and we introduced Mosaic the cross-ledger highly competitive transferal system backed by advanced engineering. All of our technologies are backed by strong guiding principles in both engineering and programming practices.
 
 Composable's full technical stack is driving the evolution of digital assets and DeFi protocols. It enables the unification of functionality, across all blockchain ecosystems. We are engineering the fully interoperable future and we embrace the sharded efficient ecosystem which is rapidly expanding.
+
+\pagebreak
+## 8. Bibliography
