@@ -1,37 +1,5 @@
 # Composable Finance
 
-## Contents
-* [1. Vision](#1-vision)
-* [2. Overview](#2-overview)
-  * [2.1 Roadmap](#21-roadmap)
-  * [2.2 Paper outline](#22-paper-outline)
-* [3. Cross-Chain Virtual Machine](#3-cross-chain-virtual-machine)
-  * [3.1 Architecture](#31-architecture)
-  * [3.2 Well-Known Protocol Types](#32-well-known-protocol-types)
-* [4. Routing Layer Design](#4-routing-layer-design)
-  * [4.1 Nameservices](#41-nameservices)
-  * [4.2 Indexers and Solvers](#42-indexers-and-solvers)
-* [5. Picasso and the Finality Layer](#5-picasso-and-the-finality-layer)
-  * [5.1 Parachain](#51-parachain)
-  * [5.2 Picasso](#52-picasso) 
-  * [5.3 Finality](#53-finality) 
-  * [5.4 Pallets](#54-pallets)
-* [6. Mosaic Design](#6-mosaic-design)
-  * [6.1 Phase I](#61-phase-i)
-  * [6.2 Phase II](#62-phase-ii) 
-  * [6.3 Phase III](#63-phase-iii)
-    * [6.3.1 Protocol](#631-protocol)
-    * [6.3.2 TSS vs. Multi-signatures](#632-tss-vs-multi-signatures)
-    * [6.3.3 Alternative Model](#633-alternative-model)
-  * [6.4 Liquidity Simulation Environment](#64-liquidity-simulation-environment)
-      * [6.4.1 Simulating Data](#641-simulating-data)
-      * [6.4.2 Mosaic Fee Model](#642-mosaic-fee-model)
-      * [6.4.3 Continuous Improvement](#643-continuous-improvement)
-  * [6.5 Liquidity Rebalancing System](#65-liquidity-rebalancing-system)
-      * [6.5.1 Forecasting a Single Network](#651-forecasting-a-single-network)
-      * [6.5.2 Rebalancing Logic](#652-rebalancing-logic)
-* [7. Conclusion](#7-conclusion)  
-
 ---
 
 ![Composable Ecossytem](./images/parachain.png)
