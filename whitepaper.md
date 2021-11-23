@@ -38,10 +38,10 @@ In 2022, we release Centauri, the IBS Substrate testnet, we finish our developme
 Later in that year, we finalize our routing layer and move Mosaic to Phase III which addresses decentralization. We also release our cross chain virtual machine and the IBC Substrate moves to mainnet.
 Each of these deliverables are covered in more detail throughout this paper.
 
-## 2.2 Paper Outline {#sec:outline}
+### 2.2 Paper Outline {#sec:outline}
 Having covered the vision in [@sec:vision] and the roadmap in [@sec:roadmap], we now take a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
 
-First, our Application Layer abstracts away high-level actions such as ``take out a loan on chain W layer X, then stake that on chain Y layer Z", in fact, we can get more abstract and say ``take out a loan at the lowest rate and buy NFT X" where ``X" does not include any specification of the chain or layer it lives on.
+First, our Application Layer abstracts away high-level actions such as "take out a loan on chain W layer X, then stake that on chain Y layer Z", in fact, we can get more abstract and say "take out a loan at the lowest rate and buy NFT X" where "X" does not include any specification of the chain or layer it lives on.
 Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet the user needs not understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
 An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.
 
@@ -332,9 +332,7 @@ The moves or transactions $N_t$ (amount of \$) from one vault to another, at tim
 with $\mu$ being a drift term, $\sigma$ the volatility, both assumed to be constants and $W_t$ is a Brownian motion stochastic process. The analytical solution of the above SDE at time t, given initial condition $N_0$, is known to be
 
 
-\begin{equation}
-N_t = N_0 \exp\left[ \left(\mu - \frac{\sigma^2}{2}\right) t + \sigma W_t\right], 
-\end{equation}{#eq:gbmsolution}
+$$N_t = N_0 \exp\left[ \left(\mu - \frac{\sigma^2}{2}\right) t + \sigma W_t\right]$$ {#eq:gbmsolution}
 
 which by definition is always strictly positive. A key property of the solution, important for our LSE use, is that the solution asymptotically goes to infinity when $\mu > \frac{1}{2}\sigma^2$, it goes to $0$ when $\mu < \frac{1}{2}$ and it fluctuates between zero and arbitrarily large values when $\mu = \frac{1}{2}\sigma^2$, therefore for most of our cases we will be using $\mu = \frac{1}{2}\sigma^2$. As [@fig:gbm] shows two random simulation of [@eq:gbmsolution] for the $N_0 = \$2000$, $\sigma=2$ and $N_0=\$1500$, $\sigma=1$ respectively. Note that the same initial and volatility values have also been used in our simulations below to simulate moves from Polygon to Arbitrum vaults and vice versa.
 
@@ -364,7 +362,7 @@ In the PoC these parameters were: 40\%, 4\%, and 0.25\%, respectively. For ease,
 
 The PoC transfer data is visualized in [@fig:pocdatavis].
 
-![Visualizing the Mosaic PoC bridge transfer data. Each network supported by Mosaic in the PoC is a node and edges represent transfers between the networks. Note that Arbitrum and Polygon were there from the beginning and other networks were added later. Thus, edges are not normalized by time and surely does not imply "popularity" of a network](images/mosaic/pocdata.png){#fig:pocdatavis}
+![Visualizing the Mosaic PoC bridge transfer data. Each network supported by Mosaic in the PoC is a node and edges represent transfers between the networks. Note that Arbitrum and Polygon were there from the beginning and other networks were added later. Thus, edges are not normalized by time and surely does not imply "popularity" of a network](images/mosaic/pocdata.png){#fig:pocdatavis width=70%}
 
 We next visualize the fees charged for the PoC data in [@fig:pocdatafees].
 
@@ -374,7 +372,7 @@ To decide on a good set of parameters, we next compare this to bridges seen in t
 We find that some operators charge a fixed 0.5\% for all transfers, higher than the average Mosaic PoC case.
 Other operators charge different fees depending on whether you are leaving Ethereum or arriving from another chain. Some charge a fixed dollar amount and others a percentage with minimum and maximum dollar amounts.
 
-Some operators do not charge a fee but instead charge a ``hidden fee" by quoting a given ``transfer rate". They also create bi-directional fees (mainnet to polygon is different than polygon to mainnet).
+Some operators do not charge a fee but instead charge a "hidden fee" by quoting a given "transfer rate". They also create bi-directional fees (mainnet to polygon is different than polygon to mainnet).
 Other operators charge a fee that is a multiple of the destination network fee.
 And so on.
 
@@ -398,11 +396,11 @@ Having an optimal allocation of capital across layers is key to offering the bes
 More formally, enter the Liquidity Rebalancing System (LRS) developed by Composable Labs.
 In [@fig:lrd] we show a graph of various networks such as the Ethereum mainnet, a layer 2 solution Arbitrum, Avalanche, and Fantom, but Mosaic supports many more networks and is growing.
 
-![Sketch of the Liquidity Rebalancing System showing how a forecast model is built on the liquidity in each vault in the Mosaic network. Transfer of funds are moved as needed when a subset of vaults are depleted (to a certain pre-set level, we use 90\% here which is conservative) needing funds from a donor vault](images/lrs.png){#fig:lrd}
+![Sketch of the Liquidity Rebalancing System showing how a forecast model is built on the liquidity in each vault in the Mosaic network. Transfer of funds are moved as needed when a subset of vaults are depleted (to a certain pre-set level, we use 90\% here which is conservative) needing funds from a donor vault](images/lrs.png){#fig:lrd width=85%}
 
 
 LRS builds a forecasting model on each network (shown as the insets with black lines being the liquidity data and green lines being the forecast model). At a given frequency, e.g. hourly, it checks the status of all networks, computes where liquidity is needed and performs the transfers.
-The transfers take place as follows: if a vault is predicted to be depleted to 80\% of its seed amount then funds are moved from a so-called ``donation" vault. If a vault has too much liquidity, or satisfy a broader set of metrics to be defined later, it becomes a donation vault (this status is temporary).
+The transfers take place as follows: if a vault is predicted to be depleted to 80\% of its seed amount then funds are moved from a so-called "donation" vault. If a vault has too much liquidity, or satisfy a broader set of metrics to be defined later, it becomes a donation vault (this status is temporary).
 
 The system overall consists of two key pieces: First, we have a forecasting model predicting the evolution of liquidity in a single vault on a single network and second, we have a broader logic deciding how to distribute available liquidity across the entire connection of networks (a connected graph).
 
@@ -441,7 +439,7 @@ Below we are presenting a list of criteria that we have used in order to identif
 
 ##### Identifying the order of differencing in the data
 
-The first step in fitting an ARIMA model is the determination of the order of differencing needed to ``stationarize" the series. Normally, the correct amount of differencing is the lowest order of differencing that yields a time series which fluctuates around a well-defined mean value and whose autocorrelation function (ACF) plot decays fairly rapidly to zero, either from above or below. If the series still exhibits a long-term trend, or otherwise lacks a tendency to return to its mean value, or if its autocorrelations are positive out to a high number of lags (e.g., 10 or more), then it needs a higher order of differencing. Although the presence of most of these characteristics can be observed by simply looking at the differenced data plots, in order to automate our model selection procedure, we work primarily with the autocorrelation function.
+The first step in fitting an ARIMA model is the determination of the order of differencing needed to "stationarize" the series. Normally, the correct amount of differencing is the lowest order of differencing that yields a time series which fluctuates around a well-defined mean value and whose autocorrelation function (ACF) plot decays fairly rapidly to zero, either from above or below. If the series still exhibits a long-term trend, or otherwise lacks a tendency to return to its mean value, or if its autocorrelations are positive out to a high number of lags (e.g., 10 or more), then it needs a higher order of differencing. Although the presence of most of these characteristics can be observed by simply looking at the differenced data plots, in order to automate our model selection procedure, we work primarily with the autocorrelation function.
 
 The first rule that we apply is that, if the series has positive autocorrelations out to a high number of lags, then we increase the order of differencing by one.
 A sign that can often indicate that the time series might be overdifferenced is to observe an lag-1 autocorrelation that is below $-0.5$. In practice, in order to apply these two rules, we fit an ARIMA(0, d, 0) model, that is a model with no AR or MA terms, but only a constant term which when trained, it provides an estimate of the mean of the data. Thus, the residuals of this model is simply the deviation from the mean. Once we identify a sufficient $d$ such that the aurocorrelation function drops to small values past lag-1, we also compare the resulting model with an ARIMA(0, d+1, 0). Assuming that lag-1 autocorrelation does not fall below $-0.5$ (which would be a sign of overdifferencing), if the model with d+1 order of differencing exhibits lower standard deviation values then it is preferred over $d$, otherwise we keep $d$ and we proceed with the selection of optimal $p$ and $q$ orders.
@@ -459,10 +457,12 @@ In what follows we employ our model selection capability explained above to opti
 We generate simulated data with the LSE. Our time series data consists of $1000$ liquidity transfer observations obtained on a hourly basis ($\Delta t = 1$ hour).
 We briefly touched on how these are computed, but let us provide more details here. We select a number of token movements of the vaults. These are drawn from a truncated Gaussian with parameters set to resemble real-world transfers. As an aside, the Mosaic PoC provided even more realistic data and we have developed ways to account for this as well - we are able to confirm that our simulated data resembles the PoC data.
 
-Then, the simulated data is snapped to a global timegrid and a state machine is used to evolve the vault states forward starting at some initial liquidity levels. This give rise to the evolving liquidity levels over time as plotted in [@fig:abcd].
+Then, the simulated data is snapped to a global timegrid and a state machine is used to evolve the vault states forward starting at some initial liquidity levels. This give rise to the evolving liquidity levels over time as plotted in [@fig:lse].
 
-![](images/lse_results_feemodel_3_20_20211015_18_59_40_412997.png){width=49% height=120%}
-![Dataset 1 (top) and Dataset 2 (bottom) from the Liquidity Simulation Environment (LSE). Each vault is a row. The liquidity is shown as the moving curves in rows 2 and 3. Row 1 does not have transfers involved with it for this data.](images/lse_results_feemodel_3_20_20211021_18_59_52_314364.png){#fig:abcd width=49% height=120%}
+![Dataset 1 (top) and Dataset 2 (bottom) from the Liquidity Simulation Environment (LSE). Each vault is a row. The liquidity is shown as the moving curves in rows 2 and 3. Row 1 does not have transfers involved with it for this data.](images/lse_results_feemodel_3_20_20211015_18_59_40_412997.png){#fig:lse}
+
+![](images/lse_results_feemodel_3_20_20211021_18_59_52_314364.png)
+
 
 We use $200$ training points (roughly 8 days worth of data) each time we fit an ARIMA model and we use it to forecast on a time horizon of $168$ hours; roughly 1 week ahead which coincides with some layer 2 to layer 1 exit times.
 
@@ -472,7 +472,7 @@ We next show the performance of the ARIMA model as well as of HLT. In the HLT ap
 
 See the forecasting comparison and performance for the Arbitrum vault in [@fig:arb_conserv].
 
-![Forecasting comparison between ARIMA and HLT models. The black point shows when the ARIMA model predicts that a 90\% liquidity level is reached in the vault - by conservative estimates (the lower confidence level). The purple point shows when the HLT model predicts the same 90\% liquidity level. While both predictions can be used to trigger, in advance, a replenishment event, the ARIMA predictions appears to be much more conservative](images/arbitrum_instance_t_fin270_90perce_drop.png){#fig:arb_conserv}
+![Forecasting comparison between ARIMA and HLT models. The black point shows when the ARIMA model predicts that a 90\% liquidity level is reached in the vault - by conservative estimates (the lower confidence level). The purple point shows when the HLT model predicts the same 90\% liquidity level. While both predictions can be used to trigger, in advance, a replenishment event, the ARIMA predictions appears to be much more conservative](images/arbitrum_instance_t_fin270_90perce_drop.png){#fig:arb_conserv width=95%}
 
 We run a forecasting model on each vault and this, in turn, triggers the rebalancing system to move liquidity accordingly to always keep the vaults ready and liquid thus maximizing the successful transfer rate.
 
@@ -487,7 +487,7 @@ This implies that we have a list of candidate liquidity donors.
 
 Next, we obtain the list of vaults which are in need of liquidity. Perhaps this is an empty set, but assuming not, we simply deplete as much liquidity from the donors going top down until all liquidity has been rebalanced.
 
-The score assigned to a vault in the ``donor detection phase" is determined based on a set of metrics including: how active is this vault (inactive implies that it can donate without needing liquidity itself), how much ``active" liquidity is assigned vs passive, what value the forecasting model predicts it will take in the future (is it generally increasing or decreasing in liquidity), and many more.
+The score assigned to a vault in the "donor detection phase" is determined based on a set of metrics including: how active is this vault (inactive implies that it can donate without needing liquidity itself), how much "active" liquidity is assigned vs passive, what value the forecasting model predicts it will take in the future (is it generally increasing or decreasing in liquidity), and many more.
 
 ## 7. Conclusion {#sec:conclusion}
 Composable is on a mission to unlock the interconnected ecosystem of blockchains via a cross-chain, cross-layer networking fabric.
