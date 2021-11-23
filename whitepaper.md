@@ -189,7 +189,7 @@ Composable's support of different ecosystems implies that we must be able to con
 
 * **Probabilistic finality:** Finality is reached eventually. Under some assumptions, we can estimate the probability that a given block is considered final. With each new block added to the chain, older blocks become more final. E.g: Bitcoin and most PoW chains consider a block final after 6 blocks since the *probability* of a fork decreases exponentially as the chain grows.
 
-* **Provable finality:** In an effort to provide stronger and faster finality, some chains include some kind of finality gadget that runs in parallel to the  chain and performs come Byzantine agreement process over the blocks. Once the gadget has gone over those blocks and a consensus is reached, they are considered final. E.g: [GRANDPA](https://github.com/w3f/consensus/blob/master/pdf/grandpa.pdf) on Polkadot and [Casper FFG](https://arxiv.org/pdf/1710.09437.pdf) on Ethereum.
+* **Provable finality:** In an effort to provide stronger and faster finality, some chains include some kind of finality gadget that runs in parallel to the  chain and performs come Byzantine agreement process over the blocks. Once the gadget has gone over those blocks and a consensus is reached, they are considered final. E.g: [GRANDPA](https://github.com/w3f/consensus/blob/master/pdf/grandpa.pdf){target="_blank"} on Polkadot and [Casper FFG](https://arxiv.org/pdf/1710.09437.pdf){target="_blank"} on Ethereum.
     
 * **Absolute finality:** At a cost, some blockchains implement Probabilistic Byzantine Fault Tolerant (PBFT) consensus protocols. This means, once the block is crafted, it is automatically considered final (e.g: Tendermint).
 
@@ -259,65 +259,8 @@ We’ve chosen to use RelayerSets instead of single relayer nodes to reduce the 
 
 A user who wants to form part of a relayer group of a given size sends a transaction and initiates the registration. The transaction includes, the identification of the user, the stake he is providing and the size of the TSS he would like to form part of. Algorithm [(1)](#alg_tss) contains the pseudo-code of the joining process.
 
----
-header-includes:
-- \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
----
-# Algorithm 1
-Just a sample algorithmn
-\begin{algorithm}[H]
-\DontPrintSemicolon
-\SetAlgoLined
-\KwResult{Write here the result}
-\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
-\Input{Write here the input}
-\Output{Write here the output}
-\BlankLine
-\While{While condition}{
-instructions\;
-\eIf{condition}{
-instructions1\;
-instructions2\;
-}{
-instructions3\;
-}
-}
-\caption{While loop with If/Else condition}
-\end{algorithm}
-
-
 <a name="alg_tss"></a>
-\begin{algorithm}[H]
-    \caption{Register TSS group}
-    \begin{algorithmic}[1]
-        \Require $t_r \gets \{Stake, msg.sender, size\}$
-        \Require groups.  
-        \Require needs.
-        
-        \If{$t_r.Stake < Required Stake$}
-            \State \Return Err
-        \EndIf
-        
-        \If{needs[$t_r$.size] $<$ groups[$t_r$.size] \& $\forall g \in groups[t_r.size] : msg.sender \not \in g$} 
-            \State g $\gets sample(Hash(msg.sender || prev-block-hash))$ 
-            \If{g.size $+ 1=$ $t_r$.size}
-                \State PerformTSS();
-            \Else
-                \If{g.size $<$ $t_r$.size}
-                \State g.size++
-                \State g.append(msg.sender)
-                \State WaitForOthers();
-                \Else
-                \State \Return Err
-                \EndIf
-            \EndIf
-        \Else
-        \State \Return Err
-        \EndIf
-        \State \Return g
-    \end{algorithmic}
-    \label{alg:register_TSS}
-\end{algorithm}
+![TSS group generation Algorithm](./images/mosaic/phase3/alg-01.png)
 
 ##### Staking and Slashing
 In any form of distributed system in which free actors can take part, there is an open door to malicious and/or selfish behaviour. Because every randomly-generated imaginary entity likes money [@LightningNetwork], we need to provide our protocol with a mechanism that punishes malicious actors, while at the same time incentives and rewards honest behaviour.
