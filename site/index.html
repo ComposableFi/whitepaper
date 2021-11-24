@@ -524,6 +524,9 @@
   </style>
 </head>
 <body>
+<div class="hero">
+    <h1 style="opacity:0">Composable Finance <span class="text-span">|</span> Whitepaper</h1>
+</div>
 <header id="title-block-header">
 <h1 class="title">Composable Whitepaper</h1>
 </header>
@@ -617,7 +620,7 @@
 <h2 id="sec:architecture">3.1 Architecture</h2>
 <p>The virtual machine is, first and foremost, and abstract definition of how services should assume that cross-layer transfers and functionality operates, including security, finality, fee model and availability. The security and finality are dependent on the bridging technology used, and relatively static (although we will see that the security for optimistic bridges is a function of network participants and economic stake). Fees are highly dynamic, dependent on network traffic. Availability describes the existence of appropriate relayers, and even the existence of the destination chain. Although many systems are not designed to take into account deprecation of a blockchain, any truly resilient and scalable bridging technology must handle that failure mode.</p>
 <p>We distinguish between two categories of bridges: optimistic and final. Mosaic is an example of an optimistic bridging technology, using decentralized relayers, economic incentives and dispute resolution to secure a network. IBC and XCM are both final, and require that the destination chain has a light client embedded, as well as deterministic finality. Tendermint, GRANDPA and BEEFY provide deterministic finality, while proof of work based chains can only be bridged using optimistic solutions, although these solutions are highly secure in the case of Bitcoin.</p>
-<p>Smart-contracts usually assume two modes of result, success or failure, but are ill-equipped to handle partial success. Even relatively simple layer-to-layer operations may reach an indefinite state, where contracts state or funds are left in limbo. Instead of massively rewriting existing smart-contracts and protocols to handle the multitude of failure modes, the XCVM transparently handles state transitions, disputes and reverts. It combines different bridging protocols, such as IBC, XCMP and Mosaic Phase 3, and is capable of integrating new bridging technologies. Rather than modeling a cross-chain transfer (XCT) as a single operation, such as locking funds in a local contract, we model it as a set of reversible state transitions with different approximate costs for each transition. The VM exposes the lower level APIs to directly query and interact with the current state of the , as well as a higher level interface, that observes the complete set as a single, fallible operation. Sets may be combined into larger operations, allowing to roll-back the entire transaction.</p>
+<p>Smart-contracts usually assume two modes of result, success or failure, but are ill-equipped to handle partial success. Even relatively simple layer-to-layer operations may reach an indefinite state, where contracts state or funds are left in limbo. Instead of massively rewriting existing smart-contracts and protocols to handle the multitude of failure modes, the XCVM transparently handles state transitions, disputes and reverts. It combines different bridging protocols, such as IBC, XCMP and Mosaic Phase 3, and is capable of integrating new bridging technologies. Rather than modeling a cross-chain transfer (XCT) as a single operation, such as locking funds in a local contract, we model it as a set of reversible state transitions with different approximate costs for each transition. The VM exposes the lower level APIs to directly query and interact with the current state, as well as a higher level interface, that observes the complete set as a single, fallible operation. Sets may be combined into larger operations, allowing to roll-back the entire transaction.</p>
 <p>By modeling XCTs as a state machine, or more accurately a directed, cyclic, weighted graph, we naturally arrive at the actual requirements of the XCVM: any blockchain that is capable of executing a transition within the XCT is XCVM compatible. Completely trustless compatibility can be achieved through the use of smart-contracts and runtime-embedded light clients, such as IBC. For chains without smart-contract capabilities or light clients, such as Bitcoin, we can employ optimistic bridging and message passing technologies, such as our Mosaic project.</p>
 <p>The XCVM offers Picasso based dapps different hooks and updates on the status of any XCT, as well as RBAC based flow control for actively managing the execution of different stages. Dapps incur transaction fees for calling into this underlying execution layer. Depending on the stage of the XCT, this fee may be subtracted from the XCTs payload in case of a simple token transfer using our bring-your-own-gas features.</p>
 <h2 id="sec:protocol-types">3.2 Well-Known Protocol Types</h2>
@@ -875,55 +878,55 @@ Y_t - \alpha_1Y_{t-1} - \dots - \alpha_{p&#39;}Y_{t-p&#39;} = \epsilon_t + \thet
 <h1 class="unnumbered" id="bibliography">8. Bibliography</h1>
 <div id="refs" class="references csl-bib-body" role="doc-bibliography">
 <div id="ref-ComposableFinance" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“<span>Composable Finance</span>.”</span> <a href="https://www.composable.finance/" class="uri">https://www.composable.finance/</a>.</div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“<span>Composable Finance</span>.”</span> <a href="https://www.composable.finance/">https://www.composable.finance/</a>.</div>
 </div>
 <div id="ref-DecentralizedEthereum.org" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“<span class="nocase">Decentralized finance (DeFi) | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/defi/" class="uri">https://ethereum.org/en/defi/</a>.</div>
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“<span class="nocase">Decentralized finance (DeFi) | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/defi/">https://ethereum.org/en/defi/</a>.</div>
 </div>
 <div id="ref-PortWikipedia" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><span>“<span>Port Control Protocol - Wikipedia</span>.”</span> <a href="https://en.wikipedia.org/wiki/Port_Control_Protocol" class="uri">https://en.wikipedia.org/wiki/Port_Control_Protocol</a>.</div>
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><span>“<span>Port Control Protocol - Wikipedia</span>.”</span> <a href="https://en.wikipedia.org/wiki/Port_Control_Protocol">https://en.wikipedia.org/wiki/Port_Control_Protocol</a>.</div>
 </div>
 <div id="ref-WhyProperties" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><span>“<span class="nocase">Why sharding is great: demystifying the technical properties</span>.”</span> <a href="https://vitalik.ca/general/2021/04/07/sharding.html" class="uri">https://vitalik.ca/general/2021/04/07/sharding.html</a>.</div>
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><span>“<span class="nocase">Why sharding is great: demystifying the technical properties</span>.”</span> <a href="https://vitalik.ca/general/2021/04/07/sharding.html">https://vitalik.ca/general/2021/04/07/sharding.html</a>.</div>
 </div>
 <div id="ref-WhatCoinDesk" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline"><span>“<span>What Is Sharding? - CoinDesk</span>.”</span> <a href="https://www.coindesk.com/learn/2020/12/02/what-is-sharding/" class="uri">https://www.coindesk.com/learn/2020/12/02/what-is-sharding/</a>.</div>
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline"><span>“<span>What Is Sharding? - CoinDesk</span>.”</span> <a href="https://www.coindesk.com/learn/2020/12/02/what-is-sharding/">https://www.coindesk.com/learn/2020/12/02/what-is-sharding/</a>.</div>
 </div>
 <div id="ref-TheEthereum.org" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline"><span>“<span class="nocase">The Eth2 upgrades | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/eth2/" class="uri">https://ethereum.org/en/eth2/</a>.</div>
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline"><span>“<span class="nocase">The Eth2 upgrades | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/eth2/">https://ethereum.org/en/eth2/</a>.</div>
 </div>
 <div id="ref-Polkadot:Platform" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline"><span>“<span>Polkadot: Decentralized Web 3.0 Blockchain Interoperability Platform</span>.”</span> <a href="https://polkadot.network/" class="uri">https://polkadot.network/</a>.</div>
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline"><span>“<span>Polkadot: Decentralized Web 3.0 Blockchain Interoperability Platform</span>.”</span> <a href="https://polkadot.network/">https://polkadot.network/</a>.</div>
 </div>
 <div id="ref-NEARWorld" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline"><span>“<span>NEAR Protocol | Reimagine Your World</span>.”</span> <a href="https://near.org/" class="uri">https://near.org/</a>.</div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline"><span>“<span>NEAR Protocol | Reimagine Your World</span>.”</span> <a href="https://near.org/">https://near.org/</a>.</div>
 </div>
 <div id="ref-IntroductionSushi" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[9] </div><div class="csl-right-inline"><span>“<span>Introduction - Sushi</span>.”</span> <a href="https://docs.sushi.com/" class="uri">https://docs.sushi.com/</a>.</div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline"><span>“<span>Introduction - Sushi</span>.”</span> <a href="https://docs.sushi.com/">https://docs.sushi.com/</a>.</div>
 </div>
 <div id="ref-EthereumEthereum.org" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[10] </div><div class="csl-right-inline"><span>“<span class="nocase">Ethereum Virtual Machine (EVM) | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/developers/docs/evm/" class="uri">https://ethereum.org/en/developers/docs/evm/</a>.</div>
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline"><span>“<span class="nocase">Ethereum Virtual Machine (EVM) | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/developers/docs/evm/">https://ethereum.org/en/developers/docs/evm/</a>.</div>
 </div>
 <div id="ref-LayerEthereum.org" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[11] </div><div class="csl-right-inline"><span>“<span class="nocase">Layer 2 Rollups | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/" class="uri">https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/</a>.</div>
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline"><span>“<span class="nocase">Layer 2 Rollups | ethereum.org</span>.”</span> <a href="https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/">https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/</a>.</div>
 </div>
 <div id="ref-WhatAlexandria" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[12] </div><div class="csl-right-inline"><span>“<span>What Are Parachains? | Alexandria</span>.”</span> <a href="https://coinmarketcap.com/alexandria/article/what-are-parachains-2" class="uri">https://coinmarketcap.com/alexandria/article/what-are-parachains-2</a>.</div>
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline"><span>“<span>What Are Parachains? | Alexandria</span>.”</span> <a href="https://coinmarketcap.com/alexandria/article/what-are-parachains-2">https://coinmarketcap.com/alexandria/article/what-are-parachains-2</a>.</div>
 </div>
 <div id="ref-0xbrainjarOurMedium" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[13] </div><div class="csl-right-inline">0xbrainjar, <span>“<span class="nocase">Our Vision for Composable Finance | by 0xbrainjar | Oct, 2021 | Medium</span>.”</span> <a href="https://0xbrainjar.medium.com/our-vision-for-composable-finance-ab6518d7e617" class="uri">https://0xbrainjar.medium.com/our-vision-for-composable-finance-ab6518d7e617</a>.</div>
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">0xbrainjar, <span>“<span class="nocase">Our Vision for Composable Finance | by 0xbrainjar | Oct, 2021 | Medium</span>.”</span> <a href="https://0xbrainjar.medium.com/our-vision-for-composable-finance-ab6518d7e617">https://0xbrainjar.medium.com/our-vision-for-composable-finance-ab6518d7e617</a>.</div>
 </div>
 <div id="ref-Cosmos:Blockchains" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[14] </div><div class="csl-right-inline"><span>“<span class="nocase">Cosmos: The Internet of Blockchains</span>.”</span> <a href="https://cosmos.network/" class="uri">https://cosmos.network/</a>.</div>
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline"><span>“<span class="nocase">Cosmos: The Internet of Blockchains</span>.”</span> <a href="https://cosmos.network/">https://cosmos.network/</a>.</div>
 </div>
 <div id="ref-Inter-BlockchainCommunication" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[15] </div><div class="csl-right-inline"><span>“<span>Inter-Blockchain Communication</span>.”</span> <a href="https://ibcprotocol.org/" class="uri">https://ibcprotocol.org/</a>.</div>
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline"><span>“<span>Inter-Blockchain Communication</span>.”</span> <a href="https://ibcprotocol.org/">https://ibcprotocol.org/</a>.</div>
 </div>
 <div id="ref-AlgorandAlgorand" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[16] </div><div class="csl-right-inline"><span>“<span class="nocase">Algorand | The Blockchain for FutureFi | Algorand</span>.”</span> <a href="https://www.algorand.com/" class="uri">https://www.algorand.com/</a>.</div>
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline"><span>“<span class="nocase">Algorand | The Blockchain for FutureFi | Algorand</span>.”</span> <a href="https://www.algorand.com/">https://www.algorand.com/</a>.</div>
 </div>
 <div id="ref-ScalableScale" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[17] </div><div class="csl-right-inline"><span>“<span class="nocase">Scalable Blockchain Infrastructure: Billions of transactions <span>&amp;</span> counting | Solana: Build crypto apps that scale</span>.”</span> <a href="https://solana.com/" class="uri">https://solana.com/</a>.</div>
+<div class="csl-left-margin">[17] </div><div class="csl-right-inline"><span>“<span class="nocase">Scalable Blockchain Infrastructure: Billions of transactions <span>&amp;</span> counting | Solana: Build crypto apps that scale</span>.”</span> <a href="https://solana.com/">https://solana.com/</a>.</div>
 </div>
 <div id="ref-HomeSubstrate_" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">[18] </div><div class="csl-right-inline"><span>“<span>Home | Substrate<span>_</span></span>.”</span> Available: <a href="https://substrate.io/">https://substrate.io/</a></div>
@@ -935,7 +938,7 @@ Y_t - \alpha_1Y_{t-1} - \dots - \alpha_{p&#39;}Y_{t-p&#39;} = \epsilon_t + \thet
 <div class="csl-left-margin">[20] </div><div class="csl-right-inline"><span>“<span class="nocase">Miner extractable value (MEV) | ethereum.org</span>.”</span> Available: <a href="https://ethereum.org/en/developers/docs/mev/">https://ethereum.org/en/developers/docs/mev/</a></div>
 </div>
 <div id="ref-Apollo:Finance" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[21] </div><div class="csl-right-inline"><span>“<span>Apollo: The Oracle Pallet - Composable Finance</span>.”</span> <a href="https://docs.composable.finance/the-polkadot-solution-1/apollo" class="uri">https://docs.composable.finance/the-polkadot-solution-1/apollo</a>.</div>
+<div class="csl-left-margin">[21] </div><div class="csl-right-inline"><span>“<span>Apollo: The Oracle Pallet - Composable Finance</span>.”</span> <a href="https://docs.composable.finance/the-polkadot-solution-1/apollo">https://docs.composable.finance/the-polkadot-solution-1/apollo</a>.</div>
 </div>
 <div id="ref-Gavish1978TheProblems" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">[22] </div><div class="csl-right-inline">B. Gavish and S. C. Graves, <span>“The travelling salesman problem and related problems.”</span> Massachusetts Institute of Technology, Operations Research Center, 1978.</div>
@@ -947,25 +950,25 @@ Y_t - \alpha_1Y_{t-1} - \dots - \alpha_{p&#39;}Y_{t-p&#39;} = \epsilon_t + \thet
 <div class="csl-left-margin">[24] </div><div class="csl-right-inline">J. Feigenbaum, C. Papadimitriou, R. Sami, and S. Shenker, <span>“A BGP-based mechanism for lowest-cost routing,”</span> <em>Distributed Computing</em>, vol. 18, no. 1, pp. 61–72, 2005.</div>
 </div>
 <div id="ref-ProtonchainBlockchain" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[25] </div><div class="csl-right-inline"><span>“<span>Protonchain | The Payment Blockchain</span>.”</span> <a href="https://www.protonchain.com/proton-white-paper-en.pdf" class="uri">https://www.protonchain.com/proton-white-paper-en.pdf</a>.</div>
+<div class="csl-left-margin">[25] </div><div class="csl-right-inline"><span>“<span>Protonchain | The Payment Blockchain</span>.”</span> <a href="https://www.protonchain.com/proton-white-paper-en.pdf">https://www.protonchain.com/proton-white-paper-en.pdf</a>.</div>
 </div>
 <div id="ref-GnosisWhitepaper" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[26] </div><div class="csl-right-inline"><span>“Gnosis protocol.”</span> <a href="https://blockchainlab.com/pdf/gnosis_whitepaper.pdf" class="uri">https://blockchainlab.com/pdf/gnosis_whitepaper.pdf</a>.</div>
+<div class="csl-left-margin">[26] </div><div class="csl-right-inline"><span>“Gnosis protocol.”</span> <a href="https://blockchainlab.com/pdf/gnosis_whitepaper.pdf">https://blockchainlab.com/pdf/gnosis_whitepaper.pdf</a>.</div>
 </div>
 <div id="ref-Brewer2012Cap" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">[27] </div><div class="csl-right-inline">E. Brewer, <span>“<span>CAP</span> twelve years later: How the "rules" have changed,”</span> <em>Computer</em>, vol. 45, no. 2, pp. 23–29, 2012.</div>
 </div>
 <div id="ref-WhyPropertiesb" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[28] </div><div class="csl-right-inline"><span>“<span>Cross-Rollup NFTs</span>.”</span> <a href="https://ethresear.ch/t/cross-rollup-nft-wrapper-and-migration-ideas/10507" class="uri">https://ethresear.ch/t/cross-rollup-nft-wrapper-and-migration-ideas/10507</a>.</div>
+<div class="csl-left-margin">[28] </div><div class="csl-right-inline"><span>“<span>Cross-Rollup NFTs</span>.”</span> <a href="https://ethresear.ch/t/cross-rollup-nft-wrapper-and-migration-ideas/10507">https://ethresear.ch/t/cross-rollup-nft-wrapper-and-migration-ideas/10507</a>.</div>
 </div>
 <div id="ref-LightningNetwork" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[29] </div><div class="csl-right-inline"><span>“<span>Lightning Network | An Argument For Single-Asset Lightning Network</span>.”</span> <a href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001752.html" class="uri">https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001752.html</a>.</div>
+<div class="csl-left-margin">[29] </div><div class="csl-right-inline"><span>“<span>Lightning Network | An Argument For Single-Asset Lightning Network</span>.”</span> <a href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001752.html">https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-December/001752.html</a>.</div>
 </div>
 <div id="ref-Diffie1976NewCryptography" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">[30] </div><div class="csl-right-inline">W. Diffie and M. E. Hellman, <span>“New directions in cryptography,”</span> <em><span>IEEE</span> Trans. Inf. Theory</em>, vol. 22, no. 6, pp. 644–654, 1976, doi: <a href="https://doi.org/10.1109/TIT.1976.1055638">10.1109/TIT.1976.1055638</a>.</div>
 </div>
 <div id="ref-DSSStandard" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[31] </div><div class="csl-right-inline"><span>“<span>DSS NIST | Digital Signature Standard</span>.”</span> <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf" class="uri">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf</a>.</div>
+<div class="csl-left-margin">[31] </div><div class="csl-right-inline"><span>“<span>DSS NIST | Digital Signature Standard</span>.”</span> <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf</a>.</div>
 </div>
 <div id="ref-Gennaro2019FastSetup" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">[32] </div><div class="csl-right-inline">R. Gennaro and S. Goldfeder, <span>“Fast multiparty threshold <span>ECDSA</span> with fast trustless setup,”</span> <em><span>IACR</span> Cryptol. ePrint Arch.</em>, p. 114, 2019.</div>
@@ -977,49 +980,49 @@ Y_t - \alpha_1Y_{t-1} - \dots - \alpha_{p&#39;}Y_{t-p&#39;} = \epsilon_t + \thet
 <div class="csl-left-margin">[34] </div><div class="csl-right-inline">C. Moore, M. O’Neill, E. O’Sullivan, Y. Doröz, and B. Sunar, <span>“Practical homomorphic encryption: A survey,”</span> in <em>2014 IEEE international symposium on circuits and systems (ISCAS)</em>, 2014, pp. 2792–2795.</div>
 </div>
 <div id="ref-HopRollups" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[35] </div><div class="csl-right-inline"><span>“<span>Hop Protocol | Send Tokens Across Rollups</span>.”</span> <a href="https://hop.exchange/whitepaper.pdf" class="uri">https://hop.exchange/whitepaper.pdf</a>.</div>
+<div class="csl-left-margin">[35] </div><div class="csl-right-inline"><span>“<span>Hop Protocol | Send Tokens Across Rollups</span>.”</span> <a href="https://hop.exchange/whitepaper.pdf">https://hop.exchange/whitepaper.pdf</a>.</div>
 </div>
 <div id="ref-MOVRMOVR" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[36] </div><div class="csl-right-inline"><span>“<span>MOVR Protocol | Data MOVR</span>.”</span> <a href="https://movrnetwork.notion.site/movrnetwork/Movr-Network-Compendium-64c66fd3ed774217ad5fac6ec92866a9" class="uri">https://movrnetwork.notion.site/movrnetwork/Movr-Network-Compendium-64c66fd3ed774217ad5fac6ec92866a9</a>.</div>
+<div class="csl-left-margin">[36] </div><div class="csl-right-inline"><span>“<span>MOVR Protocol | Data MOVR</span>.”</span> <a href="https://movrnetwork.notion.site/movrnetwork/Movr-Network-Compendium-64c66fd3ed774217ad5fac6ec92866a9">https://movrnetwork.notion.site/movrnetwork/Movr-Network-Compendium-64c66fd3ed774217ad5fac6ec92866a9</a>.</div>
 </div>
 <div id="ref-Becker2008MerkleCryptanalysis" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">[37] </div><div class="csl-right-inline">G. Becker, <span>“Merkle signature schemes, merkle trees and their cryptanalysis,”</span> <em>Ruhr-University Bochum, Tech. Rep</em>, 2008.</div>
 </div>
 <div id="ref-MosaicFinance" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[38] </div><div class="csl-right-inline"><span>“<span>Mosaic | Composable Finance</span>.”</span> <a href="https://mosaic.composable.finance/" class="uri">https://mosaic.composable.finance/</a>.</div>
+<div class="csl-left-margin">[38] </div><div class="csl-right-inline"><span>“<span>Mosaic | Composable Finance</span>.”</span> <a href="https://mosaic.composable.finance/">https://mosaic.composable.finance/</a>.</div>
 </div>
 <div id="ref-IntroducingMedium" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[39] </div><div class="csl-right-inline"><span>“<span class="nocase">Introducing Composable Labs: An Incubator and Testing Ground for Projects using Composable’s Tech<span>…</span> | by 0xbrainjar | Medium</span>.”</span> <a href="https://0xbrainjar.medium.com/introducing-composable-labs-an-incubator-and-testing-ground-for-projects-using-composables-tech-b467d438142c" class="uri">https://0xbrainjar.medium.com/introducing-composable-labs-an-incubator-and-testing-ground-for-projects-using-composables-tech-b467d438142c</a>.</div>
+<div class="csl-left-margin">[39] </div><div class="csl-right-inline"><span>“<span class="nocase">Introducing Composable Labs: An Incubator and Testing Ground for Projects using Composable’s Tech<span>…</span> | by 0xbrainjar | Medium</span>.”</span> <a href="https://0xbrainjar.medium.com/introducing-composable-labs-an-incubator-and-testing-ground-for-projects-using-composables-tech-b467d438142c">https://0xbrainjar.medium.com/introducing-composable-labs-an-incubator-and-testing-ground-for-projects-using-composables-tech-b467d438142c</a>.</div>
 </div>
 <div id="ref-IntroducingMediumb" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[40] </div><div class="csl-right-inline"><span>“<span class="nocase">Introducing Mosaic: Tackling Cross-Layer 2 Liquidity Provisioning through Delivering a New Means of Value Generation | by 0xbrainjar | Medium</span>.”</span> <a href="https://0xbrainjar.medium.com/introducing-mosaic-tackling-cross-layer-2-liquidity-provisioning-through-delivering-a-new-means-of-1c1edb8691df" class="uri">https://0xbrainjar.medium.com/introducing-mosaic-tackling-cross-layer-2-liquidity-provisioning-through-delivering-a-new-means-of-1c1edb8691df</a>.</div>
+<div class="csl-left-margin">[40] </div><div class="csl-right-inline"><span>“<span class="nocase">Introducing Mosaic: Tackling Cross-Layer 2 Liquidity Provisioning through Delivering a New Means of Value Generation | by 0xbrainjar | Medium</span>.”</span> <a href="https://0xbrainjar.medium.com/introducing-mosaic-tackling-cross-layer-2-liquidity-provisioning-through-delivering-a-new-means-of-1c1edb8691df">https://0xbrainjar.medium.com/introducing-mosaic-tackling-cross-layer-2-liquidity-provisioning-through-delivering-a-new-means-of-1c1edb8691df</a>.</div>
 </div>
 <div id="ref-TestingMedium" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[41] </div><div class="csl-right-inline"><span>“<span class="nocase">Testing Mosaic through our Arbitrum-Polygon Transferal System Proof of Concept | by Composable Finance | Sep, 2021 | Medium</span>.”</span> <a href="https://composablefi.medium.com/testing-mosaic-through-our-arbitrum-polygon-transferal-system-proof-of-concept-4e459e24e427" class="uri">https://composablefi.medium.com/testing-mosaic-through-our-arbitrum-polygon-transferal-system-proof-of-concept-4e459e24e427</a>.</div>
+<div class="csl-left-margin">[41] </div><div class="csl-right-inline"><span>“<span class="nocase">Testing Mosaic through our Arbitrum-Polygon Transferal System Proof of Concept | by Composable Finance | Sep, 2021 | Medium</span>.”</span> <a href="https://composablefi.medium.com/testing-mosaic-through-our-arbitrum-polygon-transferal-system-proof-of-concept-4e459e24e427">https://composablefi.medium.com/testing-mosaic-through-our-arbitrum-polygon-transferal-system-proof-of-concept-4e459e24e427</a>.</div>
 </div>
 <div id="ref-WhatRazor" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[42] </div><div class="csl-right-inline"><span>“<span class="nocase">What is Occam’s Razor?</span>”</span> <a href="https://math.ucr.edu/home/baez/physics/General/occam.html" class="uri">https://math.ucr.edu/home/baez/physics/General/occam.html</a>.</div>
+<div class="csl-left-margin">[42] </div><div class="csl-right-inline"><span>“<span class="nocase">What is Occam’s Razor?</span>”</span> <a href="https://math.ucr.edu/home/baez/physics/General/occam.html">https://math.ucr.edu/home/baez/physics/General/occam.html</a>.</div>
 </div>
 <div id="ref-GraphQLAPI" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[43] </div><div class="csl-right-inline"><span>“<span class="nocase">GraphQL | A query language for your API</span>.”</span> <a href="https://graphql.org/" class="uri">https://graphql.org/</a>.</div>
+<div class="csl-left-margin">[43] </div><div class="csl-right-inline"><span>“<span class="nocase">GraphQL | A query language for your API</span>.”</span> <a href="https://graphql.org/">https://graphql.org/</a>.</div>
 </div>
 <div id="ref-AnScience" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[44] </div><div class="csl-right-inline"><span>“<span class="nocase">An Introduction to Time Series Analysis with ARIMA | by Taha Binhuraib | Towards Data Science</span>.”</span> <a href="https://towardsdatascience.com/an-introduction-to-time-series-analysis-with-arima-a8b9c9a961fb" class="uri">https://towardsdatascience.com/an-introduction-to-time-series-analysis-with-arima-a8b9c9a961fb</a>.</div>
+<div class="csl-left-margin">[44] </div><div class="csl-right-inline"><span>“<span class="nocase">An Introduction to Time Series Analysis with ARIMA | by Taha Binhuraib | Towards Data Science</span>.”</span> <a href="https://towardsdatascience.com/an-introduction-to-time-series-analysis-with-arima-a8b9c9a961fb">https://towardsdatascience.com/an-introduction-to-time-series-analysis-with-arima-a8b9c9a961fb</a>.</div>
 </div>
 <div id="ref-7.2Ed" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[45] </div><div class="csl-right-inline"><span>“<span class="nocase">7.2 Trend methods | Forecasting: Principles and Practice (2nd ed)</span>.”</span> <a href="https://otexts.com/fpp2/holt.html" class="uri">https://otexts.com/fpp2/holt.html</a>.</div>
+<div class="csl-left-margin">[45] </div><div class="csl-right-inline"><span>“<span class="nocase">7.2 Trend methods | Forecasting: Principles and Practice (2nd ed)</span>.”</span> <a href="https://otexts.com/fpp2/holt.html">https://otexts.com/fpp2/holt.html</a>.</div>
 </div>
 <div id="ref-7.3Ed" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[46] </div><div class="csl-right-inline"><span>“<span class="nocase">7.3 Holt-Winters’ seasonal method | Forecasting: Principles and Practice (2nd ed)</span>.”</span> <a href="https://otexts.com/fpp2/holt-winters.html" class="uri">https://otexts.com/fpp2/holt-winters.html</a>.</div>
+<div class="csl-left-margin">[46] </div><div class="csl-right-inline"><span>“<span class="nocase">7.3 Holt-Winters’ seasonal method | Forecasting: Principles and Practice (2nd ed)</span>.”</span> <a href="https://otexts.com/fpp2/holt-winters.html">https://otexts.com/fpp2/holt-winters.html</a>.</div>
 </div>
 <div id="ref-ArtificialBritannica" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[47] </div><div class="csl-right-inline"><span>“<span class="nocase">artificial intelligence | Definition, Examples, Types, Applications, Companies, <span>&amp;</span> Facts | Britannica</span>.”</span> <a href="https://www.britannica.com/technology/artificial-intelligence" class="uri">https://www.britannica.com/technology/artificial-intelligence</a>.</div>
+<div class="csl-left-margin">[47] </div><div class="csl-right-inline"><span>“<span class="nocase">artificial intelligence | Definition, Examples, Types, Applications, Companies, <span>&amp;</span> Facts | Britannica</span>.”</span> <a href="https://www.britannica.com/technology/artificial-intelligence">https://www.britannica.com/technology/artificial-intelligence</a>.</div>
 </div>
 <div id="ref-UnderstandingBlog" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[48] </div><div class="csl-right-inline"><span>“<span class="nocase">Understanding LSTM Networks – colah’s blog</span>.”</span> <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" class="uri">https://colah.github.io/posts/2015-08-Understanding-LSTMs/</a>.</div>
+<div class="csl-left-margin">[48] </div><div class="csl-right-inline"><span>“<span class="nocase">Understanding LSTM Networks – colah’s blog</span>.”</span> <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">https://colah.github.io/posts/2015-08-Understanding-LSTMs/</a>.</div>
 </div>
 <div id="ref-TimeScience" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">[49] </div><div class="csl-right-inline"><span>“<span class="nocase">Time Series Models. AR, MA, ARMA, ARIMA | by Charanraj Shetty | Towards Data Science</span>.”</span> <a href="https://towardsdatascience.com/time-series-models-d9266f8ac7b0" class="uri">https://towardsdatascience.com/time-series-models-d9266f8ac7b0</a>.</div>
+<div class="csl-left-margin">[49] </div><div class="csl-right-inline"><span>“<span class="nocase">Time Series Models. AR, MA, ARMA, ARIMA | by Charanraj Shetty | Towards Data Science</span>.”</span> <a href="https://towardsdatascience.com/time-series-models-d9266f8ac7b0">https://towardsdatascience.com/time-series-models-d9266f8ac7b0</a>.</div>
 </div>
 </div>
 </body>
