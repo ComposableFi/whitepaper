@@ -52,8 +52,8 @@ Each of these deliverables are covered in more detail throughout this paper.
 ## 2.2 Paper Outline {#sec:outline}
 Having covered the vision in [@sec:vision] and the roadmap in [@sec:roadmap], we now take a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
 
-First, our Application Layer abstracts away high-level actions such as "take out a loan on chain W layer X, then stake that on chain Y layer Z", in fact, we can get more abstract and say "take out a loan at the lowest rate and buy NFT X" where "X" does not include any specification of the chain or layer it lives on.
-Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet the user needs not understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
+First, our Application Layer abstracts away high-level actions such as \"take out a loan on chain W layer X, then stake that on chain Y layer Z", in fact, we can get more abstract and say: \"take out a loan at the lowest rate and buy NFT X" where "X" does not include any specification of the chain or layer it lives on.
+Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet. The user needs not understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
 An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.
 
 Let us descend one layer.
