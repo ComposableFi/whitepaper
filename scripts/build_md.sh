@@ -20,7 +20,6 @@ if [ ! -e $lockfile ]; then
              -t html5 \
              --metadata title="Composable Whitepaper" \
              --metadata link-citations=true \
-             --include-before-body=styles/header.html \
              -o site/index.html whitepaper.md
 
    rm $lockfile

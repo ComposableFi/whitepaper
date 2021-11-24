@@ -25,11 +25,11 @@ jobs:
 
     - name: Install tools
       run: |
-        ./scripts/setup.sh
+        chmod u+x scripts/setup.sh && ./scripts/setup.sh
 
     - name: Generate HTML
       run: |
-        ./scripts/build_md.sh
+        chmod u+x scripts/setup.sh && ./scripts/build_md.sh
     
     - name: Deploy to S3
       run: |
