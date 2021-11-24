@@ -25,7 +25,7 @@ jobs:
 
     - name: Install tools
       run: |
-        chmod u+x scripts/setup.sh && ./scripts/setup.sh
+        chmod u+x scripts/setup.sh && sudo ./scripts/setup.sh
 
     - name: Generate HTML
       run: |

@@ -175,31 +175,6 @@
     -ms-text-size-adjust: 100%;
   }
 
-  .hero {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100vh;
-    left: 0;
-    padding-right: 0%;
-    padding-left: 0%;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background-color: #170010;
-    background-image: url('images/1920x1080-min.png');
-    background-position: 50% 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
-
   /* a[data-reference-type^="ref"] {
      display: none;
   } */
@@ -524,9 +499,6 @@
   </style>
 </head>
 <body>
-<div class="hero">
-    <h1 style="opacity:0">Composable Finance <span class="text-span">|</span> Whitepaper</h1>
-</div>
 <header id="title-block-header">
 <h1 class="title">Composable Whitepaper</h1>
 </header>
@@ -607,7 +579,7 @@
 <p>In 2022, we release Centauri, the IBS Substrate testnet, we finish our developments of the BEEFY light client, and develop our Parachain to L2 bridge capability. Later in that year, we finalize our routing layer and move Mosaic to Phase III which addresses decentralization. We also release our cross chain virtual machine and the IBC Substrate moves to mainnet. Each of these deliverables are covered in more detail throughout this paper.</p>
 <h2 id="sec:outline">2.2 Paper Outline</h2>
 <p>Having covered the vision in sec. 1 and the roadmap in sec. 2.1, we now take a look at Composable’s tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.</p>
-<p>First, our Application Layer abstracts away high-level actions such as “take out a loan on chain W layer X, then stake that on chain Y layer Z”, in fact, we can get more abstract and say “take out a loan at the lowest rate and buy NFT X” where “X” does not include any specification of the chain or layer it lives on. Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet the user needs not understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer. An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.</p>
+<p>First, our Application Layer abstracts away high-level actions such as "take out a loan on chain W layer X, then stake that on chain Y layer Z”, in fact, we can get more abstract and say: "take out a loan at the lowest rate and buy NFT X” where “X” does not include any specification of the chain or layer it lives on. Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet. The user needs not understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer. An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.</p>
 <p>Let us descend one layer. We believe that the application needs to be developed in an easy to use language for developers which is blockchain agnostic. This can help bring to life the full network effect and speed of Web3. This is where the Cross-Chain Virtual Machine (XCVM) comes in, see sec. 3. In other words, XCVM is a virtual machine (akin to that familiar from Ethereum) capable of running smart contracts without the need to worry about the underlying chain-connection details. XCVM, in turn, needs to send information between various blockchains and layers. This is where the next layer down comes into focus: The Routing Layer, see sec. 4. This is how the encoded information from developers are turned into information being sent and received to and from the relevant parties. In other words, the Routing layer is responsible for routing the information from the XCVM to the correct blockchain and the correct layer, much like Port Control Protocol <span class="citation" data-cites="PortWikipedia"><a href="#ref-PortWikipedia" role="doc-biblioref">[3]</a></span> from Web2.</p>
 <p>To accomplish this, the Routing Layer, in turn, needs broad access to the ecosystem of blockchains. And it needs this access to be fast and secure. We have now arrived at our core layer: The Picasso Parachain for Kusama in sec. 5. Incidentally, a goal is to also deploy, in a similar way, to a Polkadot parachain. The parachain ensures security and speed as the applications transmit information around the entire ecosystem.</p>
 <p>Taking a look now at the various existing ecosystems, for Ethereum we built Mosaic, covered in sec. 6. Mosaic is a cross-layer bridge and allows for easy cross-layer transfers of tokens. Mosaic is actively being built to support cross-chain transfers as well - via Picasso. To achieve our vision for Mosaic we broke down the development into three distinct phases which we will highlight here. In Mosaic’s Phase I, sec. 6.1 aka the proof-of-concept (PoC), assets can be locked on the source layer, a relayer transmits the transferal information to the destination layer and the same amount in fees is released on the destination layer. In Mosaic’s Phase II, sec. 6.2 , we now connect multiple layers and provide multiple ways to provide liquidity on both L1 and L2. We build a software environment, sec. 6.4, to help us decide on liquidity rebalancing and an optimal fee model to use, sec. 6.4.2. In Mosaic’s Phase III, sec. 6.3 we seek to increase as much as possible the decentralization of the entire system.</p>
