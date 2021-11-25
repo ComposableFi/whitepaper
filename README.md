@@ -1,5 +1,7 @@
 ## Building
 
+[![Build and Deploy to EKS](https://github.com/ComposableFi/whitepaper/actions/workflows/.github-ci.yaml/badge.svg)](https://github.com/ComposableFi/whitepaper/actions/workflows/.github-ci.yaml)
+
 ### Pre-requisites
 Install `pandoc` e.g. from here: https://github.com/jgm/pandoc/releases/tag/2.16.1
 
