@@ -2,7 +2,7 @@
 
 ---
 
-![Composable Ecosytem](./images/parachain.png)
+![Composable Ecosystem](./images/parachain.png)
 
 # 1. Vision {#sec:vision}
 
