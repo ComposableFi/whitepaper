@@ -37,7 +37,7 @@ We believe that the applications of such a stack are the catalyst for the next D
 ## 2.1 Roadmap {#sec:roadmap}
 Let us start with Composable's roadmap shown in [@fig:roadmap] covering tasks we target to complete through the first half of 2022.
 
-![Composable Roadmap](./images/roadmap.png){#fig:roadmap}
+![The Composable Finance Roadmap through H1 2022](./images/roadmap.png){#fig:roadmap}
 
 
 In the closing of this year, we target to enable support for cross-layer NFTs, we deploy Phase II for Mosaic, we have Picasso onboarded to Kusama.
