@@ -18,7 +18,7 @@ if [ ! -e $lockfile ]; then
              --csl=styles/csl/ieee.csl \
              -H styles/whitepaper.css \
              -t html5 \
-             --metadata title="Composable Whitepaper" \
+             --metadata title="Composable Finance Whitepaper" \
              --metadata link-citations=true \
              -o site/index.html whitepaper.md
 
