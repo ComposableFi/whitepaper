@@ -27,30 +27,28 @@ We are embarking on a vast and growing opportunity in architecting and building 
 # 2. Overview {#sec:overview}
 
 ## 2.1 Roadmap {#sec:roadmap}
-Let us start with Composable's roadmap shown in [@fig:roadmap] covering tasks we target to complete through the first half of 2022.
+Let us start with Composable's roadmap shown in [@fig:roadmap], covering tasks we target to complete through the first half of 2022.
 
 ![The Composable Finance Roadmap through H1 2022](./images/roadmap.png){#fig:roadmap}
 
 
-In the closing of this year, we target to enable support for cross-layer NFTs, we deploy Phase II for Mosaic, and we have Picasso onboarded to Kusama.
-The Picasso Token Generation Event (TGE) is planned to take place as well and our Oracle pallet Apollo is set to unlock primaries and secondaries.
-We are also set to release cubic - our pallet supporting vaults known from Ethereum but in the substrate-based Polkadot and Kusama ecosystems.
+This year's closing, we target to enable support for cross-layer NFTs, deploy Phase II for Mosaic, and have Picasso onboarded to Kusama.
+The Picasso Token Generation Event (TGE) occurs, and our Oracle pallet Apollo unlocks primaries and secondaries. We are also set to release cubic - our pallet supporting vaults known from Ethereum but in the substrate-based Polkadot and Kusama ecosystems.
 
-In Q1 of 2022, we release Centauri, the IBS Substrate testnet, we finish our developments of the BEEFY light client and develop our Parachain to L2 bridge capability.
-Later in the first half of that year, we finalize our routing layer and move Mosaic to Phase III which addresses decentralization.
-We also release our cross-chain virtual machine and the IBC Substrate moves to mainnet.
+In Q1 of 2022, we release Centauri, the IBS Substrate testnet; we finish our developments of the BEEFY light client and develop our Parachain to L2 bridge capability.
+Later in the first half of 2022, we aim to finalize our routing layer and move Mosaic to Phase III, addressing decentralization.
+We also release our cross-chain virtual machine, and the IBC Substrate moves to the mainnet.
 Each deliverable, along with the underlying technologies built and used by Composable, is covered in more detail throughout this paper.
 
 ## 2.2 Paper Outline {#sec:outline}
-Having covered the vision in [@sec:vision] and the roadmap in [@sec:roadmap], we now look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
+Having covered the vision in [@sec:vision] and the roadmap in [@sec:roadmap], we now look at Composable's tech stack in a top-down approach and specify which sections throughout the Construction Paper one can find further information.
 
 First, our Application Layer abstracts away high-level actions such as \"take out a loan on chain W layer X, then stake that on chain Y layer Z". 
 We can get more abstract and say: \"take out a loan at the lowest rate and buy NFT X" where \"X" does not include any specification of the chain or layer it lives on.
-Consider the application Zoom, e.g., on a Mac which can sync and communicate seamlessly with Zoom on a PC via the internet. The user needs not to understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
-An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.
+Consider the application Zoom, e.g., on a Mac, which can sync and communicate seamlessly with Zoom on a PC via the internet. The user needs not to understand anything about how the internet works (besides connecting in the first place); they see the abstraction of complicated information transfers underneath, at this application layer. An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.
 
 Let us descend one layer.
-We believe that the application needs to be developed in an easy-to-use language for developers which is blockchain agnostic. This can help bring to life the full network effect and speed of Web3.
+We believe that the application needs to be developed in an easy-to-use language for developers, blockchain agnostic. This application can help bring to life the full network effect and speed of Web3.
 This is where the Cross-Chain Virtual Machine (XCVM) comes in, see [@sec:xcvm].
 In other words, XCVM is a virtual machine (akin to that familiar from Ethereum) capable of running smart contracts without the need to worry about the underlying chain-connection details.
 XCVM, in turn, needs to send information between various blockchains and layers.
@@ -78,13 +76,13 @@ Then, pallets [@TheMedium] are used to add additional functionality - one exampl
 Other pallets can be developed including ones to enable Solidity support, cross-chain message capabilities (XCMP), decentralized exchanges, and so on.
 Cosmos supports the Inter-Blockchain Communication Protocol (IBC) [@Inter-BlockchainCommunication] standard opening up for a large ecosystem that we can connect to.
 
-In the remaining sections, we cover each of these layers in more detail and we conclude at the end in [@sec:conclusion].
+In the remaining sections, we cover each of these layers in more detail and conclude at the end in [@sec:conclusion].
 
 # 3. Cross-Chain Virtual Machine {#sec:xcvm}
 The cross-chain virtual machine (XCVM) is a single, developer-friendly interface to interact and orchestrate smart contract functions across the multitude of L1 and L2 networks available.
 In short, the XCVM abstracts complexity from the process of having to send instructions to the routing layer directly initiates call-backs into smart contracts and handles circuit failure such as network outages.
 
-Build on top of our bridging infrastructure, our tools for the Composable Cross-Chain Virtual Machine allow developers to tap into various functions of communication and liquidity availability.
+Build on top of our bridging infrastructure; our Composable Cross-Chain Virtual Machine tools allow developers to tap into various communication and liquidity availability functions.
 The result is multifaceted; users can perform cross-chain actions, and the overarching blockchain ecosystem is repositioned as a network of agnostic liquidity and available yield.
 
 Composable allows developers to tailor their experience to maximize for the desired parameter while minimizing ecosystem-specific decision making.
@@ -112,7 +110,7 @@ By modeling XCTs as a state machine, or more accurately a directed, cyclic, weig
 Completely trustless compatibility can be achieved through the use of smart contracts and runtime-embedded light clients, such as IBC.
 For chains without smart contract capabilities or light clients, such as Bitcoin, we can employ optimistic bridging and message passing technologies, such as our Mosaic project.
 
-The XCVM offers Picasso-based dApps different hooks and updates on the status of any XCT, as well as RBAC-based flow control for actively managing the execution of different stages.
+The XCVM offers Picasso-based decentralized Applications (dApps) different hooks and updates on the status of any XCT, as well as RBAC-based flow control for actively managing the execution of different stages.
 Dapps incur transaction fees for calling into this underlying execution layer.
 Depending on the stage of the XCT, this fee may be subtracted from the XCTs payload in case of a simple token transfer using our bring-your-own-gas features.
 
@@ -150,17 +148,17 @@ With the increasing number of chains (both on Layer 1 and Layer 2), and the diff
 In a dense graph, the number of edges connecting the vertices grows quadratically.
 We also need to consider the mutating and changing nature of blockchain ecosystems: new versions of protocols can be deployed, old bridges might drop support, new tokens can be added, etc.
 
-Given the magnitude and dynamic essence of the task, and the volatile prices we face, finding the optimal route for a given trade is not in the reach of most of the users.
-The problem can be seen as an instance of the Travelling salesman problem [@Gavish1978TheProblems] or the Minimum-cost flow problem [@Orlin1988AAlgorithm], with the component of changing networks and the requirement of on-chain validity.
+Given the magnitude and dynamic essence of the task and the volatile prices we face, finding the optimal route for a given trade is not in most users' reach.
+The problem is the Travelling salesman problem [@Gavish1978TheProblems] or the Minimum-cost flow problem [@Orlin1988AAlgorithm], with the component of changing networks the requirement of on-chain validity.
 The users need to be guaranteed they got the best possible path.
-To accomplish all this, we require complex algorithms (e.g: [@Feigenbaum2005ARouting]) and dedicated heuristics.
+We require complex algorithms (e.g.: [@Feigenbaum2005ARouting]) and dedicated heuristics to accomplish all this.
 
 One exciting application for this execution layer is cross-chain fee management.
 Our infrastructure as a whole intends to support a network of blockchain networks, meaning that there will be multiple potential pathways to the same destination.
 In this scenario, without a tool to do so for them, users would have to pathfind the most efficient and compliant route for value packets.
-Users may need to prioritize efficiency if the pathway must be especially liquid or secure, or if a specific regulatory requirement must be enforced (such as know your customer/anti-money laundering requirements, abbreviated KYC/AML).
-Therefore, the routing process would be both incredibly important and very time-intensive.
-Our pathway execution layer will make this process simple for users and enable them to customize which parameter they want to optimize for when completing a given transaction.
+Users may need to prioritize efficiency if the pathway must be predominantly liquid or secure or if a specific regulatory requirement must be enforced (know your customer/anti-money laundering requirements, abbreviated KYC/AML).
+Therefore, the routing process would be both critical and very time-intensive.
+Our pathway execution layer will simplify this process and enable users to customize which parameter they want to optimize for when completing a given transaction.
 
 Our routing layer will abstract and simplify the route algorithms through a clean and straightforward interface.
 To decentralize our solution and increase the transparency of DeFi projects, we also plan to include the following services and parties within our solution.
@@ -170,19 +168,17 @@ A nameservice is a simple registry that maps identifications to names (e.g: DNS)
 This feature can also be used to link blockchain addresses to names (e.g: nicknames).
 Nameservices improve the semantic meaning of decentralized protocols, help the inexperienced user, bridge different platforms, decrease the possibility of making errors when creating transactions, and contribute to promoting identity and digital ownership on Web3.
 
-While other projects have already explored the benefits of using nameservices [@ProtonchainBlockchain].
-To the best of our knowledge, Composable Finance will be the first one to provide cross-chain and cross-layer nameservice support.
+While other projects have already explored the benefits of using nameservices [@ProtonchainBlockchain], to the best of our knowledge, Composable Finance will be the first one to provide cross-chain and cross-layer nameservice support.
 Providing nameservice support on a single chain is relatively trivial. However, maintaining nameservices across different layers and chains poses new challenges.
 We will take care of the details such as key management, data synchronization, and finality on different chains so that the whole process is translucent to the final user.
-Therefore, no matter the network or the token, we will be able to support names and addresses indistinctly.
+Therefore, no matter the network or the token, we will support names and addresses indistinctly.
 
-Nameservices help to accomplish our vision of less fragmented and more accessible blockchain space.
-Where a single interface helps to leverage the composability of the DeFi space, unlocking its full potential and enabling new projects.
+Nameservices help accomplish our vision of a less fragmented and more accessible blockchain space where a single interface allows us to leverage the composability of the DeFi space, unlocking its full potential and enabling new projects.
 
 ## 4.2 Indexers and Solvers {#sec:indexers}
-As mentioned beforehand, constructing a dynamic graph and finding the best route within it, are the main challenges our routing layer faces.
+As mentioned beforehand, constructing a dynamic graph and finding the best route are the main challenges our routing layer faces.
 In achieving these goals, we also want to ensure the decentralization and auditability of the solution.
-For this reason, we introduce two parties, which can be run by anyone, that will have a crucial role in the protocol:
+For this reason, we introduce two parties, which anyone can run, that will have a crucial role in the protocol:
 
 * Indexers will act as oracles and will help to update the graph of interconnected chains and bridges. Every time there is a change in the topology of the network (new bridges/chains, network disruptions, significant changes in costs, etc.), indexers will notify it. Indexers notifications will be weighted and taken into account to update the main graph. Indexers will obtain rewards in rewards in the function of the utility of the updates and a slashing mechanism will be used to prevent malicious indexers.
 
@@ -190,17 +186,17 @@ For this reason, we introduce two parties, which can be run by anyone, that will
 
 ![Routing architecture with indexers and solvers. We can appreciate how, by using Picasso as a finality layer, routers and indexers can collaborate on the routing algorithm. Please note how routing solver nodes leverage XCVM to propose new routes.](./images/routing.png){#fig:routing}
 
-These roles will be used, together with a default minimum cost routing algorithm, to address the routing challenges previously introduced.
-This architecture, as shown in [@fig:routing], enhances public examination and minimizes the trust users need to put on the protocol.
-It is also fairly easy to scale since most of the workload is performed off-chain, while only validation is done on-chain.
+Together with a default minimum-cost routing algorithm, these roles will address the routing challenges previously introduced.
+As shown in [@fig:routing], this architecture enhances public examination and minimizes the trust users need to put on the protocol.
+It is also reasonably easy to scale since most of the workload runs off-chain, while only validation is on-chain.
 
 ![Uni-connected directional graph representation of different Blockchains connected via the best bridges based on the specific requirements of a given user at a given time.](./images/Selected_Bridges1.png){#fig:selbridges}
 
-As for the routing algorithms employed by solvers, we do not enforce any kind of restriction.
+As for the routing algorithms employed by solvers, we do not enforce any restrictions.
 We are interested in the best result the community can provide.
 As previously mentioned, and shown in [@fig:selbridges], we are facing a complex problem with variable parameters, where there is no unique strategy that dominates the others, at least with limited time.
 We outsource the pathfinding task to the decentralized community of Composable users.
-As other projects have explored [@GnosisWhitepaper], having the users run different algorithms and heuristics in a fair economic game, produces a better and more complete solution that can adapt to new scenarios faster.
+As other projects have explored [@GnosisWhitepaper], having the users run different algorithms and heuristics in a fair economic game produces a better and more complete solution that can adapt to new scenarios faster.
 We will also run our in-house algorithm so that all problem instances have a fair baseline solution.
 
 # 5. Picasso and the Finality Layer {#sec:picasso-and-finality}
@@ -208,10 +204,10 @@ We will also run our in-house algorithm so that all problem instances have a fai
 Composable’s vision is to create a protocol that allows for communication across ecosystems.
 The result is a Port Control Protocol-like system for blockchains.
 The result is multifaceted; users can perform cross-chain actions, and the overarching blockchain ecosystem is re-positioned as a network of agnostic liquidity and available yield.
-Throughout these interactions, Composable allows users to tailor their experience to maximize for the desired scalar, such as security or speed while minimizing ecosystem-specific decision making.
+Throughout these interactions, Composable allows users to tailor their experience to maximize for the desired scalar, such as security or speed, while minimizing ecosystem-specific decision making.
 
 Foundational to our approach of expanding on existing, cutting-edge technology is our effort on stabilizing BEEFY and leading the charge on the Cosmos-Substrate bridging infrastructure.
-We are developing the reference implementation for BEEFY in Golang, as well as the BEEFY-IBC client libraries needed to support connections to Cosmos chains.
+We are developing the reference implementation for BEEFY in Golang, and the BEEFY-IBC client libraries are needed to support connections to Cosmos chains.
 Only the security of a parachain allows for bridging to both XCM and IBC compatible chains.
 
 ## 5.1 Parachain {#sec:parachain}
@@ -219,28 +215,30 @@ At the core of our communication stack lies the parachain, functioning as a fina
 It functions as the incentivization layer for light client data storage and proving.
 
 We will be pursuing the operation of both a Kusama and Polkadot parachain.
-Projects that do well on the Kusama chain, can then upgrade to our Polkadot parachain - still to be named.
+Projects that do well on the Kusama chain can then upgrade to our Polkadot parachain - still to be named.
 
-Polkadot and Kusama also allow for native cross-chain communication with all other parachains connected to the relay chain, as well as all external networks.
+Polkadot and Kusama also allow for native cross-chain communication with all other parachains connected to the relay chain and all external networks.
 An inflationary reward mechanism is used to incentivize collators and oracles.
-Through a runtime upgrade enacted by decentralized governance, the actual reward rate can be set and reduced as the protocol starts generating significant fees.
-Users and infrastructure providers are capable of staking PICA and LAYR tokens to grow with the ecosystem, providing critical security and capabilities to our ecosystem.
+Through a runtime upgrade enacted by decentralized governance, the actual reward rate can be set and reduced as the protocol generates significant fees.
+Users and infrastructure providers can stake PICA and LAYR tokens to grow with the ecosystem, providing critical security and capabilities to our ecosystem.
 
 ## 5.2 Picasso {#sec:picasso}
 We consider Kusama and Polkadot interchangeable in what follows and part of the greater substrate ecosystem.
 Polkadot offers plug-and-play security, allowing Composable to focus on building its ecosystem and leaving the security to Polkadot’s validators.
-By leveraging parachains we do not have to recruit our own validators for security, which gives us greater finality guarantees and lowers the risk of cross-chain transaction failures.
+By leveraging parachains we do not have to recruit our validators for security, which gives us more excellent finality guarantees and lowers the risk of cross-chain transaction failures.
+
 We also chose Polkadot for its blockchain development framework, Substrate.
-Substrate allowed us to custom-build our blockchain, allowing us to continuously upgrade our blockchain with new functionalities without needing to fork the network.
-Polkadot also allows for native cross-chain communication with all other parachains connected to Polkadot, as well as all external networks bridged to Polkadot.
-Last, we believe Polkadot has the top engineering team and leadership in the industry, having been built by Gavin Wood who coded Ethereum, invented the Solidity programming language, and invented the Ethereum Virtual Machine (EVM).
+Substrate allowed us to custom-build our blockchain, continuously upgrading our blockchain with new functionalities without needing to fork the network.
+Polkadot also allows for native cross-chain communication with all other parachains connected to Polkadot and all external networks bridged to Polkadot.
+Last, we believe Polkadot has the top engineering team and leadership in the industry, having been built by Gavin Wood, who coded Ethereum, invented the Solidity programming language, and developed the Ethereum Virtual Machine (EVM).
 We believe Polkadot is building the third phase of crypto after Bitcoin and Ethereum.
 
 ## 5.3 Finality {#sec:finality}
-Composable's support of different ecosystems implies that we must be able to control and abstract for the final user, the inclusion of transactions in different chains.
+Composable's support of different ecosystems implies that we must control and abstract the inclusion of transactions in other chains for the final user.
 Inclusion is tightly related to the concept of finality.
-Finality guarantees that past events on the blockchain are immutable, therefore when a transaction is included on a final block we can be sure that it has been included on the chain.
-Unfortunately, strong finality cannot be provided without some compromises [@Brewer2012Cap] and most blockchains only offer some degree of finality.
+Finality guarantees that past events on the blockchain are immutable; therefore, when a transaction is included on a final block, we can be sure that it has been included on the chain.
+
+Unfortunately, complete finality cannot be provided without some compromises [@Brewer2012Cap], and most blockchains only offer some degree of finality.
 We list the three degrees of finality most likely to be found on different networks, from weaker to stronger finality:
 
 * **Probabilistic finality:** Finality is reached eventually. Under some assumptions, we can estimate the probability that a given block is considered final. With each new block added to the chain, older blocks become more final. E.g: Bitcoin and most PoW chains consider a block final after 6 blocks since the *probability* of a fork decreases exponentially as the chain grows.
@@ -256,30 +254,38 @@ To make Composable decentralized and protocol-agnostic, we need to rely on valid
 ## 5.4 Pallets {#sec:pallets}
 Given that our parachains are the foundational layer that powers our ecosystem, we have adopted a pallet-centric approach to adding products to our parachains.
 Meaning, we will offer projects the ability to deploy as pallets on our chain, with decentralized, stake-based governance, having the ability to upgrade these pallets into the runtime of our chains.
-We are excited to be able to offer this to the Kusama ecosystem and have grants programs for others to develop pallet projects using our technology, to be implemented into our parachain.
-Projects that do well on the Kusama chain, can then upgrade to our Polkadot parachain, which we envision to be the stable, more mature sister of our Kusama chain.
+We are excited to offer this to the Kusama ecosystem and have grants programs for others to develop pallet projects using our technology to be implemented into our parachain.
+Projects that do well on the Kusama chain can then upgrade to our Polkadot parachain, which we envision as the stable, more mature sister of our Kusama chain.
 
-Although we intend for untrusted sources to also perform protocol-to-protocol interactions on our parachains, through the web assembly-based XCVM, we initially focus on projects deploying as pallets, which allows these projects more granular, lower-level access to our cross-chain APIs, as well as more advanced logic related to the block life-cycle, storage, and cryptographic primitives.
-We are strong believers in security through tooling and support the move within the DeFi ecosystem towards Rust and web assembly as tools and computing platforms.
+We intend for untrusted sources to also perform protocol-to-protocol interactions on our parachains through the web assembly-based XCVM.
+Therefore, we initially focus on projects deploying as pallets, which allows these projects more granular, lower-level access to our cross-chain APIs and more advanced logic related to the block life-cycle, storage, and cryptographic primitives.
+
+We are firm believers in security through tooling and support the move within the DeFi ecosystem towards Rust and web assembly as tools and computing platforms.
 
 # 6. Mosaic Design {#sec:mosaic}
-Mosaic is an optimistic bridging solution based on advanced liquidity management, singe sided liquidity pools, and a relayer network.
-At its core, it consists of a network of bridges, operated by relayers interacting with smart contracts on the source and destination chains.
-Our proof-of-concept relayer solution is based on a trusted setup, that monitors all connected chains for events, and enacts the transfers accordingly.
+Mosaic is an optimistic bridging solution based on advanced liquidity management, single-sided liquidity pools, and a relayer network.
+At its core, it consists of a network of bridges operated by relayers interacting with smart contracts on the source and destination chains.
+Our proof-of-concept relayer solution is based on a trusted setup that monitors all connected chains for events and enacts the transfers accordingly.
 The next release improves on this model by decentralizing the relayer, using different cutting-edge technologies such as Threshold-Secret-Sharing (TSS) and transaction batching using Merkle-proofs.
 
 The liquidity layer serves to ensure liquidity is moving to the locations where it is needed, allowing the propagation of whatever instructions are required to satisfy the user’s desired outcome, as specified above.
 We are currently testing this capacity within the EVM ecosystem by running our Proof of Concept (PoC) of Mosaic.
 From there, we can generalize this liquidity problem and solution to other ecosystems.
 Liquidity concerns are not new in DeFi.
-However, they have largely been resolved by automated market makers (AMMs) built into the popular DeFi exchanges like UniSwap and Sushiswap.
-The introduction of cross-layer and cross-chain applications is, however, making liquidity a more pressing issue than ever before; with so many different layer 2 applications and blockchains to balance liquidity across, and so little infrastructure to do so, liquidity is too siloed for interoperable applications to generate meaningful value.
+
+However, they have been mainly resolved by automated market makers (AMMs) built into the popular DeFi exchanges like UniSwap and Sushiswap.
+However, the introduction of cross-layer and cross-chain applications is making liquidity a more pressing issue than ever before. With so many different L2 applications and blockchains to balance liquidity and so little infrastructure, liquidity is too siloed for interoperable applications to generate meaningful value.
 
 ## 6.1 Phase I {#sec:phase-i}
-Phase I presents a simple and functional cross-layer solution to enable a transfer system between all major DeFi ecosystems.
+Phase I presents a functional and straightforward cross-layer solution to transfer all major DeFi ecosystems.
 It is a PoC with enforced limited functionality to demonstrate the capability of the system.
 
-The main actors in this phase are an L1 vault in charge of redistributing liquidity, dedicated vaults on each L2, users engaging and providing the required liquidity, and a relayer in charge of communicating the different supported networks.
+The main actors in this phase are:
+* An L1 vault is in charge of redistributing liquidity.
+* Dedicated vaults on each L2.
+* Users are engaging and providing the required liquidity.
+* A relayer is in charge of communicating the different supported networks.
+
 All the actors and their interactions are depicted in [@fig:v1_mosaic].
 
 ![Polygon-Arbitrum transfer scheme in Mosaic v1.](./images/mosaic/v1.png){#fig:v1_mosaic}
