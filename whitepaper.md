@@ -44,16 +44,17 @@ In the closing of this year, we target to enable support for cross-layer NFTs, w
 The Picasso Token Generation Event (TGE) is planned to take place as well and our Oracle pallet Apollo is set to unlock primaries and secondaries.
 We are also set to release cubic - our pallet supporting vaults known from Ethereum but in the substrate-based Polkadot and Kusama ecosystems.
 
-In 2022, we release Centauri, the IBS Substrate testnet, we finish our developments of the BEEFY light client and develop our Parachain to L2 bridge capability.
-Later in that year, we finalize our routing layer and move Mosaic to Phase III which addresses decentralization.
+In Q1 of 2022, we release Centauri, the IBS Substrate testnet, we finish our developments of the BEEFY light client and develop our Parachain to L2 bridge capability.
+Later in the first half of that year, we finalize our routing layer and move Mosaic to Phase III which addresses decentralization.
 We also release our cross-chain virtual machine and the IBC Substrate moves to mainnet.
-Each of these deliverables is covered in more detail throughout this paper.
+Each deliverable, along with the underlying technologies built and used by Composable, is covered in more detail throughout this paper.
 
 ## 2.2 Paper Outline {#sec:outline}
-Having covered the vision in [@sec:vision] and the roadmap in [@sec:roadmap], we now take a look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
+Having covered the vision in [@sec:vision] and the roadmap in [@sec:roadmap], we now look at Composable's tech stack in a top-down approach and specify in which sections throughout the Construction Paper one can find further information.
 
-First, our Application Layer abstracts away high-level actions such as \"take out a loan on chain W layer X, then stake that on chain Y layer Z" we can get more abstract and say: \"take out a loan at the lowest rate and buy NFT X" where \"X" does not include any specification of the chain or layer it lives on.
-Much like the application Zoom, e.g., on a Mac can sync and communicate with Zoom on a PC via the internet. The user needs not to understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
+First, our Application Layer abstracts away high-level actions such as \"take out a loan on chain W layer X, then stake that on chain Y layer Z". 
+We can get more abstract and say: \"take out a loan at the lowest rate and buy NFT X" where \"X" does not include any specification of the chain or layer it lives on.
+Consider the application Zoom, e.g., on a Mac which can sync and communicate seamlessly with Zoom on a PC via the internet. The user needs not to understand anything about the details of how the internet works (besides how to connect in the first place), they are purely seeing the abstraction of complicated information transfers underneath, at this application layer.
 An application, however, in our case could be lending out money, taking a loan, committing capital to high-yield strategies, etc.
 
 Let us descend one layer.
