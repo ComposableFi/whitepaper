@@ -294,29 +294,28 @@ All the actors and their interactions are depicted in [@fig:v1_mosaic].
 
 ![Polygon-Arbitrum transfer scheme in Mosaic v1.](./images/mosaic/v1.png){#fig:v1_mosaic}
 
-As you can see on [@fig:v1_mosaic], a transfer consists of 2 important events: the lock event that happens on the source layer and the release event that is triggered by our relayer system on the destination one.
+As you can see on [@fig:v1_mosaic], a transfer consists of two critical events: the lock event on the source layer and the release event triggered by our relayer system on the destination.
 This interaction is done on the L2Vault contract, with the lock happening using the *depositERC20* method, while for the asset release, the *withdrawTo* method is called on the L2Vault contract deployed on the other side.
 
 In terms of the necessary liquidity for these actions to happen, users deposit liquidity using the VaultL1 smart contract deployed on the L1 mainnet.
-Users obtain rewards in form of LAYR tokens in exchange for providing liquidity.
+Users obtain rewards in the form of LAYR tokens in exchange for providing liquidity.
 L1 Vault acts as master with regards to the L2 vaults and redistributes the liquidity on demand.
 
-By leveraging a lock/unlock pattern on phase I, we were able to prove that interoperability can be obtained in the DeFi space and that a single curated interface is enough for the user to operate on different layers and chains.
+By leveraging a lock/unlock pattern in Mosaic's Phase I, we prove that we can obtain interoperability in the DeFi space. A single curated interface is enough for the user to operate on different layers and chains.
 We also obtained data about the user experience and liquidity demands on different networks.
 Nevertheless, we kept the functionality limited for testing purposes.
 Thus, we dedicate the next phase to enhancing and opening the protocol to more complex features.
 
 ## 6.2 Phase II {#sec:phase-ii}
 Phase II represents the evolution of Mosaic v1, our proof of concept.
-Phase II introduces two main components: a new active/passive liquidity model and a new and more complete set of features that deeply extend the functionality of Mosaic.
-Phase 2 allows using different tokens on the source and destination layers, and also introduces the support for new chains such as Moonriver, Fantom, and Avalanche.
+Phase II introduces two main components: a new active/passive liquidity model and a new and more complete set of features that deeply extend the functionality of Mosaic. Phase 2 allows using different tokens on the source and destination layers and introduces the support for new chains such as Moonriver, Fantom, and Avalanche.
 
 ### 6.2.1 Active and passive liquidity
 In Mosaic v2 the user can provide liquidity on any layer and in exchange, besides the APY, he receives receipt tokens that can be integrated with other protocols (e.g: use them as collateral for loans).
 The user is also able to withdraw liquidity at any point he desires, our dynamic withdrawal fee will calculate the proportional rewards and the user will be credited with the right amount of tokens.
 Liquidity can be also directly provided using ETH, and ETH can be transferred among the different layers. In addition to all these new possibilities, we introduce two types of liquidity for different profiles:
 
-* **Passive liquidity:** In this type of liquidity-providing, a more conservative user can obtain some rewards by providing liquidity in his desired layer. It can be understood as staking assets to yield some farm.  On the withdrawal, the user obtains the rewards and recovers the initial liquidity. Passive liquidity can only be withdrawn in the same token it was deposited. 
+* **Passive liquidity:** In this type of liquidity-providing, a more conservative user can obtain rewards by providing liquidity in his desired layer. It can be understood as staking assets to yield some farm.  On the withdrawal, the user gets the rewards and recovers the initial liquidity. Passive liquidity can only be withdrawn in the same token it was deposited. 
         
 * **Active liquidity:** This liquidity providing model is intended for more knowledgeable and active users with an elevated risk appetite. By leveraging Composable SDK, they can run a dedicated bot to monitor the mempool and the liquidity requirements of the transactions. If the liquidity of the destination layer is not enough, users can front-run those transactions to gain greater rewards. Active liquidity is specified in the number of blocks and automatically becomes passive liquidity after that time. Active liquidity requires flow management but allows users to benefit from unbalanced networks to gain additional yield. Active liquidity can also be withdrawn in any token from any network.
 
