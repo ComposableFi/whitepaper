@@ -281,9 +281,13 @@ Phase I presents a functional and straightforward cross-layer solution to transf
 It is a PoC with enforced limited functionality to demonstrate the capability of the system.
 
 The main actors in this phase are:
+
 * An L1 vault is in charge of redistributing liquidity.
+
 * Dedicated vaults on each L2.
+
 * Users are engaging and providing the required liquidity.
+
 * A relayer is in charge of communicating the different supported networks.
 
 All the actors and their interactions are depicted in [@fig:v1_mosaic].
