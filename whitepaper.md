@@ -8,8 +8,10 @@
 
 
 A natural evolution in a cross-chain world entails developers and users interacting seamlessly with protocols, regardless of where their assets live. That is why our core mission at Composable Finance (Composable) [@ComposableFinance] is to build a fully interoperable future capable of offering developers and end-users a seamless experience and utility.
+
 By simplifying and unifying decentralized finance (DeFi) [@DecentralizedEthereum.org] with new interoperability standards, we accelerate DeFi into the mainstream. We are crafting a transparent, interoperable future for DeFi 2.0 and Web3.
 Similar to how Port Control Protocol [@PortWikipedia] became an essential piece of the networking layer for the Internet, Composable’s vision is to become the entryway and networking fabric for blockchain networks. It is Composable’s mission to serve all interactions, transfers, and communication cross-ecosystem. Our vision of hyper liquidity and composability abstracts the underlying technology into a single interface, unlocking the potential for new primitives to be developed at an unprecedented pace. Protocol-to-protocol interactions will become possible across ecosystems.
+
 The DeFi space has resorted to sharded blockchains for increased scalability [@WhyProperties], [@WhatCoinDesk].
 Examples are Ethereum 2.0 [@TheEthereum.org], Polkadot [@Polkadot:Platform], and NEAR [@NEARWorld].
 The result is that even though the ETH 2.0 vision is upon us, applications are sharded instead of just sharded blockchains. SushiSwap [@IntroductionSushi], for example, is deployed on multiple Ethereum Virtual Machine (EVM) [@EthereumEthereum.org] compatible chains, Layer-2-like (L2) rollups [@LayerEthereum.org], and Parachains [@WhatAlexandria], and the expansion of these applications to other ecosystems is very likely.
