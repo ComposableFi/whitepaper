@@ -40,7 +40,7 @@ Let us start with Composable's roadmap shown in [@fig:roadmap] covering tasks we
 ![The Composable Finance Roadmap through H1 2022](./images/roadmap.png){#fig:roadmap}
 
 
-In the closing of this year, we target to enable support for cross-layer NFTs, we deploy Phase II for Mosaic, we have Picasso onboarded to Kusama.
+In the closing of this year, we target to enable support for cross-layer NFTs, we deploy Phase II for Mosaic, and we have Picasso onboarded to Kusama.
 The Picasso Token Generation Event (TGE) is planned to take place as well and our Oracle pallet Apollo is set to unlock primaries and secondaries.
 We are also set to release cubic - our pallet supporting vaults known from Ethereum but in the substrate-based Polkadot and Kusama ecosystems.
 
