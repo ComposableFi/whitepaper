@@ -21,7 +21,7 @@ if [ ! -e $lockfile ]; then
              --metadata title="Composable Finance\
              Whitepaper" \
              --metadata link-citations=true \
-             -o site/index.html whitepaper.md
+             -o dist/index.html whitepaper.md
 
    rm $lockfile
    trap - INT TERM EXIT
