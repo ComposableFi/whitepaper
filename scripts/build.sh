@@ -21,7 +21,10 @@ if [ ! -e $lockfile ]; then
              --metadata title="Composable Finance\
              Whitepaper" \
              --metadata link-citations=true \
-             -o dist/index.html whitepaper.md
+             -o site/index.html whitepaper.md
+
+   # Publish a copy on distribution folder
+   cp site/index.html dist/
 
    rm $lockfile
    trap - INT TERM EXIT
