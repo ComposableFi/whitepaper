@@ -2,7 +2,7 @@
 
 ---
 
-![Composable Ecosystem](images/parachain.png)
+![Composable Ecosystem.](images/parachain.png)
 
 # 1. Vision {#sec:vision}
 
@@ -29,7 +29,7 @@ We are embarking on a vast and growing opportunity in architecting and building 
 ## 2.1 Roadmap {#sec:roadmap}
 Let us start with Composable's roadmap shown in [@fig:roadmap], covering tasks we target to complete through the first half of 2022.
 
-![The Composable Finance Roadmap through H1 2022](images/roadmap.png){#fig:roadmap}
+![The Composable Finance Roadmap through H1 2022.](images/roadmap.png){#fig:roadmap}
 
 
 This year's closing, we target to enable support for cross-layer NFTs, deploy Phase II for Mosaic, and have Picasso onboarded to Kusama.
@@ -320,8 +320,8 @@ Liquidity can be also directly provided using ETH, and ETH can be transferred am
 * **Active liquidity:** This liquidity providing model is intended for more knowledgeable and active users with an elevated risk appetite. By leveraging Composable SDK, they can run a dedicated bot to monitor the mempool and the liquidity requirements of the transactions. If the liquidity of the destination layer is not enough, users can front-run those transactions to gain greater rewards. Active liquidity is specified in the number of blocks and automatically becomes passive liquidity after that time. Active liquidity requires flow management but allows users to benefit from unbalanced networks to gain additional yield. Active liquidity can also be withdrawn in any token from any network.
 
 
-### 6.2.2 Cross Layer Function Calls
-Mosaic v2 not only supports value transfers but also offers cross functions calls.
+### 6.2.2 Cross-Layer Function Calls
+Mosaic v2 not only supports value transfers but also offers cross-layer function calls.
 The relayer can transfer the function call and its associated parameters from source to destination in a similar manner as value transfers.
 To handle calls and returns, it employs a *MsgSender* contract on the source layer, which is in charge of abstracting the user and communicating with the relayer, and a *MsgReceiverFactory* contract on the destination layer.
 *MsgReceiverFactory* creates *MsgReceiver* instances, which create a virtual identification of the user on the destination network, and interact with the desired protocol.
@@ -330,7 +330,7 @@ All the interactions on the destination layer are done through the factory contr
 This general architecture, as shown on [@fig:crosscall], allows users to call any protocol on any network and from any source.
 This elevates Mosaic v2 to a new level of unification, not only value is transferred, but also functionality is bridged together.
 
-![Cross layer function call architecture.](images/mosaic/crosscalls.png){#fig:crosscall}
+![Cross-layer function call architecture.](images/mosaic/crosscalls.png){#fig:crosscall}
 
 ### 6.2.3 Other improvements
 In addition to the improvements already mentioned, phase II of the protocol presents the following and varied advances:
@@ -477,7 +477,7 @@ By bundling information, we can reduce transaction costs on the common layer as 
 To ensure the validity of data being transferred, some stake is locked or an optimistic approach is pursued until the source chain settles its states on the common chain.
 Then, the data is considered final and can be used as ground truth.
 
-![Accumulate and transfer scheme. Only the Merkle root is transferred on-chain to  reduce costs.](images/mosaic/phase3/accumulator.png){#fig:accumulator}
+![Accumulator and transfer scheme. Only the Merkle root is transferred on-chain to reduce costs.](images/mosaic/phase3/accumulator.png){#fig:accumulator}
 
 We believe Mosaic is more general than this approach since it does not depend on the existence of a common layer and replaces the finality gadget with a set of decentralized relayers.
 Nonetheless, we might consider this agglutination scheme for scenarios in which a common layer can be easily found, to keep as much of the process on-chain.
