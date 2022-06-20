@@ -70,7 +70,16 @@ In Mosaic's Phase II, [@sec:phase-ii], we now connect multiple layers and provid
 We build a software environment, [@sec:liquidity-sim-env], to help us decide on liquidity rebalancing and an optimal fee model to use, [@sec:mosaic-fees].
 In Mosaic's Phase III, [@sec:phase-iii]  we seek to increase as much as possible the decentralization of the entire system.
 
-Next, besides Ethereum, we are also actively developing in the Polkadot and Cosmos ecosystems [@Cosmos:Blockchains].
+In addition to Mosaic, Composable is constructing a number of bridges to expand upon the  [Inter-Blockchain Communication (IBC) Protocol](https://ibcprotocol.org/) and create additional connections to the Composable ecosystem and other chains.
+As the first bridge in this series, Composable has created the [Centauri Bridge](https://medium.com/composable-finance/centauri-facilitating-communication-between-interoperable-networks-5c1a997f9154) to connect the IBC Protocol (which is on the Cosmos Network) and [Picasso](https://www.picasso.xyz/), our [Kusama](https://kusama.network/) parachain.
+Centauri is a trustless, final bridge that will offer the first opportunity to connect between the DotSama and Cosmos ecosystems.
+While Mosaic was designed to connect to chains without light clients, Centauri is necessary to connect to chains that do have light clients installed into their runtimes.
+In [@sec:lightclients], we describe light clients, their importance, and their various components.
+In [@sec:mmr], we look at Merkle Mountain Ranges (MMRs) and how they can allow us to more efficiently leverage light clients in the bridging process.
+Finally, in [@sec:beefy], we explain how we have combined these tools with the Bridge Efficiency Enabling Finality Yielder (BEEFY) from [Parity](https://www.parity.io/) to support a BEEFY Finality Gadget ([@sec:gadget]) and develop our own 11-BEEFY COSMOS-IBC Light Client ([@sec:beefyIbc]).
+As a result, we are able to expand upon the bridging infrastructure already offered by IBC and deliver a more efficient bridge that can connect to more chains than ever before - and moreover, in combination with Mosaic, can ultimately connect all chains (whether or not they have light clients) into the Composable ecosystem.
+
+We are also working on a number of additional developments in the Polkadot and Cosmos ecosystems [@Cosmos:Blockchains].
 For Polkadot, we are creating a blockchain in Substrate [@HomeSubstrate_] and for Cosmos, we are contributing to the Cosmos SDK.
 Then, pallets [@TheMedium] are used to add additional functionality - one example is our Maximal Extractable Value (MEV) [@MinerEthereum.org] resistant data oracle Apollo [@Apollo:Finance].
 Other pallets can be developed including ones to enable Solidity support, cross-chain message capabilities (XCMP), decentralized exchanges, and so on.
@@ -713,7 +722,239 @@ Perhaps this is an empty set, but assuming not, we simply deplete as much liquid
 
 The score assigned to a vault in the "donor detection phase" is determined based on a set of metrics including: how active is this vault (inactive implies that it can donate without needing liquidity itself), how much "active" liquidity is assigned vs passive, what value the forecasting model predicts it will take in the future (is it generally increasing or decreasing in liquidity), and many more.
 
-# 7. Conclusion {#sec:conclusion}
+# 7. Centauri and Expanding the IBC {#sec:centauri}
+Composable is working on expanding the [Inter-Blockchain Communication (IBC) Protocol](https://ibcprotocol.org/) to become the primary digital asset transport layer across different chains.
+The IBC Protocol allows for the trustless passing of arbitrary data in opaque packets between [Cosmos Software Development Kit (SDK)](https://v1.cosmos.network/sdk) chains.
+This trustlessness is achieved through light clients and finality proofs, rather than relying on the conventional relayer and mint structure.
+We are connecting the IBC Protocol to chains in other ecosystems that support light clients by integrating light clients that track the finality in these ecosystems on IBC.
+This becomes the transport layer for the Composable XCVM, facilitating cross-layer movement of information and assets.
+
+Centauri will be the first bridge created by Composable to accomplish this goal.
+Centauri is a trustless, final bridge between [Picasso](https://www.picasso.xyz/) (Composable’s parachain on [Kusama](https://kusama.network/)) and the [Cosmos](https://cosmos.network/) ecosystem.
+In contrast to [Mosaic](https://mosaic.composable.finance/), Centauri serves to bridge Picasso to blockchains and layers that have light clients installed.
+Through Centauri, the Composable Ecosystem (and the broader DotSama ecosystem) are bridged to all projects connected to the IBC Protocol and Cosmos.
+This positions Centauri to be the first-ever bridge between the DotSama and Cosmos ecosystems.
+
+As mentioned, we will additionally create other bridges using the IBC to connect Polkadot (and the Composable Ecosystem) to more blockchains, such as [NEAR](https://near.org/).
+Combined, Mosaic, Centauri, and additional bridge expansions of the IBC from Composable aim to connect all chains in DeFi to the Composable ecosystem.
+
+The key challenge in executing upon the goals of Centauri is to reach consensus on the finality of the two networks it is connecting in a trustless manner, which guarantees the correctness and security of cross-chain bridging.
+This is achieved with several pieces of new technology.
+Firstly, the light clients allow nodes to verify the blockchain state without downloading the full block data, thus ensuring light computing requirements and decentralization.
+Secondly, Merkle Mountain Ranges (MMRs) allow new block headers to be hashed in an ‘append-only’ manner, which is more suited for use in consensus subsystems other than Merkle trees.
+Finally, the BEEFY finality gadget makes use of Merkle Mountain Ranges to produce finality proofs for parachains in a more efficient way. These components are shown below:
+
+![Centauri Overview](images/centauri/centauri_progress.png)
+
+The Composable team is currently contributing to the core BEEFY systems as well as reviewing an IBC Light Client for Cosmos.
+Once merged with IBC upon further audits, this will allow Cosmos chains to directly communicate with Substrate chains on Dotsama.
+
+To create the proof of concept (PoC) of Centauri, we are working with [Osmosis](https://osmosis.zone/), an automated market maker (AMM) in the Cosmos ecosystem.
+Then, we will hold a larger scale launch of the bridge, serving as a DotSama-IBC Substrate bridge to power enhanced interoperability in DeFi.
+
+## 7.1 Light Clients {#sec:lightclients}
+Highly efficient light client protocols are crucial in enabling the decentralization and mainstream adoption of blockchain protocols.
+Light clients are also what make bridges on the IBC possible; the IBC Protocol bridges to other chains by having light clients on either side of the connection.
+These light clients facilitate the passing of IBC opaque packets of information (i.e. transactions and associated information).
+Since Centauri uses the IBC Protocol, it also leverages these light clients to facilitate connections, even further expanding upon the bridging opportunities of the IBC itself.
+
+Light clients provide environments with computation and memory resource constraints (e.g. mobile, on-chain contracts) with the ability to verify the latest blockchain state without the need to execute and store the full block data and state.
+Light clients instead track block headers as opposed to tracking the full blocks and executing transactions to arrive at the latest state.
+It is important to note that blocks are simply composed of the header and transactions:
+
+![Block Structure](images/centauri/headers.png)
+
+The size of the transactions in a block might vary, but headers have a fixed size (usually no more than 1kb) and contain the following:
+
+![Header Structture](images/centauri/header_structure.png)
+
+Light client protocols consist of a combination of transaction Merkle proofs, state proofs, consensus proofs, and finality proofs, which are all usually included in the block headers with the exception of finality proofs.
+This is because finality proofs may differ from the consensus proof and require data that is an extension of the header.
+
+### 7.1.1 Transaction Root
+This is the Merkle root of all transactions that have been executed in this block.
+This Merkle root can be seen as a kind of cryptographic compression that allow trustless verification in the event that some data was part of the original data that was compressed by a Merkle proof, illustrated below:
+
+![Merkle Transaction Root](images/centauri/merkle_root.png)
+
+The Merkle proof required to check if some element was included in the root would be log2(n) hashes, which are usually 32 bytes.
+In the diagram above, we only need 4 hashes (outlined in blue) to prove or otherwise reconstruct the original root hash that K was indeed part of the original Merkle tree.
+The math is $n = 16, \log_2(16) = 4$.
+This enables light clients to efficiently check which transactions were executed in a block without needing to download the full block that may potentially contain thousands of transactions and having to scan this list linearly.
+
+### 7.1.2 State Root
+The state root of a blockchain is similar to the transactions root in that it is the output of the cryptographic compression of data.
+However, where the transaction root is a compression of a list of transaction data, the state root can be seen as the compression of a list of keys and values.
+Take, for example, the Ethereum state tree architecture:
+
+![State Root](images/centauri/state_root.png)
+
+Hence, the keys and values are the data stored on the blockchain by contracts or core blockchain subsystems, like the consensus protocol storing the list of authorities and their stakes.
+By compressing this data into a kind of Merkle root, it is possible to check the existence of some key value against the root hash and a Merkle proof without needing to maintain the full blockchain state, but still having the same trussless guarantees as a full node.
+
+### 7.1.3 Consensus Proofs
+The consensus proof that a block is valid is usually included in its header and its format is entirely dependent on the consensus protocol of the blockchain.
+For proof-of-work (PoW) systems, the consensus proof is a nonce that satisfies the equation:
+
+![State Root](images/centauri/pow.png)
+
+As seen above, finding a value that satisfies this equation would require a significant amount of computation as the hash functions cannot be brute-forced, but verifying this consensus proof is relatively inexpensive and fast.
+Meanwhile, the consensus proof for a proof-of-stake (PoS) protocol is usually the output of a verifiable random function where:
+
+![State Root](images/centauri/pos.png)
+
+Most blockchain protocols’ consensus mechanisms usually only guarantee liveness, hence verifying these consensus proofs only tells if this block is valid.
+It does not, however, tell if this block should be considered as final.
+In the case of PoS, blocks that are not signed by a public key in the known authority set are not considered to be valid.
+Consensus proofs provide trust guarantees about a block to the nodes on the network pending finalization, as competing blocks for the same block height may arise in a byzantine system.
+It is entirely up to the finalization protocol to provide safety guarantees.
+
+### 7.1.4 Finality Proofs
+For light clients to verify that events are happening on chain, they need a finality proof.
+This is cryptographic proof that the transactions in a block are final and that the block can never be reverted.
+These proofs could be part of the headers or could be requested alongside the header from full nodes.
+
+For proof-of-work blockchains, this finality proof is actually embedded in the headers as the proof-of-work nonce.
+However, this alone is not enough to guarantee finality.
+Rather, we need a certain threshold of similarly valid headers that reference this header as its parent in order to be truly convinced of its finality.
+This vastly increases the storage requirements for light clients that want to be convinced of finality, since they must store n headers to verify the finality of n-1 headers.
+
+Even then, the finality is entirely probabilistic and dependent on the security of the hash functions used in deriving the proof-of-work nonce.
+
+For proof-of-stake blockchains, the finality proof is usually not included in the header but is optionally available to light clients to request alongside the headers.
+The finality proof will typically consist of the signatures of the known authority set, who have staked their tokens on the network and sign what they think is the latest block in the network.
+The finality proofs in this system are signatures of this data from $\frac{2}{3} + 1$ of the known authority set, under security assumptions that less than a third of the authority set is malicious.
+
+### 7.1.5 Ancestry Proofs
+Unfortunately, most finality proofs require light clients to be aware of the full chain of headers that have been finalized in order to follow the finality protocol.
+To enable trustless bridging between two networks via light clients which run in smart contract environments and have even stringent computation and memory constraints, Composable needs smaller-sized ancestry proofs which do not require awareness of every header in the blockchain.
+
+This could be attempted using Merkle trees, where a light client simply tracks the Merkle root of all block headers seen so far.
+Merkle proofs could then prove finality about any header to a light client that only knows the Merkle root of all finalized blocks.
+However, because of the structure of Merkle trees, this would require recalculating the full tree structure from the genesis block all the way to the latest block, for every new block.
+
+Thus, 2,097,151 nodes would need to be recalculated for every new block for blockchain that already has a million blocks:
+
+> Tree height = $log₂(1,000,000)$ // a million blocks
+> 
+> Tree height = 20
+> 
+> Nodes in the tree = $2^{20 + 1} — 1$
+> 
+> Nodes in the tree = 2,097,151
+
+To prevent this staggering amount of work, Composable needs a tree structure that preserves the $\log_2(n)$ proof sizes of a Merkle tree but also re-uses in some way the previous hash computations on older nodes in the tree whenever new data is added to the tree.
+
+## 7.2 Merkle Mountain Ranges {#sec:mmr}
+Merkle Mountain Range trees resolve this high computational volume problem by enabling highly efficient ancestry proofs.
+Merkle Mountain Ranges (MMRs) are a special kind of Merkle tree that is composed of perfectly-sized binary subtrees in descending order of height.
+For example, an MMR tree with 1,000,000 leaves will be composed of 8 perfect subtrees of heights: 19, 18, 17, 16, 14, 9 and 6:
+
+![Scheme of a Merkle Mountain Range](images/centauri/mmr.png)
+
+A key feature of MMR is the reuse of the previous computations (root hashes) whenever new leaves are added to the tree.
+The rules for adding new leaves to an existing MMR tree require merging any two subtrees of the same height (i.e. the pink section and blue section are merged to the hash in blue in the following two images), so there is only ever one subtree per height level:
+
+![State before adding leaves](images/centauri/mmr_1.png)
+
+![State after adding leaves](images/centauri/mmr_2.png)
+
+Merkle Mountain Ranges are also very efficient with proofs where the tree itself is composed of subtrees.
+Since MMR subtrees are presented in descending height, the first subtree is typically the heaviest to compute.
+This also means that, as the list grows, new leaves are actually less expensive to insert and prove.
+
+![State after adding 2 more leaves](images/centauri/mmr_3.png)
+
+In the continued example of the above tree, the subtree that requires the most proof items is the first subtree, 4 + 2 (peak nodes of the other 2 subtrees) = 6 proof nodes.
+The benefit of the MMR is that, when adding new leaves, there is no need to recalculate the hashes of the first subtree, only the more recent ones:
+
+![Proofs for MMR](images/centauri/mmr_4.png)
+
+## 7.3 The BEEFY Finality Gadget and 11-BEEFY COSMOS-IBC Light Client {#sec:beefy}
+The final pieces of technology contributing to the construction of Centauri leverage Parity’s Bridge Efficiency Enabling Finality Yielder (BEEFY) and its novel consensus gadget that enables DotSama to be bridged to additional chains via very efficient finality proofs.
+Parachains get their finality from the Kusama relay chain, and thus BEEFY’s ability to create finality proofs provides finality for Centauri on Picasso and an essential gateway for the bridge infrastructure.
+
+We are also developing a BEEFY light client implementation for Cosmos-IBC (11-BEEFY, spec pending). This product will enable Cosmos chains to follow the finality of the Kusama relay chain (and thus, the finality of Picasso).
+A single instance of this light client on any Cosmos chain can prove finality for any Kusama parachain, allowing Cosmos chains to verify IBC commitment packets (IBC consensus proofs). The final piece of Centauri is a pallet on Picasso, facilitating the creation of these IBC commitment packets.
+
+### 7.3.1 BEEFY Finality Gadget {#sec:gadget}
+With the BEEFY protocol, the authority set produces an extra finality proof for light clients which consists of the MMR root hash of all blocks finalized by GRANDPA (the finality gadget implemented for the Polkadot relay chain) at a given height.
+With the introduction of this protocol, light clients no longer need to be aware of all the headers in a chain for them to be convinced about finality.
+This drastically reduces the size of the data that light clients must store to follow the chain’s consensus to exactly 124 bytes.
+
+A preliminary specification for BEEFY is already available and is largely implemented, barring a few kinks that need ironing out.
+At a high level, this is a new protocol that will be added to Polkadot without the need for a hard fork.
+Thanks to the WebAssembly (Wasm) runtime and the on-chain governance protocol, this new protocol will produce significantly lighter finality proofs for light clients for both on-chain and off-chain uses.
+It will achieve this by having the existing GRANDPA authority set periodically vote on the Merkle Mountain Range root hash of all blocks that have been considered final by the network.
+This proof is shown below:
+
+    pub struct BEEFYNextAuthoritySet {
+      /// Id of the next set.
+      ///
+      /// Id is required to correlate BEEFY signed commitments with the validator set.
+      /// Light Client can easily verify that the commitment witness it is getting is
+      /// produced by the latest validator set.
+      pub id: u64, // 8bytes
+      /// Number of validators in the set.
+      ///
+      /// Some BEEFY Light Clients may use an interactive protocol to verify only subset
+      /// of signatures. We put set length here, so that these clients can verify the minimal
+      /// number of required signatures.
+      pub len: u32, // 4bytes
+      /// Merkle Root Hash build from BEEFY AuthorityIds.
+      ///
+      /// This is used by Light Clients to confirm that the commitments are signed by the correct
+      /// validator set. Light Clients using interactive protocol, might verify only subset of
+      /// signatures, hence don't require the full list here (will receive inclusion proofs).
+      pub root: H256, // 32 bytes
+    }
+    
+    
+    // Data that light clients need to follow relay chain consensus
+    pub struct BEEFYLightClient {
+      pub latest_BEEFY_height: u32, // 4bytes
+      pub mmr_root_hash: H256, // 32bytes
+      pub current_authorities: BEEFYNextAuthoritySet<H256>, // 44bytes
+      pub next_authorities: BEEFYNextAuthoritySet<H256>, // 44bytes
+    }
+
+Composable is performing a total of [8 PRs to core BEEFY subsystems](https://github.com/paritytech/substrate/pulls/wizdave97) in both the runtime and Substrate client, pending further review by the Substrate bridges team.
+Some are listed below:
+
+- [1](https://github.com/paritytech/substrate/pull/10669): Introduces a runtime API to the BEEFY finalization gadget for fetching the block number where the current session began.
+- [2](https://github.com/paritytech/substrate/pull/10727): Implements an algorithm for deterministic block selection for finalization by the BEEFY gadget.
+- [3](https://github.com/paritytech/substrate/pull/10705): Prevents the finalization gadget from starting while block syncing is still in progress.
+- [4](https://github.com/paritytech/substrate/pull/10684): De-duplicates BEEFY finalization notifications sent to RPC subscribers.
+- [5](https://github.com/paritytech/substrate/pull/10664): Refactors the runtime subsystems for BEEFY to be generic for downstream runtimes, e.g. parachains.
+- [6](https://github.com/paritytech/substrate/pull/10635): Introduces support for generating multi-leaf MMR proofs for even smaller finality proofs.
+
+### 7.3.2 11-BEEFY COSMOS-IBC Light Client {#sec:beefyIbc}
+Connecting to IBC requires both chains (in the case of Centauri, Cosmos and Picasso) to embed a light client for proof of validation.
+In order to connect to IBC using Cosmos and Picasso, Composable is working to develop a Bridge Efficiency Enabling Finality Yielder (BEEFY) light client onto Picasso and Cosmos.
+In this process, Composable is working closely with [Strangelove](https://www.strangelove.ventures/), an early-stage venture fund focused on supporting DeFi protocols in the broader IBC ecosystem.
+Strangelove already has an IBC implementation layer in the [Go](https://go.dev/) programming language.
+
+To support Substrate-based chains on the Cosmos side, Composable will need a BEEFY-IBC client merged into IBC-Go; therefore, the first step in the process is to create a BEEFY-Go followed by a BEEFY-IBC.
+Once this is set, Composable will work on updating the relayer before launching the product.
+
+Composable has completed the development of this [BEEFY light client](https://github.com/ComposableFi/ibc-go/blob/main/modules/light-clients/11-beefy/README.md) in Go for the Cosmos ecosystem, with the product being called the 11-BEEFY COSMOS-IBC light client.
+Pending further audits, this light client will be merged upstream into the IBC-Go repo which hosts the canonical implementation of the [Tendermint](https://tendermint.com/) light client.
+
+Composable’s intent is that this light client will serve as the canonical light client for Cosmos chains to communicate directly with DotSama parachains.
+A single instance of the light client can track either the Kusama or Polkadot relay chain’s finality and be used to prove the finality of any of the connected parachains’ states.
+In the spirit of trustlessness, Composable has published a demo with [instructions](https://github.com/ComposableFi/ibc-go/blob/main/modules/light-clients/11-beefy/README.md) for everyone to run a test to verify the operation of the light client. The draft spec is available [here](https://github.com/ComposableFi/ibc-go/blob/main/modules/light-clients/11-beefy/spec.md).
+
+Our plan is to use [Osmosis](https://osmosis.zone/), the Automated Market Maker (AMM) of Cosmos, and Picasso to run our proof of concept (PoC) before moving onto a larger-scale launch.
+Ultimately, this BEEFY implementation will set the stage for a DotSama-IBC Substrate bridge allowing for seamless cross-chain communication and asset transfers between the Cosmos and Composable ecosystems.
+
+In time, we will also create another Substrate bridge to connect Mosaic to our Picasso-IBC bridge.
+This will allow us to generalize the asset transferal system to extend across more ecosystems and better serve its role as a hyper-liquidity system.
+
+The BEEFY light client is a step towards building out the Centauri bridge which connects DotSama and Cosmos.
+Composable has completed the development of the BEEFY light client to be merged on the Cosmos side (pending reviews), and the other two components are in development.
+
+
+# 8. Conclusion {#sec:conclusion}
 Composable is on a mission to unlock the interconnected ecosystem of blockchains via a cross-chain, cross-layer networking fabric.
 Moving assets intra-ecosystem is becoming more intuitive.
 However, more and more applications have begun to shard operations across one or several blockchain L1 and L2 networks to minimize costs and maximize performance the implications being asset transfers and smart contract executions that are increasingly more complex and ambiguous.
@@ -729,4 +970,4 @@ It enables the unification of functionality, across all blockchain ecosystems.
 We are engineering the fully interoperable future and we embrace the sharded efficient ecosystem which is rapidly expanding.
 
 \pagebreak
-# 8. Bibliography
+# 9. Bibliography
