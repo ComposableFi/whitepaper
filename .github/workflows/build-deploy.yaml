@@ -43,17 +43,3 @@ jobs:
     - name: Build
       run: |
         cachix watch-exec --jobs 16 --compression-level $CACHIX_COMPRESSION_LEVEL composable-whitepaper nix -- build --no-update-lock-file --show-trace -L
-    
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-region: eu-central-1
-
-    # - name: Login to Amazon ECR
-    #   id: login-ecr
-    #   uses: aws-actions/amazon-ecr-login@v1
-
-    # - name: Deploy to S3
-    #   run: |
-    #     aws s3 sync result/ s3://paper.composable.finance
-    #     aws cloudfront create-invalidation --distribution-id E23AJ9F0MJOWAM --paths "/*"
