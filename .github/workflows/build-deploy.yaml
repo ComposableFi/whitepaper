@@ -1,6 +1,7 @@
-name: Build and Deploy to EKS
+name: Build, Preview and Deploy
 
 on: 
+  pull_request:
   push: 
     branches: 
       - main
@@ -15,7 +16,7 @@ env:
 
 jobs: 
   build: 
-    name: Build and Deploy
+    name: Build
     runs-on: ubuntu-latest
     container:
       image: niteo/nixpkgs-nixos-22.05:316b762afdb9e142a803f29c49a88b4a47db80ee
@@ -23,13 +24,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
     - name: Configure Nix
       run: |
           echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
           echo "sandbox = relaxed" >> /etc/nix/nix.conf
           echo "narinfo-cache-negative-ttl = 0" >> /etc/nix/nix.conf
-      
     - uses: cachix/cachix-action@f5f67badd061acb62b5c6e25e763572ca8317004
       with:
         skipPush: true
@@ -39,17 +38,72 @@ jobs:
           nix-env -iA nixpkgs.cachix
         name: ${{  env.CACHE }}
         authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
     - name: Build
       run: |
         cachix watch-exec --jobs 16 --compression-level $CACHIX_COMPRESSION_LEVEL composable-whitepaper nix -- build --no-update-lock-file --show-trace -L
         nix build
-        
-    - name: Deploy to Firebase
-      uses: w9jds/firebase-action@master
-      with:
-        args: deploy --only hosting:composable-whitepaper --message \"${{ github.event.head_commit.message }}\"
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}        
-      if: '''[ `nix build --dry-run "github:ComposableFi/whitepaper" --json` == `nix build --dry-run --json` ];'''
-  
+
+
+
+  preview:
+    name: Preview
+    needs: [build]
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    container:
+      image: niteo/nixpkgs-nixos-22.05:316b762afdb9e142a803f29c49a88b4a47db80ee
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure Nix
+        run: |
+            echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
+            echo "sandbox = relaxed" >> /etc/nix/nix.conf
+            echo "narinfo-cache-negative-ttl = 0" >> /etc/nix/nix.conf
+      - uses: cachix/cachix-action@f5f67badd061acb62b5c6e25e763572ca8317004
+        with:
+          skipPush: true
+          installCommand: |
+            nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
+            nix-channel --update
+            nix-env -iA nixpkgs.cachix
+          name: ${{  env.CACHE }}
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}'
+          projectId: whitepaper-73b60
+
+  deploy:
+    name: Deploy
+    needs: [ build ]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    container:
+      image: niteo/nixpkgs-nixos-22.05:316b762afdb9e142a803f29c49a88b4a47db80ee
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure Nix
+        run: |
+            echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
+            echo "sandbox = relaxed" >> /etc/nix/nix.conf
+            echo "narinfo-cache-negative-ttl = 0" >> /etc/nix/nix.conf
+      - uses: cachix/cachix-action@f5f67badd061acb62b5c6e25e763572ca8317004
+        with:
+          skipPush: true
+          installCommand: |
+            nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
+            nix-channel --update
+            nix-env -iA nixpkgs.cachix
+          name: ${{  env.CACHE }}
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}'
+          channelId: live
+          projectId: whitepaper-73b60
