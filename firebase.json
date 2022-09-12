@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "composable-whitepaper",
+    "public": "result",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

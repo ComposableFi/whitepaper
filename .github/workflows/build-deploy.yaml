@@ -43,3 +43,12 @@ jobs:
     - name: Build
       run: |
         cachix watch-exec --jobs 16 --compression-level $CACHIX_COMPRESSION_LEVEL composable-whitepaper nix -- build --no-update-lock-file --show-trace -L
+
+    - name: Deploy to Firebase
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting:composable-whitepaper --message \"${{ github.event.head_commit.message }}\"
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}        
+      if: '''[ `nix build --dry-run "github:ComposableFi/whitepaper" --json` == `nix build --dry-run --json` ];'''
+  
