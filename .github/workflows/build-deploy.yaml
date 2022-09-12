@@ -37,7 +37,7 @@ jobs:
           nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
           nix-channel --update
           nix-env -iA nixpkgs.cachix
-        name: ${{  env.CACHIX_COMPOSABLE }}
+        name: ${{  env.CACHE }}
         authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
     - name: Build
