@@ -8,7 +8,7 @@
       name = "whitepaper";
       src = ./.;
       phases = [ "unpackPhase" "buildPhase" "installPhase" ];
-      buildPhase = "pandoc --toc --citeproc --pdf-engine=xelatex -o $name.pdf ./whitepaper.md";
+      buildPhase = "pandoc --toc --citeproc --bibliography=references.bib --pdf-engine=xelatex -o $name.pdf ./whitepaper.md";
       installPhase = "mkdir -p $out; cp $name.pdf $out";
     }) nixpkgs.legacyPackages;
   };
