@@ -43,7 +43,8 @@ jobs:
     - name: Build
       run: |
         cachix watch-exec --jobs 16 --compression-level $CACHIX_COMPRESSION_LEVEL composable-whitepaper nix -- build --no-update-lock-file --show-trace -L
-
+        nix build
+        
     - name: Deploy to Firebase
       uses: w9jds/firebase-action@master
       with:
