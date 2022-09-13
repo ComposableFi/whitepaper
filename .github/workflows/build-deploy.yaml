@@ -64,7 +64,8 @@ jobs:
           installCommand: |
             nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
             nix-channel --update
-            nix-env -iA nixpkgs.cachix
+            nix-env -iA nixpkgs.nodePackages.npm nixpkgs.nodejs nixpkgs.cachix
+            npm install npx
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
@@ -95,10 +96,10 @@ jobs:
           installCommand: |
             nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
             nix-channel --update
-            nix-env -iA nixpkgs.cachix nixpkgs.nodePackages.npm nixpkgs.nodejs
+            nix-env -iA nixpkgs.nodePackages.npm nixpkgs.nodejs nixpkgs.cachix
+            npm install npx
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-          
       - run: nix build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
