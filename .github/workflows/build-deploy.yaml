@@ -77,37 +77,48 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}
           projectId: whitepaper-73b60
 
+
   deploy:
-    name: Deploy
-    needs: [ build ]
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    name: "Deploy"
+    needs: build
     runs-on: ubuntu-latest
+   
     container:
       image: niteo/nixpkgs-nixos-22.05:316b762afdb9e142a803f29c49a88b4a47db80ee
-
     steps:
       - uses: actions/checkout@v3
-      - name: Configure Nix
-        run: |
-            echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
-            echo "sandbox = relaxed" >> /etc/nix/nix.conf
-            echo "narinfo-cache-negative-ttl = 0" >> /etc/nix/nix.conf
+      - run: |
+          echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
+          echo "sandbox = relaxed" >> /etc/nix/nix.conf
+          echo "narinfo-cache-negative-ttl = 0" >> /etc/nix/nix.conf
+      
+      # - name: Check if hash changes
+      #   id: feStaticHashChanges
+      #   run: |
+      #     if [ `nix build --dry-run "github:ComposableFi/whitepaper" --json` == `nix build --dry-run --json` ]; then
+      #       echo "::set-output name=hashChange::false"; 
+      #     else echo "::set-output name=hashChange::true"; 
+      #     fi
+      
       - uses: cachix/cachix-action@f5f67badd061acb62b5c6e25e763572ca8317004
+        # if: steps.feStaticHashChanges.outputs.hashChange == 'true'
         with:
           skipPush: true
           installCommand: |
             nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
             nix-channel --update
-            nix-env -iA nixpkgs.nodejs nixpkgs.cachix
-            mkdir $HOME/.config
-            chmod -R ugo+rwx $HOME/.config
-            chmod -R ugo+rwx /tmp
-          name: ${{  env.CACHE }}
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix build
-      - uses: FirebaseExtended/action-hosting-deploy@0f248036885ae672f78587669fa2923f0ef6cac2
+            nix-env -iA nixpkgs.cachix
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          name: composable-community
+      
+      - run: |
+          nix build
+          nix-env -iA nixpkgs.nodejs
+      
+      - name: Deploy to live channel
+        uses: FirebaseExtended/action-hosting-deploy@0f248036885ae672f78587669fa2923f0ef6cac2
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}
+          projectId: whitepaper-73b60     
           channelId: live
-          projectId: whitepaper-73b60
