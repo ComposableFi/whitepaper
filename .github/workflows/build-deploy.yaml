@@ -65,6 +65,9 @@ jobs:
             nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
             nix-channel --update
             nix-env -iA nixpkgs.nodejs nixpkgs.cachix
+            mkdir $HOME/.config
+            chmod -R ugo+rwx $HOME/.config
+            chmod -R ugo+rwx /tmp
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
@@ -96,6 +99,9 @@ jobs:
             nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
             nix-channel --update
             nix-env -iA nixpkgs.nodejs nixpkgs.cachix
+            mkdir $HOME/.config
+            chmod -R ugo+rwx $HOME/.config
+            chmod -R ugo+rwx /tmp
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
