@@ -69,12 +69,12 @@ jobs:
             chmod -R ugo+rwx $HOME/.config
             chmod -R ugo+rwx /tmp
           name: ${{  env.CACHE }}
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix build
       - uses: FirebaseExtended/action-hosting-deploy@0f248036885ae672f78587669fa2923f0ef6cac2
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}
           projectId: whitepaper-73b60
 
   deploy:
@@ -103,11 +103,11 @@ jobs:
             chmod -R ugo+rwx $HOME/.config
             chmod -R ugo+rwx /tmp
           name: ${{  env.CACHE }}
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix build
       - uses: FirebaseExtended/action-hosting-deploy@0f248036885ae672f78587669fa2923f0ef6cac2
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}
           channelId: live
           projectId: whitepaper-73b60
