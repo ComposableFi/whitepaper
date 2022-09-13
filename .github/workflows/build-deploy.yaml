@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Configure Nix
       run: |
           echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
@@ -52,7 +52,7 @@ jobs:
       image: niteo/nixpkgs-nixos-22.05:316b762afdb9e142a803f29c49a88b4a47db80ee
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Configure Nix
         run: |
             echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
@@ -64,11 +64,7 @@ jobs:
           installCommand: |
             nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
             nix-channel --update
-            nix-env -iA nixpkgs.nodePackages.npm nixpkgs.nodejs nixpkgs.cachix
-            npm install npx
-            mkdir $HOME/.config
-            chmod -R ugo+rwx /github/home/.config
-            chmod -R ugo+rwx /tmp/
+            nix-env -iA nixpkgs.nodejs nixpkgs.cachix
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
@@ -87,7 +83,7 @@ jobs:
       image: niteo/nixpkgs-nixos-22.05:316b762afdb9e142a803f29c49a88b4a47db80ee
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Configure Nix
         run: |
             echo "experimental-features = nix-command flakes" > /etc/nix/nix.conf
@@ -99,11 +95,7 @@ jobs:
           installCommand: |
             nix-channel --add ${{env.NIX_NIXPKGS_CHANNEL }} nixpkgs
             nix-channel --update
-            nix-env -iA nixpkgs.nodePackages.npm nixpkgs.nodejs nixpkgs.cachix
-            npm install npx
-            mkdir $HOME/.config
-            chmod -R ugo+rwx /github/home/.config
-            chmod -R ugo+rwx /tmp/
+            nix-env -iA nixpkgs.nodejs nixpkgs.cachix
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
