@@ -66,6 +66,9 @@ jobs:
             nix-channel --update
             nix-env -iA nixpkgs.nodePackages.npm nixpkgs.nodejs nixpkgs.cachix
             npm install npx
+            mkdir $HOME/.config
+            chmod -R ugo+rwx /github/home/.config
+            chmod -R ugo+rwx /tmp/
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
@@ -98,6 +101,9 @@ jobs:
             nix-channel --update
             nix-env -iA nixpkgs.nodePackages.npm nixpkgs.nodejs nixpkgs.cachix
             npm install npx
+            mkdir $HOME/.config
+            chmod -R ugo+rwx /github/home/.config
+            chmod -R ugo+rwx /tmp/
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
