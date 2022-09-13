@@ -72,7 +72,7 @@ jobs:
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: FirebaseExtended/action-hosting-deploy@0f248036885ae672f78587669fa2923f0ef6cac2
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}'
@@ -107,7 +107,7 @@ jobs:
           name: ${{  env.CACHE }}
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: FirebaseExtended/action-hosting-deploy@0f248036885ae672f78587669fa2923f0ef6cac2
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHITEPAPER_73B60 }}'
