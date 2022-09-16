@@ -109,7 +109,7 @@ jobs:
             nix-channel --update
             nix-env -iA nixpkgs.cachix
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-          name: composable-community
+          name: composable-whitepaper
       
       - run: |
           nix build

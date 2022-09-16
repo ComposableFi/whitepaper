@@ -1,44 +1,181 @@
-% Composable Finance
-
 ---
-
-![Composable Ecosystem.](images/parachain.png)
-
-# 1. Vision {#sec:vision}
-
-
-A natural evolution in a cross-chain world entails developers and users interacting seamlessly with protocols, regardless of where their assets live. That is why our core mission at Composable Finance (Composable) [@ComposableFinance] is to build a fully interoperable future capable of offering developers and end-users a seamless experience and utility.
-
-By simplifying and unifying decentralized finance (DeFi) [@DecentralizedEthereum.org] with new interoperability standards, we accelerate DeFi into the mainstream. We are crafting a transparent, interoperable future for DeFi 2.0 and Web3.
-Similar to how Port Control Protocol [@PortWikipedia] became an essential piece of the networking layer for the Internet, Composable’s vision is to become the entryway and networking fabric for blockchain networks. It is Composable’s mission to serve all interactions, transfers, and communication cross-ecosystem. Our vision of hyper liquidity and composability abstracts the underlying technology into a single interface, unlocking the potential for new primitives to be developed at an unprecedented pace. Protocol-to-protocol interactions will become possible across ecosystems.
-
-The DeFi space has resorted to sharded blockchains for increased scalability [@WhyProperties], [@WhatCoinDesk].
-Examples are Ethereum 2.0 [@TheEthereum.org], Polkadot [@Polkadot:Platform], and NEAR [@NEARWorld].
-The result is that even though the ETH 2.0 vision is upon us, applications are sharded instead of just sharded blockchains. SushiSwap [@IntroductionSushi], for example, is deployed on multiple Ethereum Virtual Machine (EVM) [@EthereumEthereum.org] compatible chains, Layer-2-like (L2) rollups [@LayerEthereum.org], and Parachains [@WhatAlexandria], and the expansion of these applications to other ecosystems is very likely.
-Thus, while moving assets intra-ecosystem is becoming more intuitive, with several applications segregated within a specific ecosystem, managing assets inter-ecosystem is not [@0xbrainjarOurMedium].
-
-Therefore, Composable focuses on a cross-chain, cross-layer liquidity layer for sharded applications. Composable takes this notion a step further by realizing that there is a sharding of functionality between each ecosystem; for instance, most ecosystems have their lending protocols. Our vision is thus to abstract away inter-ecosystem decision-making. It maximizes users’ and developers’ outcomes based on their unique goals.
-We are creating a communication protocol to accomplish this function, utilizing our parachain as a finality layer.
-The protocol will connect L2s to the Polkadot and Kusama ecosystems and the Cosmos Ecosystem [@Cosmos:Blockchains] through the Inter-Blockchain Communication protocol (IBC) [@Inter-BlockchainCommunication] to the Polkadot and Kusama ecosystems.
-We will then include other ecosystems, such as Algorand [@AlgorandAlgorand], Solana [@ScalableScale], and more.
-
-We are embarking on a vast and growing opportunity in architecting and building infrastructure. Our goal is to allow developers to deploy applications capable of operating across layers and chains autonomously. We believe that the applications of such a stack are the catalyst for the next DeFi revolution.
-
-# 2. Overview {#sec:overview}
-
-## 2.1 Roadmap {#sec:roadmap}
-Let us start with Composable's roadmap shown in [@fig:roadmap], covering tasks we target to complete through the first half of 2022.
-
-![The Composable Finance Roadmap through H1 2022.](images/roadmap.png){#fig:roadmap}
+papersize: a4
+documentclass: article
+header-includes:
+    - \usepackage{multicol}
+    - \usepackage{algorithm2e}
+    - \newcommand{\hideFromPandoc}[1]{#1}
+    - \hideFromPandoc{
+        \let\Begin\begin
+        \let\End\end
+      }
+---      
 
 
-This year's closing, we target to enable support for cross-layer NFTs, deploy Phase II for Mosaic, and have Picasso onboarded to Kusama.
-The Picasso Token Generation Event (TGE) occurs, and our Oracle pallet Apollo unlocks primaries and secondaries. We are also set to release cubic - our pallet supporting vaults known from Ethereum but in the substrate-based Polkadot and Kusama ecosystems.
+# Vision {#sec:vision}
 
-In Q1 of 2022, we release Centauri, the IBS Substrate testnet; we finish our developments of the BEEFY light client and develop our Parachain to L2 bridge capability.
-Later in the first half of 2022, we aim to finalize our routing layer and move Mosaic to Phase III, addressing decentralization.
-We also release our cross-chain virtual machine, and the IBC Substrate moves to the mainnet.
-Each deliverable, along with the underlying technologies built and used by Composable, is covered in more detail throughout this paper.
+A natural evolution in a cross-chain world entails developers and users interacting seamlessly with protocols, regardless of where their assets live or what execution type the protocol supports. Three major problems inhibit the current adoption of cross-chain DeFi by the developer community: 1) lack of trustless and secure bridging infrastructure, 2) Standardization across ecosystems (unification of contract standards) and 3) powerful, single sided messaging standards (current implementations require contracts on both layers to handle messages). 
+
+By simplifying and unifying decentralized finance (DeFi) [@DecentralizedEthereum.org] with new interoperability standards, we accelerate DeFi into the mainstream. We are crafting a transparent, interoperable future for DeFi 2.0 and Web3. Similar to how Port Control Protocol [@PortWikipedia] became an essential piece of the networking layer for the Internet, Composable’s vision is to become the entryway and networking fabric for blockchain networks. 
+
+The DeFi space has resorted to sharded blockchains for increased scalability [@WhyProperties], [@WhatCoinDesk]. Examples are Ethereum 2.0 [@TheEthereum.org], Polkadot [@Polkadot:Platform], and NEAR [@NEARWorld]. The result is that even though the ETH 2.0 vision is upon us, applications are sharded instead of just sharded blockchains. SushiSwap [@IntroductionSushi], for example, is deployed on multiple Ethereum Virtual Machine (EVM) [@EthereumEthereum.org] compatible chains, Layer-2-like (L2) rollups [@LayerEthereum.org], and Parachains [@WhatAlexandria], and the expansion of these applications to other ecosystems is very likely. Thus, while moving assets intra-ecosystem is becoming more intuitive, with several applications segregated within a specific ecosystem, managing assets inter-ecosystem is not [@0xbrainjarOurMedium].
+
+We are embarking on a vast and growing opportunity in architecting and building infrastructure. Our goal is to allow developers to deploy applications capable of operating across layers and chains autonomously. 
+
+\newpage
+\tableofcontents
+\newpage
+
+\Begin{multicols}{2}
+
+# Issues in cross-chain Infrastructure {#sec:issues-in-infra}
+
+As new ecosystems rose in prominence during the 2020-2021 market cycle, we saw many bridging protocols rise and fall to accomodate the need for liquidity. Most (if not all) of these bridges were based on optimistic, fraud-sensitive architectures, where in essence an authority acts as an oracle. These bridges lock up certain assets on the origin chain, and mint a debt token on the destination chain, granting the holder the right to unlock the origin asset when returning the debt token. Besides asset transfers, these bridges sometimes support message passing as well, which can be used as a building block for cross-chain applications. These bridges have already proven to be security risks to DeFi, as well as difficult to build protocols on top off due to the lack of complex features provided by the message passing.
+
+In a trusted bridging setup, we identify the following actors: 
+
+- Relayer: pays for execution on the destination chain.
+- Oracle: provides authorized mint and burn access to the contracts on origin and destination side.
+- User: a contract, protocol or actual user directly interacting with the bridge. 
+
+In this generic architecture, we choose to keep the relayer and oracle as separate actors, although in many actual implementations, these are the same entity. 
+
+Designs used in Wormhole, Axelar and centralized exchanges use one or more accounts determine the state of the origin chain, destination chain, and based on that co-sign a message to mint/unlock funds on the destination side. 
+
+### Trusted Bridging Recapped
+
+We will briefly recapture the architectures of pessimistic and optimistic bridges. 
+
+##### Pessimistic bridging {#sec:pessimisticbridging}
+
+Pessimistic bridges require the oracle to pre-validate withdrawals, assuming that relayers will commit fraud as soon as they can.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\BlankLine
+\While{block has events}{
+    \If{block is not final}{
+        waitUntilFinal(block)
+    }
+
+    \If{block has bridge events}{
+        signAndBroadcast(event)
+    }
+}
+\caption{Oracle protocol for pessimistic trusted bridging}
+\end{algorithm} 
+
+The oracle assumes multiple responsibilities here:
+
+1. It ensures that the event data is correct.
+2. It ensures that the event data is final.
+
+For many chains, including Ethereum, 2. cannot yet be ensured, and thus the oracle service is taking on a large risk. Usually this is reduced by waiting for a number of confirmations (blocks built on top of the current block).
+
+From the on-chain perspective, funds are managed assuming that the oracle is honest about 1. and 2. Fraud, hacks or misconfigurations can lead to the oracle's authority being used to incorrectly release funds, as occured in Wormhole, Nomad, Raku etc...
+
+Different protocols attempt to reduce this risk by sharding the private key using multi party computation, or simply multisig.
+
+For a secure bridging operation, the transaction time $t$ is given by:
+
+$$ t := t_{finality} + t_{submission} $$
+
+where $ t_{finality} $ is the average duration for block finality, and $ t_{submission} $ the length of time of block inclusion on the destination side.
+
+##### Optimistic bridging
+
+Optimistic bridges such as Nomad assume that the relayer is usually honest, and fraud rarely occurs. The relayer/oracle algorithm is relatively identical to the [@sec:pessimisticbridging] algorithm. On the contract side however, the mint/unlock action is delayed, ensuring that fishermen have sufficient time to dispute the message.
+
+Message acceptance is incredibly simple:
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\BlankLine
+\If{message is from relayer}{
+    store(message)
+}
+\caption{Message acceptance protocol for optimistic trusted bridges}
+\end{algorithm} 
+
+However, actually enacting the message, which leads to mints and unlocks, has a time delay, referred to as the dispute window.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\BlankLine
+\If{message received time is above wait threshold}{
+  If{message is undisputed} {
+    enact(message)
+  }
+}
+\caption{Unlock protocol for optimistic trusted bridges}
+\end{algorithm} 
+
+Optimistic bridging trades in some advantages of pessimistic bridging, such as faster transaction times, in favour for more decentralized security. Dispute setllement remains an issue however. Usually protocols resolve to token based governance or a council.
+
+For a secure bridging operation, the transaction time $t$ is given by:
+
+$$ t := t_{finality} + t_{submission} + t_{dispute window} $$
+
+where $t_{finality}$ is the average duration for block finality, $t_{submission}$ the length of time of block inclusion on the destination side, and $t_{dispute window}$ the amount of time that the relayed transaction may be disputed on the destination side.
+
+Relayers can choose to combine $t_{finality}$ and $t_ {dispute window}$, at the risk of needing to dispute their own submissions. This improves UX but brings in a significant risk to the relayer, and in practise is not performed.
+
+### Economic Risks in Trusted Bridging {#sec:economics-trusted-bridging}
+
+Bridging in general brings in security risks, both on a technical level as mentioned above, and on an economic level. A wrapped token in essence is a debt obligation between the bridging protocol and the token holder, guaranteeing that on redemption of the wrapped token, the original token will be returned. The value of the wrapped token is thus the value of the underlying minus the risk of the bridging protocol not fulfilling the debt. Currently the market does not correctly price wrapped tokens (usually the valuation is equal to the underlying). This leads to a greater economic impact when a trusted bridge is unable to fulfill the debt, such as after losing the underlying in a hack.
+
+For protocols relying on trusted bridging ecosystem, the only way to deal with this underlying economic risk is to price wrapped tokens differently. Although this mitigates economic impact, liquidity and UX suffer. It also reduces the utility of cross-chain protocols, as the actual cost of using a trusted bridge is the fee and wrapped token premium.
+
+### Security Risks in Trusted Bridging
+
+<!-- 
+1. Censorship
+2. State attackers
+3. Fraud and Collusion
+ -->
+
+# Architecture Overview {#sec:overview}
+
+<!-- 
+- relayer gossip network
+- IBC light client layer
+- XCVM
+- third party applications
+ -->
+
+# Relayer Network
+
+<!-- 
+- Monitoring
+- MEV
+- Block proposing integrations
+ -->
+
+# IBC Across Ecosystems
+
+<!-- 
+- Architecture for MultiConsensus IBC
+- BEEFY
+- Nightshade
+- Aptos
+ -->
+
+# XCVM
+
+<!-- 
+1. Explain Cosmos IBC network infrastructure
+2. EVM message passing
+3. Gas cost of message passing + multiple round trips
+ --> 
+
+<!-- 
+- XCVM Spec
+- CNS
+- Security
+ -->
+
+\End{multicols}
+
 
 ## 2.2 Paper Outline {#sec:outline}
 Having covered the vision in [@sec:vision] and the roadmap in [@sec:roadmap], we now look at Composable's tech stack in a top-down approach and specify which sections throughout the Construction Paper one can find further information.
